@@ -1,0 +1,166 @@
+---
+import Drawing from "../components/Drawing.astro";
+import VideoFrame from "../components/VideoFrame.astro";
+import Base from "../layouts/Base.astro";
+import { projects } from "../data/projects";
+import { testimonials } from "../data/content";
+import { films, studio } from "../data/site";
+
+const selected = [
+	projects[0],
+	projects[2],
+	projects[4],
+];
+const quote = testimonials[3];
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: studio.name,
+	description: studio.summary,
+	founder: {
+		"@type": "Person",
+		name: "Shahnawaz",
+		honorificPrefix: "Mr.",
+		jobTitle: "Architect",
+	},
+	knowsAbout: [
+		"Jewelry showroom interiors",
+		"Residential interiors",
+		"Banquet hall interiors",
+	],
+};
+---
+
+<Base
+	title="Design 10 Entire Interior | Showrooms, homes, halls"
+	description="Design 10 Entire Interior completes jewelry showrooms, homes, and banquet halls. Mr. Shahnawaz has led the studio since 1996, from the plan to the last surface."
+	image="/posters/hall.jpg"
+>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+	</Fragment>
+
+	<section class="hero" aria-label="Introduction">
+		<div class="hero-media">
+			<video
+				src={films.hall.src}
+				poster={films.hall.poster}
+				muted
+				loop
+				playsinline
+				autoplay
+				preload="auto"
+				aria-label={films.hall.caption}
+			></video>
+			<button type="button" class="video-control" data-video-toggle>Pause film</button>
+		</div>
+		<div class="hero-copy">
+			<p class="hero-brand">{studio.name}</p>
+			<h1>From the plan to the last surface.</h1>
+			<p>
+				Jewelry showrooms, homes, and banquet halls, finished as complete
+				interiors. {studio.principal} has led the studio since {studio.since}.
+			</p>
+		</div>
+	</section>
+
+	<section class="wrap section" data-reveal>
+		<h2>Three kinds of rooms</h2>
+		<p class="lede">
+			The practice stays with showrooms, houses, and halls. Each one is a room
+			where people stop, live, or gather, and the drawing starts from that day.
+		</p>
+		<div class="practice-grid">
+			<article>
+				<Drawing kind="vitrine" label="Plan of a jewelry room" />
+				<h3>Jewelry showrooms</h3>
+				<p>
+					Cases and counters planned so a piece can be seen, and the next
+					family can still pass.
+				</p>
+			</article>
+			<article>
+				<Drawing kind="court" label="Plan of a courtyard house" />
+				<h3>Residences</h3>
+				<p>
+					Courts, verandas, and a ground floor that keeps elders near the
+					life of the house.
+				</p>
+			</article>
+			<article>
+				<Drawing kind="hall" label="Section through a banquet hall" />
+				<h3>Banquet halls</h3>
+				<p>
+					Arrival, hall, elders, bridal room, and a kitchen path that does
+					not cross the door.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="wrap section owner-grid" data-reveal>
+		<div class="stack">
+			<h2>{studio.principal}</h2>
+			<p class="since">Architect since {studio.since}.</p>
+			<p>
+				For three decades the work has stayed with three kinds of rooms: the
+				jewelry showroom, where a piece has to be seen; the house, where a
+				family has to live; and the banquet hall, where a day of gathering has
+				to move from the door to the table.
+			</p>
+			<p>
+				He still begins on paper. A plan, a section, and a conversation about
+				light come before the finish. The studio remains small enough that the
+				principal draws the work and walks the site.
+			</p>
+			<p class="actions">
+				<a href="/about">About the studio</a>
+				<a href="/journey">Read the journey</a>
+			</p>
+		</div>
+		<VideoFrame film="residence" />
+	</section>
+
+	<section class="wrap section" data-reveal>
+		<h2>Selected rooms</h2>
+		<p class="sample">
+			Sample rooms, ready for the studio’s own names and photographs.
+		</p>
+		<div class="project-list">
+			{
+				selected.map((project) => (
+					<a class="project-row" href={`/work/${project.slug}`}>
+						<Drawing kind={project.drawings[0].kind} label={project.drawings[0].label} />
+						<div class="project-copy">
+							<p class="kind">{project.kindLabel}</p>
+							<h3>{project.name}</h3>
+							<p>{project.summary}</p>
+						</div>
+					</a>
+				))
+			}
+		</div>
+		<p class="actions">
+			<a href="/work">All the work</a>
+		</p>
+	</section>
+
+	<section class="wrap section" data-reveal>
+		<blockquote class="pull">
+			<p>{quote.quote}</p>
+			<footer>{quote.by}</footer>
+		</blockquote>
+		<p class="actions">
+			<a href="/testimonials">More client words</a>
+		</p>
+	</section>
+
+	<section class="wrap section close" data-reveal>
+		<h2>Begin with the room you need.</h2>
+		<p>
+			A showroom, a house, or a hall. Write with the day the room has to hold.
+		</p>
+		<a class="button" href="/contact">Start a conversation</a>
+	</section>
+</Base>

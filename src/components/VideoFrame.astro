@@ -1,0 +1,32 @@
+---
+import { films, type FilmKey } from "../data/site";
+
+interface Props {
+	film: FilmKey;
+	eager?: boolean;
+	caption?: string;
+}
+
+const { film, eager = false, caption } = Astro.props;
+const media = films[film];
+const text = caption ?? media.caption;
+---
+
+<figure class="video-frame">
+	<div class="video-stage">
+		<video
+			src={media.src}
+			poster={media.poster}
+			muted
+			loop
+			playsinline
+			autoplay
+			preload={eager ? "auto" : "metadata"}
+			aria-label={text}
+		></video>
+		<button type="button" class="video-control" data-video-toggle>
+			Pause film
+		</button>
+	</div>
+	<figcaption>{text}</figcaption>
+</figure>

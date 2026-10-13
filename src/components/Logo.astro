@@ -1,0 +1,27 @@
+---
+interface Props {
+	href?: string;
+	size?: "header" | "footer" | "loader";
+}
+
+const { href, size = "header" } = Astro.props;
+const Tag = href ? "a" : "span";
+---
+
+<Tag
+	class:list={["logo", `logo-${size}`]}
+	href={href}
+	aria-label={href ? "Design 10 Entire Interior, home" : undefined}
+>
+	<span class="logo-mark" aria-hidden="true">
+		<svg viewBox="0 0 48 48">
+			<rect class="logo-frame" x="1.25" y="1.25" width="45.5" height="45.5" pathLength="1" />
+			<path class="logo-brass" d="M1.25 1.25 H18" pathLength="1" />
+		</svg>
+		<span class="logo-num">10</span>
+	</span>
+	<span class="logo-words">
+		<span class="logo-name">Design 10</span>
+		<span class="logo-line">Entire Interior</span>
+	</span>
+</Tag>

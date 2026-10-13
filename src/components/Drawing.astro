@@ -1,0 +1,104 @@
+---
+import type { DrawingKind } from "../data/drawings";
+
+interface Props {
+	kind: DrawingKind;
+	label: string;
+}
+
+const { kind, label } = Astro.props;
+---
+
+<figure class="drawing" data-draw>
+	{
+		kind === "pavilion" && (
+			<svg viewBox="0 0 400 230" aria-hidden="true">
+				<path class="line" pathLength="1" d="M24 196 H376" />
+				<path class="line" pathLength="1" d="M44 180 H356" />
+				<path class="line" pathLength="1" d="M68 180 V104" />
+				<path class="line" pathLength="1" d="M148 180 V104" />
+				<path class="line" pathLength="1" d="M252 180 V104" />
+				<path class="line" pathLength="1" d="M332 180 V104" />
+				<path class="line" pathLength="1" d="M68 104 H332" />
+				<path class="line brass" pathLength="1" d="M52 90 H348" />
+				<path class="line" pathLength="1" d="M68 76 H332" />
+				<path class="line" pathLength="1" d="M92 168 V120 H136 V168" />
+				<path class="line" pathLength="1" d="M114 168 V120" />
+				<path class="line" pathLength="1" d="M176 180 V128 H224 V180" />
+				<path class="line" pathLength="1" d="M268 168 V120 H312 V168" />
+				<path class="line" pathLength="1" d="M290 168 V120" />
+				<path class="line" pathLength="1" d="M164 180 H236" />
+			</svg>
+		)
+	}
+	{
+		kind === "vitrine" && (
+			<svg viewBox="0 0 400 280" aria-hidden="true">
+				<rect class="wash" x="148" y="112" width="104" height="78" />
+				<path class="line" pathLength="1" d="M40 36 H360 V244" />
+				<path class="line" pathLength="1" d="M360 244 H228" />
+				<path class="line" pathLength="1" d="M172 244 H40 V36" />
+				<path class="line" pathLength="1" d="M64 52 H336 V80 H64 Z" />
+				<path class="line" pathLength="1" d="M56 98 H86 V206 H56 Z" />
+				<path class="line" pathLength="1" d="M314 98 H344 V206 H314 Z" />
+				<path class="line" pathLength="1" d="M148 112 H252 V190 H148 Z" />
+				<path class="line brass" pathLength="1" d="M166 128 H234 V174 H166 Z" />
+				<path class="line" pathLength="1" d="M200 244 V214" />
+			</svg>
+		)
+	}
+	{
+		kind === "court" && (
+			<svg viewBox="0 0 400 320" aria-hidden="true">
+				<rect class="wash" x="146" y="112" width="108" height="96" />
+				<path class="line" pathLength="1" d="M36 36 H364 V288" />
+				<path class="line" pathLength="1" d="M364 288 H248" />
+				<path class="line" pathLength="1" d="M152 288 H36 V36" />
+				<path class="line" pathLength="1" d="M146 36 V112" />
+				<path class="line" pathLength="1" d="M146 208 V252" />
+				<path class="line" pathLength="1" d="M254 36 V112" />
+				<path class="line" pathLength="1" d="M254 208 V252" />
+				<path class="line" pathLength="1" d="M36 112 H146" />
+				<path class="line" pathLength="1" d="M254 112 H364" />
+				<path class="line" pathLength="1" d="M36 208 H146" />
+				<path class="line" pathLength="1" d="M254 208 H364" />
+				<path class="line" pathLength="1" d="M36 252 H364" />
+				<circle class="line brass" pathLength="1" cx="200" cy="160" r="18" />
+				<path class="line" pathLength="1" d="M200 288 V262" />
+			</svg>
+		)
+	}
+	{
+		kind === "hall" && (
+			<svg viewBox="0 0 480 240" aria-hidden="true">
+				<path class="line" pathLength="1" d="M24 196 H456" />
+				<path class="line" pathLength="1" d="M24 196 V108 H150" />
+				<path class="line" pathLength="1" d="M150 196 V68 H440 V196" />
+				<path class="line brass" pathLength="1" d="M150 68 H440" />
+				<path class="line" pathLength="1" d="M64 196 V142 H102 V196" />
+				<path class="line" pathLength="1" d="M196 124 V84 H246 V124" />
+				<path class="line" pathLength="1" d="M276 124 V84 H326 V124" />
+				<path class="line" pathLength="1" d="M356 124 V84 H406 V124" />
+				<path class="line" pathLength="1" d="M300 196 V170 H404 V196" />
+				<path class="line" pathLength="1" d="M318 170 V158 H386 V170" />
+			</svg>
+		)
+	}
+	{
+		kind === "stair" && (
+			<svg viewBox="0 0 360 260" aria-hidden="true">
+				<rect class="wash" x="40" y="200" width="100" height="20" />
+				<path class="line" pathLength="1" d="M40 40 V220 H300 V40" />
+				<path class="line" pathLength="1" d="M40 70 H300" />
+				<path class="line" pathLength="1" d="M40 200 H140" />
+				<path class="line" pathLength="1" d="M140 200 V186 H162 V172 H184 V158 H206 V144 H228 V130 H300" />
+				<path class="line brass" pathLength="1" d="M140 172 L300 104" />
+				<path class="line" pathLength="1" d="M48 200 V220" />
+				<path class="line" pathLength="1" d="M64 200 V220" />
+				<path class="line" pathLength="1" d="M80 200 V220" />
+				<path class="line" pathLength="1" d="M96 200 V220" />
+			</svg>
+		)
+	}
+	<figcaption>{label}</figcaption>
+</figure>

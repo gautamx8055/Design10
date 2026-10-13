@@ -1,0 +1,42 @@
+---
+import Drawing from "../components/Drawing.astro";
+import VideoFrame from "../components/VideoFrame.astro";
+import Base from "../layouts/Base.astro";
+import { journey } from "../data/content";
+---
+
+<Base
+	title="The studio journey since 1996 | Design 10"
+	description="A sample ledger of the practice Mr. Shahnawaz has kept since 1996: showrooms, courtyard houses, and banquet halls."
+	image="/posters/hall.jpg"
+>
+	<div class="wrap page">
+		<header class="page-title">
+			<h1>Journey</h1>
+			<p>
+				Mr. Shahnawaz has been an architect since 1996. The years below are a
+				sample ledger. Replace them with the studio’s own record.
+			</p>
+		</header>
+
+		<VideoFrame film="hall" eager />
+
+		<ol class="timeline section">
+			{
+				journey.map((entry) => (
+					<li>
+						<p class="year">{entry.year}</p>
+						<h2>{entry.title}</h2>
+						<p class="measure">{entry.text}</p>
+					</li>
+				))
+			}
+		</ol>
+
+		<div class="drawing-row section">
+			<Drawing kind="pavilion" label="Front of a showroom" />
+			<Drawing kind="stair" label="Section through a stair" />
+			<Drawing kind="court" label="Plan of a courtyard house" />
+		</div>
+	</div>
+</Base>

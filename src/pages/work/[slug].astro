@@ -1,0 +1,56 @@
+---
+import Drawing from "../../components/Drawing.astro";
+import VideoFrame from "../../components/VideoFrame.astro";
+import Base from "../../layouts/Base.astro";
+import { projects, type Project } from "../../data/projects";
+import { films } from "../../data/site";
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+const description = `${project.summary} A ${project.kindLabel.toLowerCase()} by Mr. Shahnawaz.`;
+---
+
+<Base
+	title={`${project.name} | Design 10`}
+	description={description}
+	image={films[project.film].poster}
+>
+	<article class="wrap page">
+		<header class="page-title">
+			<p class="kind">{project.kindLabel}</p>
+			<h1>{project.name}</h1>
+			<p>{project.summary}</p>
+		</header>
+
+		<VideoFrame film={project.film} eager />
+
+		<div class="stack section measure">
+			{project.body.map((paragraph) => <p>{paragraph}</p>)}
+			<p class="sample">
+				Sample description. Replace it with the studio’s notes for this room.
+			</p>
+			<p class="actions">
+				<a href="/work">Back to the work</a>
+				<a href="/contact">Discuss a room like this</a>
+			</p>
+		</div>
+
+		<div class="drawing-row section">
+			{
+				project.drawings.map((drawing) => (
+					<Drawing kind={drawing.kind} label={drawing.label} />
+				))
+			}
+		</div>
+	</article>
+</Base>

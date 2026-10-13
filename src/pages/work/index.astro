@@ -1,0 +1,58 @@
+---
+import Drawing from "../../components/Drawing.astro";
+import VideoFrame from "../../components/VideoFrame.astro";
+import Base from "../../layouts/Base.astro";
+import { kindFilters, projects } from "../../data/projects";
+---
+
+<Base
+	title="Showrooms, houses, and halls | Design 10"
+	description="Selected jewelry showrooms, residences, and banquet halls from the studio of Mr. Shahnawaz, an architect practising since 1996."
+	image="/posters/jewelry.jpg"
+>
+	<div class="wrap page">
+		<header class="page-title">
+			<h1>Work</h1>
+			<p>
+				Jewelry showrooms, residences, and banquet halls. The rooms below are
+				a sample set, ready for the studio’s own names and photographs.
+			</p>
+		</header>
+
+		<VideoFrame film="jewelry" eager />
+
+		<div class="filters" role="group" aria-label="Filter rooms">
+			{
+				kindFilters.map((filter) => (
+					<button
+						type="button"
+						data-filter={filter.id}
+						aria-pressed={filter.id === "all" ? "true" : "false"}
+					>
+						{filter.label}
+					</button>
+				))
+			}
+		</div>
+
+		<div class="project-list">
+			{
+				projects.map((project) => (
+					<a class="project-row" href={`/work/${project.slug}`} data-kind={project.kind}>
+						<Drawing kind={project.drawings[0].kind} label={project.drawings[0].label} />
+						<div class="project-copy">
+							<p class="kind">{project.kindLabel}</p>
+							<h2>{project.name}</h2>
+							<p>{project.summary}</p>
+						</div>
+					</a>
+				))
+			}
+		</div>
+
+		<div class="drawing-row section">
+			<Drawing kind="court" label="Plan of a courtyard house" />
+			<Drawing kind="hall" label="Section through a banquet hall" />
+		</div>
+	</div>
+</Base>

@@ -1,0 +1,106 @@
+---
+import Logo from "./Logo.astro";
+import { projects } from "../data/projects";
+import { nav } from "../data/site";
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const workLinks = [
+	{ href: "/work", label: "All rooms" },
+	{ href: "/work#jewelry", label: "Jewelry showrooms" },
+	{ href: "/work#residence", label: "Residences" },
+	{ href: "/work#banquet", label: "Banquet halls" },
+];
+
+const serviceLinks = [
+	{ href: "/services#showrooms", label: "Jewelry showrooms" },
+	{ href: "/services#residences", label: "Residences" },
+	{ href: "/services#halls", label: "Banquet halls" },
+];
+
+const menus: Record<string, { href: string; label: string }[]> = {
+	"/work": workLinks,
+	"/services": serviceLinks,
+};
+
+function parentCurrent(href: string) {
+	return current === href || current.startsWith(`${href}/`);
+}
+
+function childCurrent(href: string) {
+	const path = href.split("#")[0];
+	if (href.includes("#")) return false;
+	return current === path;
+}
+---
+
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+	<div class="header-inner">
+		<Logo href="/" />
+		<button
+			class="nav-toggle"
+			type="button"
+			aria-expanded="false"
+			aria-controls="site-nav"
+			data-menu
+		>
+			<span class="nav-toggle-lines" aria-hidden="true"></span>
+			<span class="nav-toggle-label">Menu</span>
+		</button>
+		<nav id="site-nav" aria-label="Primary">
+			{
+				nav.map((item) => {
+					const children = menus[item.href];
+					const active = parentCurrent(item.href);
+					if (!children) {
+						return (
+							<a href={item.href} aria-current={active ? "page" : undefined}>
+								{item.label}
+							</a>
+						);
+					}
+					const menuId = `menu-${item.label.toLowerCase()}`;
+					return (
+						<div class:list={["nav-item", { "is-current": active }]}>
+							<a href={item.href} aria-current={active ? "page" : undefined}>
+								{item.label}
+							</a>
+							<button
+								class="nav-caret-btn"
+								type="button"
+								aria-expanded="false"
+								aria-controls={menuId}
+								data-submenu
+							>
+								<span class="visually-hidden">Show {item.label} menu</span>
+								<svg class="nav-caret" viewBox="0 0 12 8" aria-hidden="true">
+									<path d="M1 1.5 L6 6.5 L11 1.5" />
+								</svg>
+							</button>
+							<div class="nav-sub" id={menuId}>
+								{
+									children.map((child) => (
+										<a href={child.href} aria-current={childCurrent(child.href) ? "page" : undefined}>
+											{child.label}
+										</a>
+									))
+								}
+								{
+									item.href === "/work" && (
+										<>
+											<p class="nav-sub-label">Selected rooms</p>
+											{projects.map((project) => (
+												<a href={`/work/${project.slug}`}>{project.name}</a>
+											))}
+										</>
+									)
+								}
+							</div>
+						</div>
+					);
+				})
+			}
+		</nav>
+	</div>
+</header>

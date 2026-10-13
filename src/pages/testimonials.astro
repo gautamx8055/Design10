@@ -1,0 +1,43 @@
+---
+import Drawing from "../components/Drawing.astro";
+import VideoFrame from "../components/VideoFrame.astro";
+import Base from "../layouts/Base.astro";
+import { testimonials } from "../data/content";
+---
+
+<Base
+	title="Words from clients of the studio | Design 10"
+	description="Sample words from clients of jewelry showrooms, courtyard houses, and banquet halls designed by Mr. Shahnawaz. Replace them with the studio’s own letters."
+	image="/posters/kitchen.jpg"
+>
+	<div class="wrap page">
+		<header class="page-title">
+			<h1>Testimonials</h1>
+			<p>
+				Sample words, ready to replace with letters from the studio’s clients.
+				Each one is tied to a kind of room: a showroom, a house, or a hall.
+			</p>
+		</header>
+
+		<VideoFrame film="kitchen" eager />
+
+		<ul class="quotes section">
+			{
+				testimonials.map((item) => (
+					<li>
+						<blockquote>
+							<p>{item.quote}</p>
+							<footer>{item.by}</footer>
+						</blockquote>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="drawing-row three section">
+			<Drawing kind="vitrine" label="Plan of a jewelry room" />
+			<Drawing kind="court" label="Plan of a courtyard house" />
+			<Drawing kind="hall" label="Section through a banquet hall" />
+		</div>
+	</div>
+</Base>

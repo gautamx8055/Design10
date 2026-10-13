@@ -1,0 +1,284 @@
+<script>
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	function boot() {
+		const root = document.documentElement;
+
+		if (!root.dataset.loaderWatch) {
+			root.dataset.loaderWatch = "1";
+			if (!root.classList.contains("skip-loader")) {
+				try {
+					sessionStorage.setItem("sz-drawn", "1");
+				} catch {
+					/* storage can be blocked */
+				}
+			}
+			window.setTimeout(() => root.classList.add("skip-loader"), 4200);
+			const loader = document.getElementById("loader");
+			loader?.addEventListener("animationend", (event) => {
+				if (event.target !== loader) return;
+				if (!(event instanceof AnimationEvent)) return;
+				if (event.animationName !== "loader-exit") return;
+				root.classList.add("skip-loader");
+			});
+		}
+
+		document.querySelectorAll<HTMLElement>("[data-draw]").forEach((drawing) => {
+			if (drawing.dataset.ready === "1") return;
+			drawing.dataset.ready = "1";
+			if (reduceMotion) {
+				drawing.classList.add("is-drawn");
+				return;
+			}
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						drawing.classList.add("is-drawn");
+						observer.disconnect();
+					});
+				},
+				{ threshold: 0.35 },
+			);
+			observer.observe(drawing);
+		});
+
+		document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((section) => {
+			if (section.dataset.ready === "1") return;
+			section.dataset.ready = "1";
+			if (reduceMotion) {
+				section.classList.add("is-in");
+				return;
+			}
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						section.classList.add("is-in");
+						observer.disconnect();
+					});
+				},
+				{ threshold: 0.15 },
+			);
+			observer.observe(section);
+		});
+
+		document.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
+			const button = video.parentElement?.querySelector<HTMLButtonElement>(
+				"[data-video-toggle]",
+			);
+			if (!button || button.dataset.ready === "1") return;
+			button.dataset.ready = "1";
+			if (reduceMotion) {
+				video.pause();
+				video.removeAttribute("autoplay");
+				button.textContent = "Play film";
+			}
+			button.addEventListener("click", () => {
+				if (video.paused) {
+					void video.play();
+					button.textContent = "Pause film";
+				} else {
+					video.pause();
+					button.textContent = "Play film";
+				}
+			});
+		});
+
+		const toggle = document.querySelector<HTMLButtonElement>("[data-menu]");
+		const nav = document.getElementById("site-nav");
+		if (toggle && nav && toggle.dataset.ready !== "1") {
+			toggle.dataset.ready = "1";
+			const label = toggle.querySelector(".nav-toggle-label");
+			const setOpen = (open: boolean) => {
+				toggle.setAttribute("aria-expanded", String(open));
+				nav.classList.toggle("is-open", open);
+				if (label) label.textContent = open ? "Close" : "Menu";
+			};
+			toggle.addEventListener("click", () => {
+				setOpen(toggle.getAttribute("aria-expanded") !== "true");
+			});
+			nav.querySelectorAll("a").forEach((link) => {
+				link.addEventListener("click", () => setOpen(false));
+			});
+
+			const closeSubs = () => {
+				nav.querySelectorAll<HTMLElement>(".nav-item.is-open").forEach((item) => {
+					item.classList.remove("is-open");
+					item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "false");
+				});
+			};
+
+			nav.querySelectorAll<HTMLButtonElement>("[data-submenu]").forEach((button) => {
+				button.addEventListener("click", (event) => {
+					event.stopPropagation();
+					const item = button.closest<HTMLElement>(".nav-item");
+					if (!item) return;
+					const willOpen = !item.classList.contains("is-open");
+					closeSubs();
+					if (willOpen) {
+						item.classList.add("is-open");
+						button.setAttribute("aria-expanded", "true");
+					}
+				});
+			});
+
+			const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+			if (canHover) {
+				nav.querySelectorAll<HTMLElement>(".nav-item").forEach((item) => {
+					if (!item.querySelector(".nav-sub")) return;
+					item.addEventListener("pointerenter", () => {
+						closeSubs();
+						item.classList.add("is-open");
+						item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "true");
+					});
+					item.addEventListener("pointerleave", () => {
+						item.classList.remove("is-open");
+						item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "false");
+					});
+				});
+			}
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape") {
+					setOpen(false);
+					closeSubs();
+				}
+			});
+			document.addEventListener("click", (event) => {
+				if (!(event.target instanceof Node) || nav.contains(event.target)) return;
+				closeSubs();
+			});
+		}
+
+		const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+		if (form && form.dataset.ready !== "1") {
+			form.dataset.ready = "1";
+			const status = form.querySelector<HTMLElement>("[data-status]");
+			const submit = form.querySelector<HTMLButtonElement>("[type='submit']");
+
+			const showErrors = () => {
+				form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+					"input, textarea, select",
+				).forEach((field) => {
+					const error = form.querySelector<HTMLElement>(
+						`[data-error-for="${field.name}"]`,
+					);
+					if (!error || field.type === "hidden" || field.name === "_gotcha") return;
+					if (field.validity.valid) {
+						error.textContent = "";
+						field.removeAttribute("aria-invalid");
+					} else {
+						field.setAttribute("aria-invalid", "true");
+						error.textContent = field.validationMessage;
+					}
+				});
+			};
+
+			form.addEventListener(
+				"blur",
+				(event) => {
+					const target = event.target;
+					const isField =
+						target instanceof HTMLInputElement ||
+						target instanceof HTMLTextAreaElement ||
+						target instanceof HTMLSelectElement;
+					if (!isField) return;
+					if (!form.classList.contains("show-errors")) return;
+					showErrors();
+				},
+				true,
+			);
+
+			form.addEventListener(
+				"invalid",
+				() => {
+					form.classList.add("show-errors");
+					showErrors();
+				},
+				true,
+			);
+
+			form.addEventListener("submit", async (event) => {
+				form.classList.add("show-errors");
+				showErrors();
+				if (!form.checkValidity()) {
+					event.preventDefault();
+					form.querySelector<HTMLElement>(":invalid")?.focus();
+					return;
+				}
+				event.preventDefault();
+				if (!status || !submit) return;
+				if (form.action.includes("replace-me")) {
+					status.textContent =
+						"Add your Formspree form URL as PUBLIC_FORMSPREE_ENDPOINT in .env, then restart the site. The message was not sent.";
+					return;
+				}
+				submit.disabled = true;
+				const original = submit.textContent;
+				submit.textContent = "Sending";
+				status.textContent = "Sending the message.";
+				try {
+					const response = await fetch(form.action, {
+						method: "POST",
+						body: new FormData(form),
+						headers: { Accept: "application/json" },
+					});
+					if (!response.ok) {
+						status.textContent =
+							"The message did not send. Check the form and try again.";
+						submit.disabled = false;
+						submit.textContent = original;
+						return;
+					}
+					form.reset();
+					form.classList.remove("show-errors");
+					status.textContent = "Message sent. The studio will reply by email.";
+					submit.textContent = "Send message";
+					submit.disabled = false;
+				} catch {
+					status.textContent =
+						"The message did not send. Check the connection and try again.";
+					submit.disabled = false;
+					submit.textContent = original;
+				}
+			});
+		}
+
+		document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((button) => {
+			if (button.dataset.ready === "1") return;
+			button.dataset.ready = "1";
+			button.addEventListener("click", () => {
+				const kind = button.dataset.filter;
+				document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((item) => {
+					item.setAttribute("aria-pressed", String(item === button));
+				});
+				document.querySelectorAll<HTMLElement>("[data-kind]").forEach((row) => {
+					const show = kind === "all" || row.dataset.kind === kind;
+					row.hidden = !show;
+				});
+			});
+		});
+
+		const hashed = location.hash.replace("#", "");
+		if (hashed) {
+			document
+				.querySelector<HTMLButtonElement>(`[data-filter="${CSS.escape(hashed)}"]`)
+				?.click();
+		}
+
+		if (!document.documentElement.dataset.hashFilter) {
+			document.documentElement.dataset.hashFilter = "1";
+			window.addEventListener("hashchange", () => {
+				const id = location.hash.replace("#", "");
+				if (!id) return;
+				document
+					.querySelector<HTMLButtonElement>(`[data-filter="${CSS.escape(id)}"]`)
+					?.click();
+			});
+		}
+	}
+
+	document.addEventListener("astro:page-load", boot);
+	boot();
+</script>

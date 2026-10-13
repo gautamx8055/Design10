@@ -1,0 +1,70 @@
+---
+import Drawing from "../components/Drawing.astro";
+import VideoFrame from "../components/VideoFrame.astro";
+import Base from "../layouts/Base.astro";
+import { studio } from "../data/site";
+---
+
+<Base
+	title="About Mr. Shahnawaz, architect since 1996"
+	description="Mr. Shahnawaz has practised architecture since 1996. The studio designs jewelry showrooms, residences, and banquet halls, and still begins each room on paper."
+	image="/posters/residence.jpg"
+>
+	<div class="wrap page">
+		<header class="page-title">
+			<h1>About</h1>
+			<p>
+				{studio.principal} has practised architecture since {studio.since}. The
+				studio is the work of that practice: showrooms, houses, and halls.
+			</p>
+		</header>
+
+		<div class="split">
+			<VideoFrame film="residence" eager />
+			<div class="stack measure">
+				<p>
+					The rooms are commercial and domestic at once. A jewelry showroom
+					has to sell and still feel calm. A house has to hold a joint family
+					without making every hour a corridor. A banquet hall has to carry a
+					wedding from the car to the last table.
+				</p>
+				<p>
+					He draws before he specifies. Clients see a plan and a section, and
+					they can point to the place where an elder sits, where a necklace is
+					lifted from the case, or where the kitchen door must not appear in
+					a photograph.
+				</p>
+				<p>
+					The studio stays with the site. A drawing that cannot be built in
+					the order a contractor actually works is sent back to the sheet.
+				</p>
+			</div>
+		</div>
+
+		<section class="section measure">
+			<h2>How a room is decided</h2>
+			<p>
+				Three questions come first. Who stops in this room, and for how long.
+				Where does the light need to fall. What must stay out of sight: a
+				store, a kitchen, a stair, a safe. Finishes follow those answers.
+				Brass appears where the hand meets a case or a rail. Plaster and stone
+				do the larger surfaces.
+			</p>
+			<p>
+				If you are bringing a site, a family house, or a hall that already
+				stands, write with the day the room has to hold. The studio will reply
+				with questions before a fee.
+			</p>
+			<p class="actions">
+				<a class="button" href="/contact">Start a conversation</a>
+				<a href="/services">See the services</a>
+			</p>
+		</section>
+
+		<div class="drawing-row three section">
+			<Drawing kind="stair" label="Section through a stair" />
+			<Drawing kind="pavilion" label="Front of a showroom" />
+			<Drawing kind="hall" label="Section through a banquet hall" />
+		</div>
+	</div>
+</Base>
