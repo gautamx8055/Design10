@@ -1,26 +1,25 @@
 ---
 import Logo from "./Logo.astro";
-import { projects } from "../data/projects";
 import { nav } from "../data/site";
 
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 
-const workLinks = [
-	{ href: "/work", label: "All rooms" },
-	{ href: "/work#jewelry", label: "Jewelry showrooms" },
-	{ href: "/work#residence", label: "Residences" },
-	{ href: "/work#banquet", label: "Banquet halls" },
+const serviceLinks = [
+	{ href: "/services#residential", label: "Residential" },
+	{ href: "/services#jewellery", label: "Jewellery Showroom" },
+	{ href: "/services#commercial", label: "Commercial" },
+	{ href: "/services#architectural", label: "Architectural" },
 ];
 
-const serviceLinks = [
-	{ href: "/services#showrooms", label: "Jewelry showrooms" },
-	{ href: "/services#residences", label: "Residences" },
-	{ href: "/services#halls", label: "Banquet halls" },
+const portfolioLinks = [
+	{ href: "/portfolio", label: "All clients" },
+	{ href: "/portfolio#groups", label: "Several showrooms" },
+	{ href: "/portfolio#directory", label: "Showroom directory" },
 ];
 
 const menus: Record<string, { href: string; label: string }[]> = {
-	"/work": workLinks,
 	"/services": serviceLinks,
+	"/portfolio": portfolioLinks,
 };
 
 function parentCurrent(href: string) {
@@ -32,10 +31,12 @@ function childCurrent(href: string) {
 	if (href.includes("#")) return false;
 	return current === path;
 }
+
+const overlay = current === "/";
 ---
 
 <a class="skip" href="#content">Skip to content</a>
-<header class="site-header">
+<header class:list={["site-header", { "is-overlay": overlay }]}>
 	<div class="header-inner">
 		<Logo href="/" />
 		<button
@@ -55,9 +56,11 @@ function childCurrent(href: string) {
 					const active = parentCurrent(item.href);
 					if (!children) {
 						return (
-							<a href={item.href} aria-current={active ? "page" : undefined}>
-								{item.label}
-							</a>
+							<div class="nav-item">
+								<a href={item.href} aria-current={active ? "page" : undefined}>
+									{item.label}
+								</a>
+							</div>
 						);
 					}
 					const menuId = `menu-${item.label.toLowerCase()}`;
@@ -78,22 +81,46 @@ function childCurrent(href: string) {
 									<path d="M1 1.5 L6 6.5 L11 1.5" />
 								</svg>
 							</button>
-							<div class="nav-sub" id={menuId}>
+							<div class:list={["nav-sub", item.href === "/portfolio" && "nav-sub-wide"]} id={menuId}>
 								{
-									children.map((child) => (
-										<a href={child.href} aria-current={childCurrent(child.href) ? "page" : undefined}>
-											{child.label}
-										</a>
-									))
+									item.href === "/portfolio" && (
+										<svg class="nav-draw" viewBox="0 0 720 52" aria-hidden="true">
+											<path class="nav-draw-line" pathLength="1" d="M8 40 H712" />
+											<path class="nav-draw-line" pathLength="1" d="M28 40 V18 H132 V40" />
+											<path class="nav-draw-line gold" pathLength="1" d="M18 18 H142" />
+											<path class="nav-draw-line" pathLength="1" d="M48 40 V28 H72 V40" />
+											<path class="nav-draw-line" pathLength="1" d="M88 40 V28 H112 V40" />
+											<path class="nav-draw-line" pathLength="1" d="M200 40 V14 H340 V40" />
+											<path class="nav-draw-line gold" pathLength="1" d="M190 14 H350" />
+											<path class="nav-draw-line" pathLength="1" d="M248 40 V26 H292 V40" />
+											<path class="nav-draw-line" pathLength="1" d="M420 40 V22 H620 V40" />
+											<path class="nav-draw-line gold" pathLength="1" d="M410 22 H630" />
+										</svg>
+									)
 								}
+								<div class="nav-sub-col">
+									<p class="nav-sub-label">
+										{item.href === "/portfolio" ? "The portfolio" : "Our expertise"}
+									</p>
+									{
+										children.map((child) => (
+											<a
+												href={child.href}
+												aria-current={childCurrent(child.href) ? "page" : undefined}
+											>
+												{child.label}
+											</a>
+										))
+									}
+								</div>
 								{
-									item.href === "/work" && (
-										<>
-											<p class="nav-sub-label">Selected rooms</p>
-											{projects.map((project) => (
-												<a href={`/work/${project.slug}`}>{project.name}</a>
-											))}
-										</>
+									item.href === "/portfolio" && (
+										<div class="nav-sub-col">
+											<p class="nav-sub-label">Clients with several showrooms</p>
+											<a href="/portfolio#urmil-jeweller">Urmil Jeweller</a>
+											<a href="/portfolio#ganga-jeweller">Ganga Jeweller</a>
+											<a href="/portfolio#giri-zever-mahal">Giri Zever Mahal</a>
+										</div>
 									)
 								}
 							</div>

@@ -1,26 +1,17 @@
 ---
 import Drawing from "../components/Drawing.astro";
-import VideoFrame from "../components/VideoFrame.astro";
+import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
 import { formEndpoint, studio } from "../data/site";
 ---
 
 <Base
-	title="Contact Design 10 Entire Interior"
-	description="Write to Mr. Shahnawaz about a jewelry showroom, a residence, or a banquet hall. Share the day the room has to hold, and the studio will reply."
+	title="Contact Design10 Entire Interior"
+	description="Write to Design10 Entire Interior Pvt. Ltd. about a residence, a jewellery showroom, a commercial interior, or an architectural project."
 	image="/posters/residence.jpg"
 >
+	<PageHero variant="contact" />
 	<div class="wrap page">
-		<header class="page-title">
-			<h1>Contact</h1>
-			<p>
-				Tell the studio which room you need, and the day it has to hold. A
-				showroom, a house, or a hall is enough to begin.
-			</p>
-		</header>
-
-		<VideoFrame film="residence" eager />
-
 		<div class="contact-grid section">
 			<form
 				class="contact-form"
@@ -28,7 +19,7 @@ import { formEndpoint, studio } from "../data/site";
 				method="POST"
 				data-contact-form
 			>
-				<input type="hidden" name="_subject" value="New enquiry for Design 10 Entire Interior" />
+				<input type="hidden" name="_subject" value="New enquiry for Design10 Entire Interior" />
 				<p class="hp" aria-hidden="true">
 					<label for="company">Company</label>
 					<input id="company" name="_gotcha" tabindex="-1" autocomplete="off" />
@@ -52,10 +43,10 @@ import { formEndpoint, studio } from "../data/site";
 					<label for="project">Room you need</label>
 					<select id="project" name="project" required>
 						<option value="">Choose one</option>
-						<option>Jewelry showroom</option>
-						<option>Residence</option>
-						<option>Banquet hall</option>
-						<option>Something else</option>
+						<option>Residential</option>
+						<option>Jewellery showroom</option>
+						<option>Commercial</option>
+						<option>Architectural</option>
 					</select>
 					<p class="field-error" data-error-for="project"></p>
 				</div>

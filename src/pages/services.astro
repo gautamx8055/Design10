@@ -1,55 +1,35 @@
 ---
 import Drawing from "../components/Drawing.astro";
-import VideoFrame from "../components/VideoFrame.astro";
+import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import { process, services } from "../data/content";
+import { expertise } from "../data/content";
 ---
 
 <Base
-	title="Showroom, house, and hall interiors | Design 10"
-	description="Architecture services for jewelry showrooms, residences, and banquet halls. The studio of Mr. Shahnawaz draws the plan, the section, and stays with the site."
+	title="Services | Design10 Entire Interior"
+	description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India."
 	image="/posters/jewelry.jpg"
 >
+	<PageHero variant="services" />
 	<div class="wrap page">
-		<header class="page-title">
-			<h1>Services</h1>
-			<p>
-				The studio takes on jewelry showrooms, residences, and banquet halls.
-				The work runs from the first conversation to reviews on site.
-			</p>
-		</header>
-
-		<VideoFrame film="jewelry" eager />
 
 		<div class="section">
 			{
-				services.map((service) => (
-					<article class="service-row section" id={service.id}>
-						<Drawing kind={service.kind} label={service.label} />
+				expertise.map((item) => (
+					<article class="service-row section" id={item.id}>
+						<Drawing kind={item.kind} label={item.label} />
 						<div>
-							<h2>{service.title}</h2>
-							<p class="measure">{service.text}</p>
+							<h2>{item.title}</h2>
+							<p class="measure">{item.text}</p>
 						</div>
 					</article>
 				))
 			}
 		</div>
 
-		<section class="section">
-			<h2>How a commission proceeds</h2>
-			<ol class="process">
-				{
-					process.map((step) => (
-						<li>
-							<h3>{step.title}</h3>
-							<p>{step.text}</p>
-						</li>
-					))
-				}
-			</ol>
-			<p class="actions">
-				<a class="button" href="/contact">Start a conversation</a>
-			</p>
-		</section>
+		<p class="actions">
+			<a class="button" href="/contact">Start a conversation</a>
+			<a href="/portfolio">See the clients</a>
+		</p>
 	</div>
 </Base>

@@ -1,0 +1,51 @@
+---
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { clients, multiLocationClients } from "../data/clients";
+
+function anchor(name: string) {
+	return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+---
+
+<Base
+	title="Portfolio and clients | Design10 Entire Interior"
+	description="Jewellery showroom clients of Design10 Entire Interior Pvt. Ltd., including Urmil Jeweller, Ganga Jeweller, and Giri Zever Mahal, with showrooms across India."
+	image="/posters/jewelry.jpg"
+>
+	<PageHero variant="portfolio" />
+	<div class="wrap page">
+		<section class="section" id="groups">
+			<h2>Clients with multiple locations</h2>
+			<div class="group-grid">
+				{
+					multiLocationClients.map((client) => (
+						<article id={anchor(client.name)}>
+							<h3>{client.name}</h3>
+							<ul>
+								{client.locations.map((place) => (
+									<li>{place}</li>
+								))}
+							</ul>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="section" id="directory">
+			<h2>All clients</h2>
+			<ol class="directory">
+				{
+					clients.map((client, index) => (
+						<li>
+							<span class="directory-index">{index + 1}</span>
+							<span class="directory-name">{client.name}</span>
+							<span class="directory-place">{client.location}</span>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+	</div>
+</Base>

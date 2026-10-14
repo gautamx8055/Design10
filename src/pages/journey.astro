@@ -1,42 +1,57 @@
 ---
 import Drawing from "../components/Drawing.astro";
-import VideoFrame from "../components/VideoFrame.astro";
+import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import { journey } from "../data/content";
+import { highlights } from "../data/content";
+import { studio } from "../data/site";
 ---
 
 <Base
-	title="The studio journey since 1996 | Design 10"
-	description="A sample ledger of the practice Mr. Shahnawaz has kept since 1996: showrooms, courtyard houses, and banquet halls."
+	title="Our Journey | Design10 Entire Interior"
+	description="On 6 October 1996 at 3:30 PM, Shahnawaz Ahmed began Design10. Three decades and 1000+ projects across India."
 	image="/posters/hall.jpg"
 >
+	<PageHero variant="journey" />
 	<div class="wrap page">
-		<header class="page-title">
-			<h1>Journey</h1>
+		<div class="stack section measure">
 			<p>
-				Mr. Shahnawaz has been an architect since 1996. The years below are a
-				sample ledger. Replace them with the studio’s own record.
+				On {studio.founded}, Mr. Shahnawaz Ahmed began his professional journey in
+				architecture and design. What started as his first project has grown into a
+				remarkable journey spanning three decades of creativity, dedication and
+				architectural excellence.
 			</p>
-		</header>
+			<p>
+				With experience across India, Mr. Shahnawaz Ahmed has worked on a diverse
+				range of residential and commercial projects, transforming ideas into
+				thoughtfully designed spaces that balance space, aesthetic, functionality
+				and the unique identity of every client.
+			</p>
+			<p>
+				His portfolio includes 1000+ complete projects, reflecting a deep
+				understanding of design, space planning, detailing and client requirements.
+			</p>
+		</div>
 
-		<VideoFrame film="hall" eager />
-
-		<ol class="timeline section">
+		<ul class="highlights section">
 			{
-				journey.map((entry) => (
+				highlights.map((item) => (
 					<li>
-						<p class="year">{entry.year}</p>
-						<h2>{entry.title}</h2>
-						<p class="measure">{entry.text}</p>
+						<strong>{item.figure}</strong>
+						<span>{item.label}</span>
 					</li>
 				))
 			}
-		</ol>
+		</ul>
+
+		<blockquote class="pull section">
+			<p>{studio.quote}</p>
+			<footer>{studio.principal}</footer>
+		</blockquote>
 
 		<div class="drawing-row section">
-			<Drawing kind="pavilion" label="Front of a showroom" />
-			<Drawing kind="stair" label="Section through a stair" />
-			<Drawing kind="court" label="Plan of a courtyard house" />
+			<Drawing kind="pavilion" label="A front elevation" />
+			<Drawing kind="court" label="A residential plan" />
+			<Drawing kind="vitrine" label="A jewellery showroom plan" />
 		</div>
 	</div>
 </Base>

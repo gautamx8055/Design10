@@ -1,0 +1,130 @@
+---
+import { clients } from "../data/clients";
+import { expertise } from "../data/content";
+import { films, studio, type FilmKey } from "../data/site";
+
+interface Props {
+	variant: "services" | "portfolio" | "journey" | "contact";
+}
+
+const { variant } = Astro.props;
+
+const filmKey: Record<Props["variant"], FilmKey | null> = {
+	services: "hall",
+	portfolio: "jewelry",
+	journey: "residence",
+	contact: null,
+};
+
+const film = filmKey[variant] ? films[filmKey[variant]] : null;
+const names = [...clients.slice(0, 14), ...clients.slice(0, 14)];
+---
+
+<section class={`page-hero page-hero-${variant}`} aria-label="Page introduction">
+	{
+		film && (
+			<video
+				src={film.src}
+				poster={film.poster}
+				muted
+				loop
+				playsinline
+				autoplay
+				preload="auto"
+				aria-label={film.caption}
+			></video>
+		)
+	}
+	{
+		film && (
+			<button type="button" class="video-control" data-video-toggle>
+				Pause film
+			</button>
+		)
+	}
+	<div class="page-hero-inner">
+		{
+			variant === "services" && (
+				<div class="page-hero-split">
+					<div>
+						<p class="page-hero-kicker">{studio.disciplines}</p>
+						<h1>Services</h1>
+						<p>
+							Designing across India, from luxury residences to iconic commercial
+							spaces. Distinctive design for every client, every space, every vision.
+						</p>
+					</div>
+					<ul class="hero-index">
+						{
+							expertise.map((item) => (
+								<li>
+									<a href={`#${item.id}`}>{item.title}</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			)
+		}
+		{
+			variant === "portfolio" && (
+				<div>
+					<p class="page-hero-kicker">1000+ complete projects</p>
+					<h1>Portfolio & Our Clients</h1>
+					<p>
+						Jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar
+						Pradesh. Houses with more than one showroom are grouped first.
+					</p>
+				</div>
+			)
+		}
+		{
+			variant === "journey" && (
+				<div class="page-hero-journey">
+					<p class="page-hero-kicker">{studio.shortName}</p>
+					<p class="page-hero-date">1996</p>
+					<p class="page-hero-when">6 October, 3:30 PM</p>
+					<h1>Our Journey</h1>
+					<p>Every Great Journey Begins With a Single Step.</p>
+				</div>
+			)
+		}
+		{
+			variant === "contact" && (
+				<div class="page-hero-split">
+					<div>
+						<p class="page-hero-kicker">{studio.name}</p>
+						<h1>Contact</h1>
+						<p>
+							Tell the studio which room you need. A residence, a jewellery
+							showroom, a commercial interior, or an architectural project.
+						</p>
+					</div>
+					<ul class="hero-facts">
+						<li>
+							<span>Email</span>
+							<a href={`mailto:${studio.email}`}>{studio.email}</a>
+						</li>
+						<li>
+							<span>Phone</span>
+							<a href={studio.phoneHref}>{studio.phone}</a>
+						</li>
+						<li>
+							<span>Studio</span>
+							{studio.city}
+						</li>
+					</ul>
+				</div>
+			)
+		}
+	</div>
+	{
+		variant === "portfolio" && (
+			<div class="page-hero-marquee" aria-hidden="true">
+				<div class="page-hero-track">
+					{names.map((client) => <span>{client.name}</span>)}
+				</div>
+			</div>
+		)
+	}
+</section>

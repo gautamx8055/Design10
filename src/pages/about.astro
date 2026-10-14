@@ -6,65 +6,67 @@ import { studio } from "../data/site";
 ---
 
 <Base
-	title="About Mr. Shahnawaz, architect since 1996"
-	description="Mr. Shahnawaz has practised architecture since 1996. The studio designs jewelry showrooms, residences, and banquet halls, and still begins each room on paper."
+	title="About Design10 Entire Interior"
+	description="About Design10 Entire Interior Pvt. Ltd. and its founder, Shahnawaz Ahmed, who began the practice on 6 October 1996."
 	image="/posters/residence.jpg"
 >
 	<div class="wrap page">
 		<header class="page-title">
 			<h1>About</h1>
 			<p>
-				{studio.principal} has practised architecture since {studio.since}. The
-				studio is the work of that practice: showrooms, houses, and halls.
+				{studio.name}. {studio.disciplines}. Founded by {studio.principal},
+				{studio.founderTitle}.
 			</p>
 		</header>
 
 		<div class="split">
-			<VideoFrame film="residence" eager />
+			<figure class="portrait">
+				<div class="portrait-frame" role="img" aria-label="Portrait of Shahnawaz Ahmed, to be placed here">
+					<span>SA</span>
+				</div>
+				<figcaption>{studio.principal}</figcaption>
+			</figure>
 			<div class="stack measure">
 				<p>
-					The rooms are commercial and domestic at once. A jewelry showroom
-					has to sell and still feel calm. A house has to hold a joint family
-					without making every hour a corridor. A banquet hall has to carry a
-					wedding from the car to the last table.
+					On {studio.founded}, Mr. Shahnawaz Ahmed began his professional journey
+					in architecture and design. What started as his first project has grown
+					into a remarkable journey spanning three decades of creativity,
+					dedication and architectural excellence.
 				</p>
 				<p>
-					He draws before he specifies. Clients see a plan and a section, and
-					they can point to the place where an elder sits, where a necklace is
-					lifted from the case, or where the kitchen door must not appear in
-					a photograph.
+					With experience across India, he has worked on a diverse range of
+					residential and commercial projects, transforming ideas into thoughtfully
+					designed spaces that balance space, aesthetic, functionality and the
+					unique identity of every client.
 				</p>
 				<p>
-					The studio stays with the site. A drawing that cannot be built in
-					the order a contractor actually works is sent back to the sheet.
+					The portfolio includes 1000+ complete projects, reflecting a deep
+					understanding of design, space planning, detailing and client requirements.
 				</p>
 			</div>
 		</div>
 
 		<section class="section measure">
-			<h2>How a room is decided</h2>
+			<h2>The practice</h2>
 			<p>
-				Three questions come first. Who stops in this room, and for how long.
-				Where does the light need to fall. What must stay out of sight: a
-				store, a kitchen, a stair, a safe. Finishes follow those answers.
-				Brass appears where the hand meets a case or a rail. Plaster and stone
-				do the larger surfaces.
+				Design10 continues to deliver distinctive design solutions for every client,
+				every space, every vision. The work reaches across India, from luxury
+				residences to jewellery showrooms and other commercial spaces.
 			</p>
-			<p>
-				If you are bringing a site, a family house, or a hall that already
-				stands, write with the day the room has to hold. The studio will reply
-				with questions before a fee.
-			</p>
+			<blockquote class="pull">
+				<p>{studio.quote}</p>
+				<footer>{studio.principal}</footer>
+			</blockquote>
 			<p class="actions">
-				<a class="button" href="/contact">Start a conversation</a>
-				<a href="/services">See the services</a>
+				<a class="button" href="/journey">Our Journey</a>
+				<a href="/contact">Contact the studio</a>
 			</p>
 		</section>
 
-		<div class="drawing-row three section">
+		<div class="drawing-row section">
 			<Drawing kind="stair" label="Section through a stair" />
-			<Drawing kind="pavilion" label="Front of a showroom" />
-			<Drawing kind="hall" label="Section through a banquet hall" />
+			<Drawing kind="pavilion" label="A commercial front" />
 		</div>
+		<VideoFrame film="residence" />
 	</div>
 </Base>

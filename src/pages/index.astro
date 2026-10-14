@@ -1,44 +1,34 @@
 ---
 import Drawing from "../components/Drawing.astro";
-import VideoFrame from "../components/VideoFrame.astro";
 import Base from "../layouts/Base.astro";
-import { projects } from "../data/projects";
-import { testimonials } from "../data/content";
+import { clients, multiLocationClients } from "../data/clients";
+import { expertise, highlights } from "../data/content";
 import { films, studio } from "../data/site";
 
-const selected = [
-	projects[0],
-	projects[2],
-	projects[4],
-];
-const quote = testimonials[3];
+const featured = clients.slice(0, 6);
 
-const personSchema = {
+const organization = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
 	name: studio.name,
 	description: studio.summary,
 	founder: {
 		"@type": "Person",
-		name: "Shahnawaz",
+		name: "Shahnawaz Ahmed",
 		honorificPrefix: "Mr.",
-		jobTitle: "Architect",
+		jobTitle: studio.founderTitle,
 	},
-	knowsAbout: [
-		"Jewelry showroom interiors",
-		"Residential interiors",
-		"Banquet hall interiors",
-	],
+	knowsAbout: expertise.map((item) => item.title),
 };
 ---
 
 <Base
-	title="Design 10 Entire Interior | Showrooms, homes, halls"
-	description="Design 10 Entire Interior completes jewelry showrooms, homes, and banquet halls. Mr. Shahnawaz has led the studio since 1996, from the plan to the last surface."
+	title="Design10 Entire Interior Pvt. Ltd."
+	description="Design10 Entire Interior Pvt. Ltd. Architecture, interior, and design. Shahnawaz Ahmed founded the practice on 6 October 1996. Three decades, 1000+ projects, across India."
 	image="/posters/hall.jpg"
 >
 	<Fragment slot="head">
-		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
 	</Fragment>
 
 	<section class="hero" aria-label="Introduction">
@@ -51,116 +41,116 @@ const personSchema = {
 				playsinline
 				autoplay
 				preload="auto"
-				aria-label={films.hall.caption}
+				aria-label="Interior of a hall, standing in until the studio photograph is placed."
 			></video>
 			<button type="button" class="video-control" data-video-toggle>Pause film</button>
 		</div>
-		<div class="hero-copy">
-			<p class="hero-brand">{studio.name}</p>
-			<h1>From the plan to the last surface.</h1>
-			<p>
-				Jewelry showrooms, homes, and banquet halls, finished as complete
-				interiors. {studio.principal} has led the studio since {studio.since}.
-			</p>
+		<div class="hero-layout">
+			<div class="hero-copy">
+				<p class="hero-brand">{studio.name}</p>
+				<p class="hero-disciplines">{studio.disciplines}</p>
+				<h1>Three Decades of Design Excellence.</h1>
+				<p class="hero-legacy">A Legacy Built on Trust.</p>
+				<p>{studio.founderTitle}: Shahnawaz Ahmed</p>
+			</div>
+			<figure class="portrait">
+				<div class="portrait-frame" role="img" aria-label="Portrait of Shahnawaz Ahmed, to be placed here">
+					<span>SA</span>
+				</div>
+				<figcaption>Shahnawaz Ahmed</figcaption>
+			</figure>
 		</div>
 	</section>
 
-	<section class="wrap section" data-reveal>
-		<h2>Three kinds of rooms</h2>
-		<p class="lede">
-			The practice stays with showrooms, houses, and halls. Each one is a room
-			where people stop, live, or gather, and the drawing starts from that day.
-		</p>
-		<div class="practice-grid">
-			<article>
-				<Drawing kind="vitrine" label="Plan of a jewelry room" />
-				<h3>Jewelry showrooms</h3>
-				<p>
-					Cases and counters planned so a piece can be seen, and the next
-					family can still pass.
-				</p>
-			</article>
-			<article>
-				<Drawing kind="court" label="Plan of a courtyard house" />
-				<h3>Residences</h3>
-				<p>
-					Courts, verandas, and a ground floor that keeps elders near the
-					life of the house.
-				</p>
-			</article>
-			<article>
-				<Drawing kind="hall" label="Section through a banquet hall" />
-				<h3>Banquet halls</h3>
-				<p>
-					Arrival, hall, elders, bridal room, and a kitchen path that does
-					not cross the door.
-				</p>
-			</article>
-		</div>
-	</section>
-
-	<section class="wrap section owner-grid" data-reveal>
-		<div class="stack">
-			<h2>{studio.principal}</h2>
-			<p class="since">Architect since {studio.since}.</p>
+	<section class="wrap section journey-open" data-reveal>
+		<div class="stack measure">
+			<h2>Every Great Journey Begins With a Single Step</h2>
 			<p>
-				For three decades the work has stayed with three kinds of rooms: the
-				jewelry showroom, where a piece has to be seen; the house, where a
-				family has to live; and the banquet hall, where a day of gathering has
-				to move from the door to the table.
-			</p>
-			<p>
-				He still begins on paper. A plan, a section, and a conversation about
-				light come before the finish. The studio remains small enough that the
-				principal draws the work and walks the site.
+				On 6 October 1996 at 3:30 PM, Mr. Shahnawaz Ahmed began his professional
+				journey in architecture and design. What started as his first project
+				has grown into a remarkable journey spanning three decades of creativity,
+				dedication and architectural excellence.
 			</p>
 			<p class="actions">
-				<a href="/about">About the studio</a>
-				<a href="/journey">Read the journey</a>
+				<a class="button" href="/journey">Know more about his journey</a>
 			</p>
 		</div>
-		<VideoFrame film="residence" />
+		<ul class="highlights">
+			{
+				highlights.map((item) => (
+					<li>
+						<strong>{item.figure}</strong>
+						<span>{item.label}</span>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="wrap section journey-band" data-reveal>
+		<div class="journey-band-copy">
+			<p class="hero-brand">Space that inspire</p>
+			<h2>The Journey</h2>
+			<p>
+				With experience across India, Mr. Shahnawaz Ahmed has worked on a diverse
+				range of residential and commercial projects, transforming ideas into
+				thoughtfully designed spaces that balance space, aesthetic, functionality
+				and the unique identity of every client.
+			</p>
+			<p>
+				His portfolio includes 1000+ complete projects, reflecting a deep
+				understanding of design, space planning, detailing and client requirements.
+			</p>
+			<blockquote class="pull">
+				<p>{studio.quote}</p>
+			</blockquote>
+		</div>
+		<div class="journey-band-media">
+			<Drawing kind="court" label="A residence, in plan" />
+			<Drawing kind="vitrine" label="A jewellery room, in plan" />
+		</div>
 	</section>
 
 	<section class="wrap section" data-reveal>
-		<h2>Selected rooms</h2>
-		<p class="sample">
-			Sample rooms, ready for the studio’s own names and photographs.
+		<h2>Our Expertise</h2>
+		<p class="lede">
+			Designing across India, from luxury residences to iconic commercial spaces.
+			Design10 continues to deliver distinctive design solutions for every client,
+			every space, every vision.
 		</p>
-		<div class="project-list">
+		<div class="practice-grid">
 			{
-				selected.map((project) => (
-					<a class="project-row" href={`/work/${project.slug}`}>
-						<Drawing kind={project.drawings[0].kind} label={project.drawings[0].label} />
-						<div class="project-copy">
-							<p class="kind">{project.kindLabel}</p>
-							<h3>{project.name}</h3>
-							<p>{project.summary}</p>
-						</div>
-					</a>
+				expertise.map((item) => (
+					<article>
+						<Drawing kind={item.kind} label={item.label} />
+						<h3>{item.title}</h3>
+					</article>
 				))
 			}
 		</div>
-		<p class="actions">
-			<a href="/work">All the work</a>
-		</p>
 	</section>
 
 	<section class="wrap section" data-reveal>
-		<blockquote class="pull">
-			<p>{quote.quote}</p>
-			<footer>{quote.by}</footer>
-		</blockquote>
+		<h2>Portfolio & Our Clients</h2>
+		<p class="lede">
+			Jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar Pradesh.
+			Some clients have more than one showroom.
+		</p>
+		<ul class="client-groups">
+			{
+				multiLocationClients.map((client) => (
+					<li>
+						<strong>{client.name}</strong>
+						<span>{client.locations.join(", ")}</span>
+					</li>
+				))
+			}
+		</ul>
+		<ul class="name-row">
+			{featured.map((client) => <li>{client.name}</li>)}
+		</ul>
 		<p class="actions">
-			<a href="/testimonials">More client words</a>
+			<a class="button" href="/portfolio">See the client list</a>
 		</p>
-	</section>
-
-	<section class="wrap section close" data-reveal>
-		<h2>Begin with the room you need.</h2>
-		<p>
-			A showroom, a house, or a hall. Write with the day the room has to hold.
-		</p>
-		<a class="button" href="/contact">Start a conversation</a>
 	</section>
 </Base>

@@ -1,25 +1,28 @@
 export const studio = {
-	name: "Design 10 Entire Interior",
-	shortName: "Design 10",
-	principal: "Mr. Shahnawaz",
-	role: "Architect",
+	name: "Design10 Entire Interior Pvt. Ltd.",
+	shortName: "Design10",
+	disciplines: "Architecture | Interior | Design",
+	principal: "Mr. Shahnawaz Ahmed",
+	founderTitle: "Founder & Principal Designer",
+	role: "Founder & Principal Designer",
 	since: 1996,
+	founded: "6 October 1996, 3:30 PM",
 	email: "studio@design10.example",
 	phone: "+91 00000 00000",
 	phoneHref: "tel:+910000000000",
 	city: "Studio address to be added",
-	statement:
-		"Complete interiors for jewelry showrooms, homes, and banquet halls.",
+	statement: "Three Decades of Design Excellence. A Legacy Built on Trust.",
 	summary:
-		"Design 10 Entire Interior completes jewelry showrooms, residences, and banquet halls. Mr. Shahnawaz has led the studio since 1996.",
+		"Design10 Entire Interior Pvt. Ltd. is the architecture and interior practice of Shahnawaz Ahmed, founded on 6 October 1996. The studio has completed 1000+ residential and commercial projects across India.",
+	quote:
+		"Every space should have a purpose. Every detail should tell a story. And every design should stand the test of time.",
 };
 
 export const nav = [
-	{ href: "/work", label: "Work" },
-	{ href: "/journey", label: "Journey" },
 	{ href: "/about", label: "About" },
 	{ href: "/services", label: "Services" },
-	{ href: "/testimonials", label: "Testimonials" },
+	{ href: "/portfolio", label: "Portfolio" },
+	{ href: "/journey", label: "Our Journey" },
 	{ href: "/contact", label: "Contact" },
 ] as const;
 

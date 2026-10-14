@@ -4,10 +4,10 @@ import { nav, studio } from "../data/site";
 
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 const rooms = [
-	{ href: "/work/the-necklace-room", label: "Jewelry showrooms" },
-	{ href: "/work/house-with-a-court", label: "Residences" },
-	{ href: "/work/the-long-table", label: "Banquet halls" },
-	{ href: "/services", label: "How a commission proceeds" },
+	{ href: "/services#residential", label: "Residential" },
+	{ href: "/services#jewellery", label: "Jewellery showrooms" },
+	{ href: "/services#commercial", label: "Commercial" },
+	{ href: "/services#architectural", label: "Architectural" },
 ];
 ---
 
@@ -17,19 +17,17 @@ const rooms = [
 			<div class="footer-intro">
 				<Logo href="/" size="footer" />
 				<p>
-					Complete interiors for jewelry showrooms, homes, and banquet halls.
-					{" "}
-					{studio.principal} has led the work since {studio.since}, from the plan to the last surface.
+					{studio.name} is the practice of {studio.principal}, {studio.founderTitle}. Architecture, interior, and design since {studio.since}.
 				</p>
 			</div>
-			<svg class="footer-mark" viewBox="0 0 220 120" aria-hidden="true">
-				<path d="M12 96 H208" />
-				<path d="M28 96 V48 H192 V96" />
-				<path class="brass" d="M20 48 H200" />
-				<path d="M28 36 H192" />
-				<path d="M48 84 V58 H84 V84" />
-				<path d="M96 96 V62 H124 V96" />
-				<path d="M136 84 V58 H172 V84" />
+			<svg class="footer-mark" data-draw viewBox="0 0 220 120" aria-hidden="true">
+				<path pathLength="1" d="M12 96 H208" />
+				<path pathLength="1" d="M28 96 V48 H192 V96" />
+				<path class="brass" pathLength="1" d="M20 48 H200" />
+				<path pathLength="1" d="M28 36 H192" />
+				<path pathLength="1" d="M48 84 V58 H84 V84" />
+				<path pathLength="1" d="M96 96 V62 H124 V96" />
+				<path pathLength="1" d="M136 84 V58 H172 V84" />
 			</svg>
 			<a class="button" href="/contact">Start a conversation</a>
 		</div>
@@ -70,7 +68,7 @@ const rooms = [
 					<li><a href={`mailto:${studio.email}`}>{studio.email}</a></li>
 					<li><a href={studio.phoneHref}>{studio.phone}</a></li>
 					<li>{studio.city}</li>
-					<li>{studio.principal}, architect</li>
+					<li>{studio.principal}, {studio.founderTitle}</li>
 				</ul>
 			</div>
 		</div>
@@ -79,7 +77,9 @@ const rooms = [
 			<p>{studio.name}</p>
 			<p>Since {studio.since}</p>
 			<p class="footer-note">
-				Films, project names, and quotations are samples until the studio’s own material is added.
+				The founder photograph, phone, email, and address will be added when the
+				studio provides them. Films on the site are reference footage until the
+				studio’s own photographs are placed.
 			</p>
 		</div>
 	</div>
