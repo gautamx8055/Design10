@@ -1,22 +1,7 @@
 ---
-import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
+import ButtonLink from "../components/ButtonLink.astro";
 ---
-
-<Base
-	title="Page not found | Design10"
-	description="This page is not on the Design10 Entire Interior site. Return to the homepage, the portfolio, or the contact form."
->
-	<section class="page-hero page-hero-contact" aria-label="Page not found">
-		<div class="page-hero-inner">
-			<p class="page-hero-kicker">Design10</p>
-			<h1>This page is not on the sheet.</h1>
-			<p>The address does not match a page in the studio site.</p>
-			<p class="actions">
-				<a class="button page-hero-button" href="/">Back to the homepage</a>
-				<a href="/portfolio">See the portfolio</a>
-				<a href="/contact">Contact the studio</a>
-			</p>
-		</div>
-	</section>
+<Base title="Page not found | Design10" description="Return to Design10’s architecture and interior design portfolio.">
+ <section class="notFound wrap sectionSpace"><p class="sectionLabel">Design10</p><h1>This page is not on the sheet.</h1><p>The address does not match a page in the studio site.</p><div class="pageActions"><ButtonLink href="/">Back to the homepage</ButtonLink><ButtonLink href="/portfolio" variant="outline">See the portfolio</ButtonLink></div></section>
 </Base>

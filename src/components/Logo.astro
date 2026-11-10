@@ -1,27 +1,9 @@
 ---
-interface Props {
-	href?: string;
-	size?: "header" | "footer" | "loader";
-}
-
+interface Props { href?: string; size?: "header" | "footer" | "loader"; }
 const { href, size = "header" } = Astro.props;
 const Tag = href ? "a" : "span";
 ---
-
-<Tag
-	class:list={["logo", `logo-${size}`]}
-	href={href}
-	aria-label={href ? "Design10 Entire Interior, home" : undefined}
->
-	<span class="logo-mark" aria-hidden="true">
-		<svg viewBox="0 0 48 48">
-			<rect class="logo-frame" x="1.25" y="1.25" width="45.5" height="45.5" pathLength="1" />
-			<path class="logo-brass" d="M1.25 16 V1.25 H16" pathLength="1" />
-		</svg>
-		<span class="logo-num">10</span>
-	</span>
-	<span class="logo-words">
-		<span class="logo-name">Design10</span>
-		<span class="logo-line">Entire Interior</span>
-	</span>
+<Tag class:list={["studioLogo", `studioLogo--${size}`]} href={href} aria-label={href ? "Design10 Entire Interior, home" : undefined}>
+ <svg class="logoSymbol" viewBox="0 0 42 42" fill="none" aria-hidden="true"><path d="M2 2h28v28H2zM12 12h28v28H12z" stroke="currentColor" stroke-width="1.5" /><path d="M12 30V12h18" stroke="currentColor" stroke-width="3" /></svg>
+ <span class="logoType"><span class="logoName">Design<span>10</span></span><span class="logoDescriptor">Entire Interior Pvt. Ltd.</span></span>
 </Tag>

@@ -1,51 +1,18 @@
 ---
-import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
+import IconArrow from "../components/IconArrow.astro";
+import UrmilStudy from "../components/UrmilStudy.astro";
+import PlanViewer from "../components/PlanViewer.astro";
+import { projects } from "../data/projects";
+import { studioCopy } from "../data/content";
 import { clients, multiLocationClients } from "../data/clients";
-
-function anchor(name: string) {
-	return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
+const directory = [...multiLocationClients.map((client) => ({ name: client.name, location: client.locations.join(", ") })), ...clients];
 ---
-
-<Base
-	title="Portfolio and clients | Design10 Entire Interior"
-	description="Jewellery showroom clients of Design10 Entire Interior Pvt. Ltd., including Urmil Jeweller, Ganga Jeweller, and Giri Zever Mahal, with showrooms across India."
-	image="/posters/jewelry.jpg"
->
-	<PageHero variant="portfolio" />
-	<div class="wrap page">
-		<section class="section" id="groups">
-			<h2>Clients with multiple locations</h2>
-			<div class="group-grid">
-				{
-					multiLocationClients.map((client) => (
-						<article id={anchor(client.name)}>
-							<h3>{client.name}</h3>
-							<ul>
-								{client.locations.map((place) => (
-									<li>{place}</li>
-								))}
-							</ul>
-						</article>
-					))
-				}
-			</div>
-		</section>
-
-		<section class="section" id="directory">
-			<h2>All clients</h2>
-			<ol class="directory">
-				{
-					clients.map((client, index) => (
-						<li>
-							<span class="directory-index">{index + 1}</span>
-							<span class="directory-name">{client.name}</span>
-							<span class="directory-place">{client.location}</span>
-						</li>
-					))
-				}
-			</ol>
-		</section>
-	</div>
+<Base title="Portfolio and clients | Design10 Entire Interior" description="Jewellery showroom clients of Design10 Entire Interior Pvt. Ltd., including Urmil Jeweller, Ganga Jeweller, and Giri Zever Mahal, with showrooms across India.">
+ <header class="pageIntro wrap"><p class="sectionLabel">1000+ completed projects</p><div class="pageIntroGrid"><h1>{studioCopy.portfolioTitle}</h1><div><p>Jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar Pradesh. Houses with more than one showroom are grouped below.</p><a class="textLink" href="#directory">See the client list <IconArrow direction="down" /></a></div></div></header>
+ <div class="wrap"><nav class="projectNavigation" aria-label="Project index">{projects.map((project) => <a href={`#${project.id}`}>{project.name}<IconArrow direction="down" /></a>)}</nav>
+ <div class="portfolioProjects">{projects.map((project, index) => <article class:list={["portfolioProject", { "portfolioProject--reverse": index % 2 !== 0, "portfolioProject--portrait": project.id === "kamalJewl" }]} id={project.id}><a class="portfolioImage" href={project.image} target="_blank" rel="noopener" aria-label={`View ${project.name} image at full size`}><img src={project.image} alt={project.alt} width={project.width} height={project.height} loading={index ? "lazy" : "eager"} /><span class="projectOpen" aria-hidden="true"><IconArrow /></span></a><div class="portfolioCopy"><p class="sectionLabel">{project.category}</p><h2>{project.name}</h2><p>{project.text}</p>{project.id === "urmil" && <a class="textLink" href="#urmilStudy">See the design & built result <IconArrow direction="down" /></a>}{project.id === "kamalJewl" && <span class="imageNote">Architectural visualisation</span>}</div></article>)}</div>
+ <UrmilStudy /><PlanViewer />
+ <section class="clientSection sectionSpace" id="groups"><div class="sectionHeading"><h2>Clients with multiple locations</h2><p>{studioCopy.clients}</p></div><div class="clientGroups">{multiLocationClients.map((client) => <article id={client.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}><h3>{client.name}</h3><p>{client.locations.join(", ")}</p></article>)}</div><section class="clientDirectory" id="directory"><h2>All clients</h2><ol class="clientDirectoryList">{directory.map((client) => <li><strong>{client.name}</strong><span>{client.location}</span></li>)}</ol></section></section>
+ </div>
 </Base>

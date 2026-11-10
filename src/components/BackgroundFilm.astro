@@ -1,0 +1,8 @@
+---
+import { projectAssets } from "../data/projects";
+interface Props { class?: string; eager?: boolean; }
+const { class: className = "", eager = false } = Astro.props;
+---
+<div class:list={["backgroundFilm", className]}>
+ <video src={projectAssets.architectDesignDemoVideo} poster={projectAssets.architectDesignDemoPoster} autoplay muted loop playsinline disablepictureinpicture disableRemotePlayback preload={eager ? "auto" : "none"} data-background-film aria-hidden="true" tabindex="-1"></video>
+</div>

@@ -1,133 +1,16 @@
 ---
 import Logo from "./Logo.astro";
+import IconArrow from "./IconArrow.astro";
 import { nav } from "../data/site";
-
-const current = Astro.url.pathname.replace(/\/$/, "") || "/";
-
-const serviceLinks = [
-	{ href: "/services#residential", label: "Residential" },
-	{ href: "/services#jewellery", label: "Jewellery Showroom" },
-	{ href: "/services#commercial", label: "Commercial" },
-	{ href: "/services#architectural", label: "Architectural" },
-];
-
-const portfolioLinks = [
-	{ href: "/portfolio", label: "All clients" },
-	{ href: "/portfolio#groups", label: "Several showrooms" },
-	{ href: "/portfolio#directory", label: "Showroom directory" },
-];
-
-const menus: Record<string, { href: string; label: string }[]> = {
-	"/services": serviceLinks,
-	"/portfolio": portfolioLinks,
-};
-
-function parentCurrent(href: string) {
-	return current === href || current.startsWith(`${href}/`);
-}
-
-function childCurrent(href: string) {
-	const path = href.split("#")[0];
-	if (href.includes("#")) return false;
-	return current === path;
-}
-
-const overlay = current === "/";
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
-
-<a class="skip" href="#content">Skip to content</a>
-<header class:list={["site-header", { "is-overlay": overlay }]}>
-	<div class="header-inner">
-		<Logo href="/" />
-		<button
-			class="nav-toggle"
-			type="button"
-			aria-expanded="false"
-			aria-controls="site-nav"
-			data-menu
-		>
-			<span class="nav-toggle-lines" aria-hidden="true"></span>
-			<span class="nav-toggle-label">Menu</span>
-		</button>
-		<nav id="site-nav" aria-label="Primary">
-			{
-				nav.map((item) => {
-					const children = menus[item.href];
-					const active = parentCurrent(item.href);
-					if (!children) {
-						return (
-							<div class="nav-item">
-								<a href={item.href} aria-current={active ? "page" : undefined}>
-									{item.label}
-								</a>
-							</div>
-						);
-					}
-					const menuId = `menu-${item.label.toLowerCase()}`;
-					return (
-						<div class:list={["nav-item", { "is-current": active }]}>
-							<a href={item.href} aria-current={active ? "page" : undefined}>
-								{item.label}
-							</a>
-							<button
-								class="nav-caret-btn"
-								type="button"
-								aria-expanded="false"
-								aria-controls={menuId}
-								data-submenu
-							>
-								<span class="visually-hidden">Show {item.label} menu</span>
-								<svg class="nav-caret" viewBox="0 0 12 8" aria-hidden="true">
-									<path d="M1 1.5 L6 6.5 L11 1.5" />
-								</svg>
-							</button>
-							<div class:list={["nav-sub", item.href === "/portfolio" && "nav-sub-wide"]} id={menuId}>
-								{
-									item.href === "/portfolio" && (
-										<svg class="nav-draw" viewBox="0 0 720 52" aria-hidden="true">
-											<path class="nav-draw-line" pathLength="1" d="M8 40 H712" />
-											<path class="nav-draw-line" pathLength="1" d="M28 40 V18 H132 V40" />
-											<path class="nav-draw-line gold" pathLength="1" d="M18 18 H142" />
-											<path class="nav-draw-line" pathLength="1" d="M48 40 V28 H72 V40" />
-											<path class="nav-draw-line" pathLength="1" d="M88 40 V28 H112 V40" />
-											<path class="nav-draw-line" pathLength="1" d="M200 40 V14 H340 V40" />
-											<path class="nav-draw-line gold" pathLength="1" d="M190 14 H350" />
-											<path class="nav-draw-line" pathLength="1" d="M248 40 V26 H292 V40" />
-											<path class="nav-draw-line" pathLength="1" d="M420 40 V22 H620 V40" />
-											<path class="nav-draw-line gold" pathLength="1" d="M410 22 H630" />
-										</svg>
-									)
-								}
-								<div class="nav-sub-col">
-									<p class="nav-sub-label">
-										{item.href === "/portfolio" ? "The portfolio" : "Our expertise"}
-									</p>
-									{
-										children.map((child) => (
-											<a
-												href={child.href}
-												aria-current={childCurrent(child.href) ? "page" : undefined}
-											>
-												{child.label}
-											</a>
-										))
-									}
-								</div>
-								{
-									item.href === "/portfolio" && (
-										<div class="nav-sub-col">
-											<p class="nav-sub-label">Clients with several showrooms</p>
-											<a href="/portfolio#urmil-jeweller">Urmil Jeweller</a>
-											<a href="/portfolio#ganga-jeweller">Ganga Jeweller</a>
-											<a href="/portfolio#giri-zever-mahal">Giri Zever Mahal</a>
-										</div>
-									)
-								}
-							</div>
-						</div>
-					);
-				})
-			}
-		</nav>
-	</div>
+<a class="skipLink" href="#content">Skip to content</a>
+<header class="siteHeader">
+ <div class="headerInner wrap">
+  <Logo href="/" />
+  <button class="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav" data-menu-toggle><span data-menu-label>Menu</span><span class="menuIcon" aria-hidden="true"><i></i><i></i></span></button>
+  <nav id="siteNav" class="siteNav" aria-label="Main navigation">
+   {nav.map((item) => item.href === "/contact" ? <a class="button navContact" href={item.href} aria-current={currentPath === item.href ? "page" : undefined}><span class="buttonLabel">{item.label}</span><span class="buttonIcon"><IconArrow /></span></a> : <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>)}
+  </nav>
+ </div>
 </header>

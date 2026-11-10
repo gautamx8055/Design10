@@ -1,0 +1,6 @@
+---
+import IconArrow from "./IconArrow.astro";
+interface Props { href: string; variant?: "primary" | "outline"; }
+const { href, variant = "primary" } = Astro.props;
+---
+<a class:list={["button", { "buttonOutline": variant === "outline" }]} href={href}><span class="buttonLabel"><slot /></span><span class="buttonIcon"><IconArrow /></span></a>

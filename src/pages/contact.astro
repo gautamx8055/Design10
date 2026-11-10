@@ -1,76 +1,18 @@
 ---
-import Drawing from "../components/Drawing.astro";
-import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import { formEndpoint, studio } from "../data/site";
+import IconArrow from "../components/IconArrow.astro";
+import { studioCopy } from "../data/content";
+import { formEndpoint } from "../data/site";
+const isFormConnected = !/replace-me|yourFormId/.test(formEndpoint);
 ---
-
-<Base
-	title="Contact Design10 Entire Interior"
-	description="Write to Design10 Entire Interior Pvt. Ltd. about a residence, a jewellery showroom, a commercial interior, or an architectural project."
-	image="/posters/residence.jpg"
->
-	<PageHero variant="contact" />
-	<div class="wrap page">
-		<div class="contact-grid section">
-			<form
-				class="contact-form"
-				action={formEndpoint}
-				method="POST"
-				data-contact-form
-			>
-				<input type="hidden" name="_subject" value="New enquiry for Design10 Entire Interior" />
-				<p class="hp" aria-hidden="true">
-					<label for="company">Company</label>
-					<input id="company" name="_gotcha" tabindex="-1" autocomplete="off" />
-				</p>
-				<div class="field">
-					<label for="name">Name</label>
-					<input id="name" name="name" type="text" autocomplete="name" required />
-					<p class="field-error" data-error-for="name"></p>
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input id="email" name="email" type="email" autocomplete="email" required />
-					<p class="field-error" data-error-for="email"></p>
-				</div>
-				<div class="field">
-					<label for="phone">Phone</label>
-					<input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
-					<p class="field-error" data-error-for="phone"></p>
-				</div>
-				<div class="field">
-					<label for="project">Room you need</label>
-					<select id="project" name="project" required>
-						<option value="">Choose one</option>
-						<option>Residential</option>
-						<option>Jewellery showroom</option>
-						<option>Commercial</option>
-						<option>Architectural</option>
-					</select>
-					<p class="field-error" data-error-for="project"></p>
-				</div>
-				<div class="field">
-					<label for="message">The day the room has to hold</label>
-					<textarea id="message" name="message" required minlength="12"></textarea>
-					<p class="field-error" data-error-for="message"></p>
-				</div>
-				<button class="button" type="submit">Send message</button>
-				<p class="status" data-status role="status"></p>
-			</form>
-			<aside class="stack">
-				<Drawing kind="court" label="Plan of a courtyard house" />
-				<Drawing kind="stair" label="Section through a stair" />
-				<p>
-					<a href={`mailto:${studio.email}`}>{studio.email}</a><br />
-					<a href={studio.phoneHref}>{studio.phone}</a><br />
-					{studio.city}
-				</p>
-				<p class="sample">
-					The form sends through Formspree once the studio’s form address is
-					connected.
-				</p>
-			</aside>
-		</div>
-	</div>
+<Base title="Contact Design10 Entire Interior" description="Tell Design10 about your residential, jewellery showroom, commercial interior or architecture project. Start with a conversation.">
+ <header class="pageIntro wrap"><p class="sectionLabel">Design10 Entire Interior Pvt. Ltd.</p><div class="pageIntroGrid"><h1>Contact</h1><p>{studioCopy.contact}</p></div></header>
+ <section class="contactSection wrap sectionSpace"><aside class="contactAside"><div class="contactDrawing" aria-hidden="true"><svg viewBox="0 0 300 220" fill="none"><path d="M35 190V35h230v155H35zM45 180V45h210v135H45zM150 45v70h105M150 180v-35M45 125h65M150 125a55 55 0 0 1-55 55M10 20h280M20 10v200M280 10v200M10 200h280" /><path d="M70 65h55v35H70zM175 65h50v25h-50z" /><circle cx="205" cy="150" r="21" /></svg></div><h2>Architecture.<br />Interior. Design.</h2><p>Shahnawaz Ahmed<br /><span>Founder & Principal Designer</span></p><p>Architecture & interiors<br />Practising across India since 1996</p>{!isFormConnected && <p class="contactAvailability">Online enquiries will open soon.</p>}</aside>
+ <form class="contactForm" action={formEndpoint} method="POST" data-contact-form data-connected={String(isFormConnected)}>
+  <input type="hidden" name="_subject" value="New project enquiry for Design10" /><p class="honeyPot" aria-hidden="true"><label for="company">Company</label><input id="company" name="_gotcha" tabindex="-1" autocomplete="off" /></p>
+  <div class="formRow"><div class="field"><label for="name">Name <span>(required)</span></label><input id="name" name="name" autocomplete="name" placeholder="Full name" required aria-describedby="nameError" /><p class="fieldError" id="nameError" data-error-for="name"></p></div><div class="field"><label for="email">Email <span>(required)</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="emailError" /><p class="fieldError" id="emailError" data-error-for="email"></p></div></div>
+  <div class="formRow"><div class="field"><label for="phone">Phone <span>(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91" /></div><div class="field"><label for="project">Project type <span>(required)</span></label><select id="project" name="project" required aria-describedby="projectError"><option value="">Select a project type</option><option value="Residential">Residential</option><option value="Jewellery Showroom">Jewellery showroom</option><option value="Commercial">Commercial</option><option value="Architectural">Architecture</option></select><p class="fieldError" id="projectError" data-error-for="project"></p></div></div>
+  <div class="field"><label for="message">Tell us about your project <span>(required)</span></label><textarea id="message" name="message" placeholder="The space, your ideas, and what you’d like to create…" required minlength="12" rows="4" aria-describedby="messageError"></textarea><p class="fieldError" id="messageError" data-error-for="message"></p></div>
+  <div class="formSubmit"><p>Architecture | Interior | Design</p><button class="button" type="submit" disabled={!isFormConnected}><span class="buttonLabel">{isFormConnected ? "Send message" : "Enquiries opening soon"}</span><span class="buttonIcon"><IconArrow /></span></button></div><p class="formStatus" data-status role="status"></p>
+ </form></section>
 </Base>

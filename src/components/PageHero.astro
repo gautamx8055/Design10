@@ -1,5 +1,5 @@
 ---
-import { clients } from "../data/clients";
+import { clients, multiLocationClients } from "../data/clients";
 import { expertise } from "../data/content";
 import { films, studio, type FilmKey } from "../data/site";
 
@@ -17,7 +17,13 @@ const filmKey: Record<Props["variant"], FilmKey | null> = {
 };
 
 const film = filmKey[variant] ? films[filmKey[variant]] : null;
-const names = [...clients.slice(0, 14), ...clients.slice(0, 14)];
+const houses = [
+	...multiLocationClients.flatMap((client) =>
+		client.locations.map((place) => `${client.name}, ${place}`),
+	),
+	...clients.map((client) => `${client.name}, ${client.location}`),
+];
+const ticker = [...houses, ...houses];
 ---
 
 <section class={`page-hero page-hero-${variant}`} aria-label="Page introduction">
@@ -83,7 +89,7 @@ const names = [...clients.slice(0, 14), ...clients.slice(0, 14)];
 				<div class="page-hero-journey">
 					<p class="page-hero-kicker">{studio.shortName}</p>
 					<p class="page-hero-date">1996</p>
-					<p class="page-hero-when">6 October, 3:30 PM</p>
+					<p class="page-hero-when">6 October</p>
 					<h1>Our Journey</h1>
 					<p>Every Great Journey Begins With a Single Step.</p>
 				</div>
@@ -122,7 +128,7 @@ const names = [...clients.slice(0, 14), ...clients.slice(0, 14)];
 		variant === "portfolio" && (
 			<div class="page-hero-marquee" aria-hidden="true">
 				<div class="page-hero-track">
-					{names.map((client) => <span>{client.name}</span>)}
+					{ticker.map((line) => <span>{line}</span>)}
 				</div>
 			</div>
 		)

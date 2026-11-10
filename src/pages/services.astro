@@ -1,35 +1,20 @@
 ---
-import Drawing from "../components/Drawing.astro";
-import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import { expertise } from "../data/content";
+import ButtonLink from "../components/ButtonLink.astro";
+import IconArrow from "../components/IconArrow.astro";
+import { expertise, studioCopy } from "../data/content";
+import { studio } from "../data/site";
+const serviceMedia = [
+ { src: "/posters/residence.jpg", alt: "Residential interior reference showing a light-filled dining area", note: "Residential design reference" },
+ { src: "/images/giriZevarMahal.webp", alt: "Giri Zevar Mahal jewellery showroom with green panelling and brass detailing", note: "Giri Zevar Mahal" },
+ { src: "/images/prabhuDayal.webp", alt: "Prabhu Dayal showroom with a clear arrangement of counters and lighting", note: "Prabhu Dayal" },
+ { src: "/images/kamalJewl.webp", alt: "Kamal Jewellers facade architectural visualisation", note: "Kamal Jewellers / Architectural visualisation" },
+];
 ---
-
-<Base
-	title="Services | Design10 Entire Interior"
-	description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India."
-	image="/posters/jewelry.jpg"
->
-	<PageHero variant="services" />
-	<div class="wrap page">
-
-		<div class="section">
-			{
-				expertise.map((item) => (
-					<article class="service-row section" id={item.id}>
-						<Drawing kind={item.kind} label={item.label} />
-						<div>
-							<h2>{item.title}</h2>
-							<p class="measure">{item.text}</p>
-						</div>
-					</article>
-				))
-			}
-		</div>
-
-		<p class="actions">
-			<a class="button" href="/contact">Start a conversation</a>
-			<a href="/portfolio">See the clients</a>
-		</p>
-	</div>
+<Base title="Services | Design10 Entire Interior" description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India.">
+ <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>Services</h1><p>{studioCopy.expertise}</p></div></header>
+ <div class="wrap"><nav class="projectNavigation" aria-label="Our expertise">{expertise.map((item) => <a href={`#${item.id}`}>{item.title}<IconArrow direction="down" /></a>)}</nav>
+ <div class="serviceProjects">{expertise.map((item, index) => <section class="serviceProject" id={item.id}><div class="serviceCopy"><h2>{item.title}</h2><p>{item.text}</p><ButtonLink href={`/contact?project=${encodeURIComponent(item.title)}`} variant="outline">Start a conversation</ButtonLink></div><figure><img src={serviceMedia[index].src} alt={serviceMedia[index].alt} width={index === 3 ? 1200 : 1500} height={index === 3 ? 1800 : 1050} loading="lazy" /><figcaption>{serviceMedia[index].note}</figcaption></figure></section>)}</div>
+ <div class="pageActions"><ButtonLink href="/contact">Start a conversation</ButtonLink><a class="textLink" href="/portfolio">See the clients <IconArrow /></a></div>
+ </div>
 </Base>

@@ -6,6 +6,10 @@ dist/
 # dependencies
 node_modules/
 
+# Local media masters; the optimised browser versions are tracked.
+/public/ArchitectDesignDemoVideo.mp4
+/public/KamalJewl.tif
+
 # logs
 npm-debug.log*
 yarn-debug.log*

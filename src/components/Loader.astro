@@ -1,24 +1,9 @@
 ---
 import Logo from "./Logo.astro";
 ---
-
-<div class="loader" id="loader" role="status" aria-live="polite">
-	<div class="loader-sheet">
-		<svg viewBox="0 0 380 210" aria-hidden="true">
-			<path class="draw d1" pathLength="1" d="M28 186 H352" />
-			<path class="draw d2" pathLength="1" d="M48 172 H332" />
-			<path class="draw d3" pathLength="1" d="M72 172 V98" />
-			<path class="draw d4" pathLength="1" d="M154 172 V98" />
-			<path class="draw d5" pathLength="1" d="M226 172 V98" />
-			<path class="draw d6" pathLength="1" d="M308 172 V98" />
-			<path class="draw d7" pathLength="1" d="M72 98 H308" />
-			<path class="draw d8 brass" pathLength="1" d="M56 84 H324" />
-			<path class="draw d9" pathLength="1" d="M96 160 V118 H140 V160" />
-			<path class="draw d10" pathLength="1" d="M174 172 V124 H206 V172" />
-			<path class="draw d11" pathLength="1" d="M240 160 V118 H284 V160" />
-		</svg>
-		<Logo size="loader" />
-		<p class="loader-since">Entire interiors since 1996</p>
-	</div>
-	<span class="visually-hidden">Design10 Entire Interior</span>
+<div class="siteLoader" id="siteLoader" aria-hidden="true">
+ <div class="loaderDrawing">
+  <svg viewBox="0 0 240 220" fill="none" aria-hidden="true"><path class="loaderLine" pathLength="1" d="M20 190h200M40 190V70h160v120M55 190V85h130v105M110 190v-65h45v65M40 70l80-45 80 45M20 55v150M10 70h220M210 55v150" /><path class="loaderArc" pathLength="1" d="M110 125a65 65 0 0 1 65 65" /></svg>
+  <Logo size="loader" /><p>A space begins with a line.</p><span class="loaderProgress"></span>
+ </div>
 </div>

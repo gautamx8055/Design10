@@ -1,156 +1,34 @@
 ---
-import Drawing from "../components/Drawing.astro";
 import Base from "../layouts/Base.astro";
+import BackgroundFilm from "../components/BackgroundFilm.astro";
+import FounderPortrait from "../components/FounderPortrait.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import IconArrow from "../components/IconArrow.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import UrmilStudy from "../components/UrmilStudy.astro";
+import PlanViewer from "../components/PlanViewer.astro";
 import { clients, multiLocationClients } from "../data/clients";
-import { expertise, highlights } from "../data/content";
-import { films, studio } from "../data/site";
-
-const featured = clients.slice(0, 6);
-
-const organization = {
-	"@context": "https://schema.org",
-	"@type": "Organization",
-	name: studio.name,
-	description: studio.summary,
-	founder: {
-		"@type": "Person",
-		name: "Shahnawaz Ahmed",
-		honorificPrefix: "Mr.",
-		jobTitle: studio.founderTitle,
-	},
-	knowsAbout: expertise.map((item) => item.title),
-};
+import { projects } from "../data/projects";
+import { expertise, highlights, studioCopy } from "../data/content";
+import { studio } from "../data/site";
+const featuredClients = clients.slice(0, 6);
+const organization = { "@context": "https://schema.org", "@type": "Organization", name: studio.name, description: studio.summary, founder: { "@type": "Person", name: "Shahnawaz Ahmed", honorificPrefix: "Mr.", jobTitle: studio.founderTitle }, knowsAbout: expertise.map((item) => item.title) };
 ---
-
-<Base
-	title="Design10 Entire Interior Pvt. Ltd."
-	description="Design10 Entire Interior Pvt. Ltd. Architecture, interior, and design. Shahnawaz Ahmed founded the practice on 6 October 1996. Three decades, 1000+ projects, across India."
-	image="/posters/hall.jpg"
->
-	<Fragment slot="head">
-		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
-	</Fragment>
-
-	<section class="hero" aria-label="Introduction">
-		<div class="hero-media">
-			<video
-				src={films.hall.src}
-				poster={films.hall.poster}
-				muted
-				loop
-				playsinline
-				autoplay
-				preload="auto"
-				aria-label="Interior of a hall, standing in until the studio photograph is placed."
-			></video>
-			<button type="button" class="video-control" data-video-toggle>Pause film</button>
-		</div>
-		<div class="hero-layout">
-			<div class="hero-copy">
-				<p class="hero-brand">{studio.name}</p>
-				<p class="hero-disciplines">{studio.disciplines}</p>
-				<h1>Three Decades of Design Excellence.</h1>
-				<p class="hero-legacy">A Legacy Built on Trust.</p>
-				<p>{studio.founderTitle}: Shahnawaz Ahmed</p>
-			</div>
-			<figure class="portrait">
-				<div class="portrait-frame" role="img" aria-label="Portrait of Shahnawaz Ahmed, to be placed here">
-					<span>SA</span>
-				</div>
-				<figcaption>Shahnawaz Ahmed</figcaption>
-			</figure>
-		</div>
-	</section>
-
-	<section class="wrap section journey-open" data-reveal>
-		<div class="stack measure">
-			<h2>Every Great Journey Begins With a Single Step</h2>
-			<p>
-				On 6 October 1996 at 3:30 PM, Mr. Shahnawaz Ahmed began his professional
-				journey in architecture and design. What started as his first project
-				has grown into a remarkable journey spanning three decades of creativity,
-				dedication and architectural excellence.
-			</p>
-			<p class="actions">
-				<a class="button" href="/journey">Know more about his journey</a>
-			</p>
-		</div>
-		<ul class="highlights">
-			{
-				highlights.map((item) => (
-					<li>
-						<strong>{item.figure}</strong>
-						<span>{item.label}</span>
-					</li>
-				))
-			}
-		</ul>
-	</section>
-
-	<section class="wrap section journey-band" data-reveal>
-		<div class="journey-band-copy">
-			<p class="hero-brand">Space that inspire</p>
-			<h2>The Journey</h2>
-			<p>
-				With experience across India, Mr. Shahnawaz Ahmed has worked on a diverse
-				range of residential and commercial projects, transforming ideas into
-				thoughtfully designed spaces that balance space, aesthetic, functionality
-				and the unique identity of every client.
-			</p>
-			<p>
-				His portfolio includes 1000+ complete projects, reflecting a deep
-				understanding of design, space planning, detailing and client requirements.
-			</p>
-			<blockquote class="pull">
-				<p>{studio.quote}</p>
-			</blockquote>
-		</div>
-		<div class="journey-band-media">
-			<Drawing kind="court" label="A residence, in plan" />
-			<Drawing kind="vitrine" label="A jewellery room, in plan" />
-		</div>
-	</section>
-
-	<section class="wrap section" data-reveal>
-		<h2>Our Expertise</h2>
-		<p class="lede">
-			Designing across India, from luxury residences to iconic commercial spaces.
-			Design10 continues to deliver distinctive design solutions for every client,
-			every space, every vision.
-		</p>
-		<div class="practice-grid">
-			{
-				expertise.map((item) => (
-					<article>
-						<Drawing kind={item.kind} label={item.label} />
-						<h3>{item.title}</h3>
-					</article>
-				))
-			}
-		</div>
-	</section>
-
-	<section class="wrap section" data-reveal>
-		<h2>Portfolio & Our Clients</h2>
-		<p class="lede">
-			Jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar Pradesh.
-			Some clients have more than one showroom.
-		</p>
-		<ul class="client-groups">
-			{
-				multiLocationClients.map((client) => (
-					<li>
-						<strong>{client.name}</strong>
-						<span>{client.locations.join(", ")}</span>
-					</li>
-				))
-			}
-		</ul>
-		<ul class="name-row">
-			{featured.map((client) => <li>{client.name}</li>)}
-		</ul>
-		<p class="actions">
-			<a class="button" href="/portfolio">See the client list</a>
-		</p>
-	</section>
+<Base title="Design10 Entire Interior Pvt. Ltd." description="Design10 Entire Interior Pvt. Ltd. Architecture, interior, and design. Shahnawaz Ahmed founded the practice on 6 October 1996. Three decades, 1000+ projects, across India.">
+ <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(organization)} /><link rel="preload" as="image" href="/posters/architectDesignDemoVideo.jpg" /></Fragment>
+ <section class="hero" aria-labelledby="heroTitle"><BackgroundFilm class="heroBackdrop" eager /><div class="wrap">
+  <div class="heroTopline"><span>{studio.disciplines}</span><span>Established {studio.since}</span></div>
+  <div class="heroGrid">
+   <div class="heroCopy"><p class="heroBrand">{studio.name}</p><h1 id="heroTitle">{studioCopy.heroTitle}</h1><p class="heroLegacy">{studioCopy.heroLegacy}</p><p class="heroFounderLine">{studio.founderTitle}: Shahnawaz Ahmed</p><ButtonLink href="/portfolio">See the portfolio</ButtonLink></div>
+   <div class="heroVisual"><FounderPortrait hero /></div>
+  </div>
+  <div class="heroBottom"><span>Residential & commercial projects</span><a href="#studioIntroduction">Discover the practice <IconArrow direction="down" /></a></div>
+ </div></section>
+ <section class="introduction wrap sectionSpace" id="studioIntroduction"><div class="sectionLabel">Since {studio.since}</div><div class="introductionBody"><h2>{studioCopy.introductionTitle}</h2><div class="introductionText"><p>{studioCopy.introduction}</p></div><ButtonLink href="/journey" variant="outline">Know more about his journey</ButtonLink><dl class="studioFacts">{highlights.map((item) => <div><dt>{item.figure}</dt><dd>{item.label}</dd></div>)}</dl></div></section>
+ <section class="homeJourney wrap sectionSpace"><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p></div><figure><img src="/images/urmil.webp" alt="Urmil Jewellers interior designed with curved counters, warm timber and carefully placed lighting" width="1500" height="1050" loading="lazy" /><figcaption>Urmil Jewellers</figcaption></figure></section>
+ <section class="selectedWork wrap sectionSpace" id="selectedWork"><div class="sectionHeading"><div><p class="sectionLabel">Design10</p><h2>{studioCopy.portfolioTitle}</h2></div><p>{studioCopy.clients}</p></div><div class="selectedGrid"><ProjectCard project={projects[0]} featured /><ProjectCard project={projects[1]} /><ProjectCard project={projects[2]} /></div><div class="clientGroups homeClientGroups">{multiLocationClients.map((client) => <article><h3>{client.name}</h3><p>{client.locations.join(", ")}</p></article>)}</div><ul class="featuredClientNames">{featuredClients.map((client) => <li>{client.name}</li>)}</ul><ButtonLink href="/portfolio">See the client list</ButtonLink></section>
+ <div class="studyBackground"><div class="wrap"><UrmilStudy /></div></div>
+ <section class="expertiseSection sectionSpace"><div class="wrap expertiseGrid"><div class="expertiseIntro"><p class="sectionLabel">{studio.disciplines}</p><h2>{studioCopy.expertiseTitle}</h2><p>{studioCopy.expertise}</p><figure><img src="/images/prabhuDayal.webp" alt="Prabhu Dayal jewellery showroom with glass displays and a detailed ceiling" width="1500" height="714" loading="lazy" /><figcaption>Prabhu Dayal / Jewellery showroom</figcaption></figure></div><div class="expertiseList">{expertise.map((item) => <a href={`/services#${item.id}`}><div><h3>{item.title}</h3><p>{item.text}</p></div><IconArrow /></a>)}</div></div></section>
+ <div class="wrap"><PlanViewer /></div>
+ <section class="founderQuote wrap sectionSpace"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal} <span>{studio.founderTitle}</span></footer></blockquote><a class="textLink" href="/journey">Our Journey <IconArrow /></a></section>
 </Base>

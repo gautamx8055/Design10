@@ -1,86 +1,16 @@
 ---
 import Logo from "./Logo.astro";
+import ButtonLink from "./ButtonLink.astro";
 import { nav, studio } from "../data/site";
-
-const current = Astro.url.pathname.replace(/\/$/, "") || "/";
-const rooms = [
-	{ href: "/services#residential", label: "Residential" },
-	{ href: "/services#jewellery", label: "Jewellery showrooms" },
-	{ href: "/services#commercial", label: "Commercial" },
-	{ href: "/services#architectural", label: "Architectural" },
-];
 ---
-
-<footer class="site-footer">
-	<div class="footer-sheet">
-		<div class="footer-mast">
-			<div class="footer-intro">
-				<Logo href="/" size="footer" />
-				<p>
-					{studio.name} is the practice of {studio.principal}, {studio.founderTitle}. Architecture, interior, and design since {studio.since}.
-				</p>
-			</div>
-			<svg class="footer-mark" data-draw viewBox="0 0 220 120" aria-hidden="true">
-				<path pathLength="1" d="M12 96 H208" />
-				<path pathLength="1" d="M28 96 V48 H192 V96" />
-				<path class="brass" pathLength="1" d="M20 48 H200" />
-				<path pathLength="1" d="M28 36 H192" />
-				<path pathLength="1" d="M48 84 V58 H84 V84" />
-				<path pathLength="1" d="M96 96 V62 H124 V96" />
-				<path pathLength="1" d="M136 84 V58 H172 V84" />
-			</svg>
-			<a class="button" href="/contact">Start a conversation</a>
-		</div>
-
-		<div class="footer-columns">
-			<nav class="footer-block" aria-label="Footer">
-				<h2>Visit</h2>
-				<ul>
-					{
-						nav.map((item) => {
-							const active = current === item.href || current.startsWith(`${item.href}/`);
-							return (
-								<li>
-									<a href={item.href} aria-current={active ? "page" : undefined}>
-										{item.label}
-									</a>
-								</li>
-							);
-						})
-					}
-				</ul>
-			</nav>
-			<div class="footer-block">
-				<h2>Rooms</h2>
-				<ul>
-					{
-						rooms.map((item) => (
-							<li>
-								<a href={item.href}>{item.label}</a>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-			<div class="footer-block">
-				<h2>Studio</h2>
-				<ul>
-					<li><a href={`mailto:${studio.email}`}>{studio.email}</a></li>
-					<li><a href={studio.phoneHref}>{studio.phone}</a></li>
-					<li>{studio.city}</li>
-					<li>{studio.principal}, {studio.founderTitle}</li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="footer-base">
-			<p>{studio.name}</p>
-			<p>Since {studio.since}</p>
-			<p class="footer-note">
-				The founder photograph, phone, email, and address will be added when the
-				studio provides them. Films on the site are reference footage until the
-				studio’s own photographs are placed.
-			</p>
-		</div>
-	</div>
+<footer class="siteFooter">
+ <div class="wrap">
+  <div class="footerInvitation"><div><p>{studio.disciplines}</p><h2>Start a conversation.</h2></div><ButtonLink href="/contact">Contact the studio</ButtonLink></div>
+  <div class="footerGrid">
+   <div class="footerIdentity"><Logo href="/" size="footer" /><p>{studio.name} is the practice of {studio.principal}, {studio.founderTitle}. Architecture, interior, and design since {studio.since}.</p></div>
+   <nav aria-label="Footer">{nav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+   <div class="footerPractice"><p>{studio.principal}</p><span>{studio.founderTitle}</span><p>Practising across India<br />Since 6 October 1996</p></div>
+  </div>
+  <div class="footerBase"><span>© {new Date().getFullYear()} {studio.name}</span><span>Architecture | Interior | Design</span><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div>
+ </div>
 </footer>

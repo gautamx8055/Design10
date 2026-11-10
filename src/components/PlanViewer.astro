@@ -1,0 +1,82 @@
+---
+import IconArrow from "./IconArrow.astro";
+import { projectAssets } from "../data/projects";
+---
+<section class="planSection sectionSpace" id="gangaPlan">
+	<div class="sectionHeading"><div><p class="sectionLabel">On the drawing board</p><h2>Behind every space,<br />a considered plan.</h2></div><div><p>The original layout drawing for Ganga Jewellers, Lal Quarter, Delhi. Explore the placement of displays, counters and circulation directly on the sheet.</p><a class="textLink" href={projectAssets.gangaJewellerPlan} target="_blank" rel="noopener">Open the original PDF <IconArrow /></a></div></div>
+	<pdf-plan-viewer class="pdfViewer" data-source={projectAssets.gangaJewellerPlan}>
+		<div class="pdfToolbar"><div><span class="sheetIcon" aria-hidden="true">▧</span><span>Ganga Jewellers <span class="pdfToolbarDetail">/ Layout plan</span></span></div><div class="pdfActions"><span class="pdfSheetCount">Sheet 1 of 1</span><button type="button" data-zoom-out aria-label="Zoom out of the plan" disabled>−</button><button type="button" data-zoom-reset aria-label="Fit plan to width" disabled>Fit</button><button type="button" data-zoom-in aria-label="Zoom into the plan" disabled>+</button></div></div>
+		<div class="pdfViewport" tabindex="0" role="region" aria-label="Ganga Jewellers plan. Use zoom buttons to inspect details and scroll to move around the drawing."><div class="pdfStage"><img class="pdfPreview" data-pdf-preview src="/images/gangaJewellerPlan.webp" alt="Original Ganga Jewellers proposed layout at Lal Quarter, Delhi. The entrance is on the right, with display counters along both sides, central seating, and a strong room, pantry and washroom at the rear." width="1668" height="1179" loading="lazy" /><canvas data-pdf-canvas role="img" aria-label="Original PDF page of the Ganga Jewellers layout plan" hidden></canvas></div></div>
+		<div class="pdfFootnote"><span>Proposed layout / Lal Quarter, Delhi</span><a href={projectAssets.gangaJewellerPlan} download>Download drawing <IconArrow direction="down" /></a></div>
+		<p class="srOnly" data-pdf-status role="status">Drawing preview. The interactive PDF will load as you approach it.</p>
+	</pdf-plan-viewer>
+</section>
+
+<script>
+	import type { PDFDocumentLoadingTask, PDFDocumentProxy, PDFPageProxy, RenderTask } from "pdfjs-dist";
+	import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+	class PdfPlanViewer extends HTMLElement {
+		private pdfDocument?: PDFDocumentProxy;
+		private loadingTask?: PDFDocumentLoadingTask;
+		private pdfPage?: PDFPageProxy;
+		private renderTask?: RenderTask;
+		private viewportObserver?: IntersectionObserver;
+		private resizeObserver?: ResizeObserver;
+		private zoom = 1;
+		private renderVersion = 0;
+		private resizeTimer?: ReturnType<typeof setTimeout>;
+		connectedCallback() {
+			this.querySelector<HTMLButtonElement>("[data-zoom-in]")?.addEventListener("click", () => this.setZoom(this.zoom + .5));
+			this.querySelector<HTMLButtonElement>("[data-zoom-out]")?.addEventListener("click", () => this.setZoom(this.zoom - .5));
+			this.querySelector<HTMLButtonElement>("[data-zoom-reset]")?.addEventListener("click", () => this.setZoom(1));
+			this.viewportObserver = new IntersectionObserver((entries) => { if (entries.some((entry) => entry.isIntersecting)) { this.viewportObserver?.disconnect(); void this.loadPdf(); } }, { rootMargin: "350px" });
+			this.viewportObserver.observe(this);
+			this.resizeObserver = new ResizeObserver(() => { clearTimeout(this.resizeTimer); this.resizeTimer = setTimeout(() => { if (this.pdfDocument) void this.renderPage(); }, 150); });
+			this.resizeObserver.observe(this.querySelector(".pdfViewport")!);
+		}
+		private async loadPdf() {
+			try {
+				const { getDocument, GlobalWorkerOptions } = await import("pdfjs-dist");
+				if (!this.isConnected) return;
+				GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+				this.loadingTask = getDocument({ url: this.dataset.source! });
+				const pdfDocument = await this.loadingTask.promise;
+				if (!this.isConnected) { void this.loadingTask.destroy(); return; }
+				this.pdfDocument = pdfDocument;
+				this.pdfPage = await pdfDocument.getPage(1);
+				await this.renderPage();
+			} catch { const status = this.querySelector("[data-pdf-status]"); if (status) status.textContent = "Showing the original drawing preview. Open the original PDF to inspect it further."; }
+		}
+		private setZoom(zoom: number) { this.zoom = Math.min(3, Math.max(1, zoom)); void this.renderPage(); }
+		private async renderPage() {
+			if (!this.pdfPage || !this.isConnected) return;
+			const version = ++this.renderVersion;
+			this.renderTask?.cancel();
+			try { await this.renderTask?.promise; } catch { /* A newer zoom request replaces this render. */ }
+			const page = this.pdfPage;
+			if (version !== this.renderVersion || !this.isConnected) return;
+			const canvas = this.querySelector<HTMLCanvasElement>("[data-pdf-canvas]")!;
+			const viewportElement = this.querySelector<HTMLElement>(".pdfViewport")!;
+			const baseViewport = page.getViewport({ scale: 1 });
+			const padding = window.innerWidth < 600 ? 24 : 64;
+			const displayWidth = (viewportElement.clientWidth - padding) * this.zoom;
+			const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+			const viewport = page.getViewport({ scale: displayWidth / baseViewport.width * pixelRatio });
+			canvas.width = Math.floor(viewport.width); canvas.height = Math.floor(viewport.height);
+			canvas.style.width = `${displayWidth}px`; canvas.style.height = `${displayWidth * baseViewport.height / baseViewport.width}px`;
+			const context = canvas.getContext("2d"); if (!context) return;
+			this.renderTask = page.render({ canvasContext: context, canvas, viewport });
+			try { await this.renderTask.promise; } catch { return; }
+			if (version !== this.renderVersion || !this.isConnected) return;
+			canvas.hidden = false;
+			this.querySelector<HTMLElement>("[data-pdf-preview]")!.hidden = true;
+			this.querySelector<HTMLButtonElement>("[data-zoom-in]")!.disabled = this.zoom >= 3;
+			this.querySelector<HTMLButtonElement>("[data-zoom-out]")!.disabled = this.zoom <= 1;
+			this.querySelector<HTMLButtonElement>("[data-zoom-reset]")!.disabled = false;
+			this.querySelector("[data-pdf-status]")!.textContent = `Original PDF loaded. Zoom ${Math.round(this.zoom * 100)} percent.`;
+			this.dataset.loaded = "true";
+		}
+		disconnectedCallback() { this.viewportObserver?.disconnect(); this.resizeObserver?.disconnect(); clearTimeout(this.resizeTimer); this.renderVersion++; this.renderTask?.cancel(); void this.loadingTask?.destroy(); }
+	}
+	if (!customElements.get("pdf-plan-viewer")) customElements.define("pdf-plan-viewer", PdfPlanViewer);
+</script>

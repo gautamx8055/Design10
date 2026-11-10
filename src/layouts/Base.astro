@@ -5,72 +5,33 @@ import Header from "../components/Header.astro";
 import Loader from "../components/Loader.astro";
 import SiteEffects from "../components/SiteEffects.astro";
 import "../styles/global.css";
-
-interface Props {
-	title: string;
-	description: string;
-	image?: string;
-}
-
-const { title, description, image = "/posters/hall.jpg" } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+interface Props { title: string; description: string; image?: string; }
+const { title, description, image = "/images/giriZevarMahal.webp" } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
-const fullTitle = title;
 ---
-
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{fullTitle}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonical} />
-		<meta property="og:title" content={fullTitle} />
-		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonical} />
-		<meta property="og:image" content={imageUrl} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={fullTitle} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={imageUrl} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,450&family=Sora:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
-		<script is:inline>
-			document.documentElement.classList.add("js");
-			try {
-				if (
-					sessionStorage.getItem("sz-drawn") === "1" ||
-					matchMedia("(prefers-reduced-motion: reduce)").matches
-				) {
-					document.documentElement.classList.add("skip-loader");
-				}
-			} catch (error) {
-				document.documentElement.classList.add("skip-loader");
-			}
-		</script>
-		<ClientRouter />
-		<slot name="head" />
-	</head>
-	<body>
-		<Loader />
-		<Header />
-		<main id="content">
-			<slot />
-		</main>
-		<Footer />
-		<SiteEffects />
-		<noscript>
-			<style>
-				.loader { display: none !important; }
-			</style>
-		</noscript>
-	</body>
+ <head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="generator" content={Astro.generator} /><meta name="theme-color" content="#111111" />
+  <title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={canonicalUrl} />
+  <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={imageUrl} />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={imageUrl} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;450;500;550;600;650;700&family=DM+Sans:wght@400;450;500;550;600&display=swap" rel="stylesheet" />
+  <script is:inline>
+   document.documentElement.classList.add("hasJs");
+   try { if (sessionStorage.getItem("design10Loaded") || matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("isLoaded"); } catch { document.documentElement.classList.add("isLoaded"); }
+   // ClientRouter replaces <html> attributes and deduplicates this script.
+   // Restore the interactive layout before the next page is painted.
+   document.addEventListener("astro:after-swap", () => {
+    document.documentElement.classList.add("hasJs", "isLoaded");
+   });
+   window.setTimeout(() => document.documentElement.classList.add("isLoaded"), 3000);
+  </script>
+  <ClientRouter /><slot name="head" />
+ </head>
+ <body id="top"><Loader /><Header /><main id="content"><slot /></main><Footer /><SiteEffects /></body>
 </html>

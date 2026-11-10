@@ -1,0 +1,10 @@
+---
+import IconArrow from "./IconArrow.astro";
+import type { projects } from "../data/projects";
+interface Props { project: (typeof projects)[number]; featured?: boolean; }
+const { project, featured = false } = Astro.props;
+---
+<a class:list={["projectCard", { "projectCard--featured": featured }]} href={`/portfolio#${project.id}`}>
+	<div class="projectImage"><img src={project.image} alt={project.alt} width={project.width} height={project.height} loading="lazy" /><span class="projectOpen" aria-hidden="true"><IconArrow /></span></div>
+	<div class="projectCaption"><h3>{project.name}</h3><span>{project.category}</span></div>
+</a>

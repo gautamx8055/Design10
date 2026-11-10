@@ -1,301 +1,135 @@
 <script>
-	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ let disposePage = () => {};
 
-	function boot() {
-		const root = document.documentElement;
+ function bootPage() {
+  disposePage();
+  const abortController = new AbortController();
+  const { signal } = abortController;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const root = document.documentElement;
 
-		if (!root.dataset.loaderWatch) {
-			root.dataset.loaderWatch = "1";
-			if (!root.classList.contains("skip-loader")) {
-				try {
-					sessionStorage.setItem("sz-drawn", "1");
-				} catch {
-					/* storage can be blocked */
-				}
-			}
-			window.setTimeout(() => root.classList.add("skip-loader"), 4200);
-			const loader = document.getElementById("loader");
-			loader?.addEventListener("animationend", (event) => {
-				if (event.target !== loader) return;
-				if (!(event instanceof AnimationEvent)) return;
-				if (event.animationName !== "loader-exit") return;
-				root.classList.add("skip-loader");
-			});
-		}
+  if (!root.classList.contains("isLoaded")) {
+   window.setTimeout(() => {
+    root.classList.add("isLoaded");
+    try { sessionStorage.setItem("design10Loaded", "1"); } catch { /* Session storage is optional. */ }
+   }, 1700);
+  }
 
-		document.querySelectorAll<HTMLElement>("[data-draw]").forEach((drawing) => {
-			if (drawing.dataset.ready === "1") return;
-			drawing.dataset.ready = "1";
-			if (reduceMotion) {
-				drawing.classList.add("is-drawn");
-				return;
-			}
-			const observer = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (!entry.isIntersecting) return;
-						drawing.classList.add("is-drawn");
-						observer.disconnect();
-					});
-				},
-				{ threshold: 0.35 },
-			);
-			observer.observe(drawing);
-		});
+  const menuToggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const siteNav = document.querySelector<HTMLElement>("#siteNav");
+  const setMenuOpen = (open: boolean, restoreFocus = false) => {
+   menuToggle?.setAttribute("aria-expanded", String(open));
+   siteNav?.classList.toggle("isOpen", open);
+   document.body.classList.toggle("menuIsOpen", open);
+   const label = menuToggle?.querySelector("[data-menu-label]");
+   if (label) label.textContent = open ? "Close" : "Menu";
+   if (restoreFocus) menuToggle?.focus();
+  };
+  menuToggle?.addEventListener("click", () => setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true"), { signal });
+  siteNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenuOpen(false), { signal }));
+  document.addEventListener("keydown", (event) => {
+   if (menuToggle?.getAttribute("aria-expanded") !== "true") return;
+   if (event.key === "Escape") { setMenuOpen(false, true); return; }
+   if (event.key !== "Tab") return;
+   const focusable = [menuToggle, ...Array.from(siteNav?.querySelectorAll<HTMLAnchorElement>("a") || [])];
+   const first = focusable[0], last = focusable.at(-1);
+   if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+   if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }, { signal });
+  document.addEventListener("pointerdown", (event) => {
+   if (event.target instanceof Node && !siteNav?.contains(event.target) && !menuToggle?.contains(event.target)) setMenuOpen(false);
+  }, { signal });
+  const desktopMedia = window.matchMedia("(min-width: 801px)");
+  desktopMedia.addEventListener("change", () => { if (desktopMedia.matches) setMenuOpen(false); }, { signal });
 
-		document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((section) => {
-			if (section.dataset.ready === "1") return;
-			section.dataset.ready = "1";
-			if (reduceMotion) {
-				section.classList.add("is-in");
-				return;
-			}
-			const observer = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (!entry.isIntersecting) return;
-						section.classList.add("is-in");
-						observer.disconnect();
-					});
-				},
-				{ threshold: 0.15 },
-			);
-			observer.observe(section);
-		});
+  document.querySelectorAll<HTMLElement>("[data-comparison]").forEach((comparison) => {
+   const range = comparison.querySelector<HTMLInputElement>("input[type=range]");
+   const updateComparison = () => {
+    const value = range?.value || "50";
+    comparison.style.setProperty("--comparisonPosition", value + "%");
+    range?.setAttribute("aria-valuetext", value + " percent design visualisation");
+   };
+   range?.addEventListener("input", updateComparison, { signal });
+   updateComparison();
+  });
 
-		document.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
-			const button = video.parentElement?.querySelector<HTMLButtonElement>(
-				"[data-video-toggle]",
-			);
-			if (!button || button.dataset.ready === "1") return;
-			button.dataset.ready = "1";
-			if (reduceMotion) {
-				video.pause();
-				video.removeAttribute("autoplay");
-				button.textContent = "Play film";
-			}
-			button.addEventListener("click", () => {
-				if (video.paused) {
-					void video.play();
-					button.textContent = "Pause film";
-				} else {
-					video.pause();
-					button.textContent = "Play film";
-				}
-			});
-		});
+  const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-background-film]"));
+  const visibleVideos = new Set<HTMLVideoElement>();
+  const syncVideos = () => {
+   videos.forEach((video) => {
+    video.muted = true;
+    video.controls = false;
+    if (reduceMotion.matches || document.hidden || !visibleVideos.has(video)) {
+     video.pause();
+     if (reduceMotion.matches) video.removeAttribute("autoplay");
+    } else { void video.play().catch(() => { /* Keep the poster if autoplay is blocked. */ }); }
+   });
+  };
+  const videoObserver = new IntersectionObserver((entries) => {
+   entries.forEach((entry) => {
+    const video = entry.target as HTMLVideoElement;
+    if (entry.isIntersecting) visibleVideos.add(video); else visibleVideos.delete(video);
+   });
+   syncVideos();
+  }, { threshold: .05 });
+  videos.forEach((video) => videoObserver.observe(video));
+  reduceMotion.addEventListener("change", syncVideos, { signal });
+  document.addEventListener("visibilitychange", syncVideos, { signal });
+  if (reduceMotion.matches) syncVideos();
 
-		const toggle = document.querySelector<HTMLButtonElement>("[data-menu]");
-		const nav = document.getElementById("site-nav");
-		if (toggle && nav && toggle.dataset.ready !== "1") {
-			toggle.dataset.ready = "1";
-			const header = toggle.closest<HTMLElement>(".site-header");
-			const label = toggle.querySelector(".nav-toggle-label");
-			const setOpen = (open: boolean) => {
-				toggle.setAttribute("aria-expanded", String(open));
-				nav.classList.toggle("is-open", open);
-				header?.classList.toggle("is-menu", open);
-				if (label) label.textContent = open ? "Close" : "Menu";
-			};
-			toggle.addEventListener("click", () => {
-				setOpen(toggle.getAttribute("aria-expanded") !== "true");
-			});
-			nav.querySelectorAll("a").forEach((link) => {
-				link.addEventListener("click", () => setOpen(false));
-			});
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  if (form) {
+   const formStatus = form.querySelector<HTMLElement>("[data-status]");
+   const submitButton = form.querySelector<HTMLButtonElement>("[type=submit]");
+   const projectSelect = form.querySelector<HTMLSelectElement>("[name=project]");
+   const selectedProject = new URLSearchParams(location.search).get("project");
+   if (projectSelect && selectedProject && [...projectSelect.options].some((option) => option.value === selectedProject)) projectSelect.value = selectedProject;
+   const validateField = (field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => {
+    const error = form.querySelector<HTMLElement>('[data-error-for="' + field.name + '"]');
+    if (!error) return;
+    error.textContent = field.validity.valid ? "" : field.validationMessage;
+    field.setAttribute("aria-invalid", String(!field.validity.valid));
+   };
+   form.addEventListener("invalid", (event) => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement || event.target instanceof HTMLTextAreaElement) validateField(event.target);
+   }, { signal, capture: true });
+   form.addEventListener("input", (event) => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement || event.target instanceof HTMLTextAreaElement) {
+     if (event.target.hasAttribute("aria-invalid")) validateField(event.target);
+    }
+   }, { signal });
+   form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!formStatus || !submitButton) return;
+    if (form.dataset.connected !== "true") { formStatus.textContent = "Online enquiries will open soon."; return; }
+    if (!form.reportValidity()) return;
+    const buttonContent = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+    formStatus.textContent = "Sending your enquiry.";
+    try {
+     const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal });
+     if (!response.ok) throw new Error("Enquiry request failed");
+     form.reset();
+     formStatus.textContent = "Thank you. Your enquiry has been sent to the studio.";
+    } catch (error) {
+     if (signal.aborted) return;
+     formStatus.textContent = "Your enquiry couldn’t be sent. Your details are still here; please try again.";
+    } finally {
+     submitButton.disabled = false;
+     submitButton.innerHTML = buttonContent;
+    }
+   }, { signal });
+  }
 
-			const closeSubs = () => {
-				nav.querySelectorAll<HTMLElement>(".nav-item.is-open").forEach((item) => {
-					item.classList.remove("is-open");
-					item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "false");
-				});
-			};
-
-			nav.querySelectorAll<HTMLButtonElement>("[data-submenu]").forEach((button) => {
-				button.addEventListener("click", (event) => {
-					event.stopPropagation();
-					const item = button.closest<HTMLElement>(".nav-item");
-					if (!item) return;
-					const willOpen = !item.classList.contains("is-open");
-					closeSubs();
-					if (willOpen) {
-						item.classList.add("is-open");
-						button.setAttribute("aria-expanded", "true");
-					}
-				});
-			});
-
-			const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-			if (canHover) {
-				nav.querySelectorAll<HTMLElement>(".nav-item").forEach((item) => {
-					if (!item.querySelector(".nav-sub")) return;
-					item.addEventListener("pointerenter", () => {
-						closeSubs();
-						item.classList.add("is-open");
-						item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "true");
-					});
-					item.addEventListener("pointerleave", () => {
-						item.classList.remove("is-open");
-						item.querySelector("[data-submenu]")?.setAttribute("aria-expanded", "false");
-					});
-				});
-			}
-
-			document.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					setOpen(false);
-					closeSubs();
-				}
-			});
-			document.addEventListener("click", (event) => {
-				if (!(event.target instanceof Node) || nav.contains(event.target)) return;
-				closeSubs();
-			});
-		}
-
-		const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
-		if (form && form.dataset.ready !== "1") {
-			form.dataset.ready = "1";
-			const status = form.querySelector<HTMLElement>("[data-status]");
-			const submit = form.querySelector<HTMLButtonElement>("[type='submit']");
-
-			const showErrors = () => {
-				form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
-					"input, textarea, select",
-				).forEach((field) => {
-					const error = form.querySelector<HTMLElement>(
-						`[data-error-for="${field.name}"]`,
-					);
-					if (!error || field.type === "hidden" || field.name === "_gotcha") return;
-					if (field.validity.valid) {
-						error.textContent = "";
-						field.removeAttribute("aria-invalid");
-					} else {
-						field.setAttribute("aria-invalid", "true");
-						error.textContent = field.validationMessage;
-					}
-				});
-			};
-
-			form.addEventListener(
-				"blur",
-				(event) => {
-					const target = event.target;
-					const isField =
-						target instanceof HTMLInputElement ||
-						target instanceof HTMLTextAreaElement ||
-						target instanceof HTMLSelectElement;
-					if (!isField) return;
-					if (!form.classList.contains("show-errors")) return;
-					showErrors();
-				},
-				true,
-			);
-
-			form.addEventListener(
-				"invalid",
-				() => {
-					form.classList.add("show-errors");
-					showErrors();
-				},
-				true,
-			);
-
-			form.addEventListener("submit", async (event) => {
-				form.classList.add("show-errors");
-				showErrors();
-				if (!form.checkValidity()) {
-					event.preventDefault();
-					form.querySelector<HTMLElement>(":invalid")?.focus();
-					return;
-				}
-				event.preventDefault();
-				if (!status || !submit) return;
-				if (form.action.includes("replace-me")) {
-					status.textContent =
-						"Add your Formspree form URL as PUBLIC_FORMSPREE_ENDPOINT in .env, then restart the site. The message was not sent.";
-					return;
-				}
-				submit.disabled = true;
-				const original = submit.textContent;
-				submit.textContent = "Sending";
-				status.textContent = "Sending the message.";
-				try {
-					const response = await fetch(form.action, {
-						method: "POST",
-						body: new FormData(form),
-						headers: { Accept: "application/json" },
-					});
-					if (!response.ok) {
-						status.textContent =
-							"The message did not send. Check the form and try again.";
-						submit.disabled = false;
-						submit.textContent = original;
-						return;
-					}
-					form.reset();
-					form.classList.remove("show-errors");
-					status.textContent = "Message sent. The studio will reply by email.";
-					submit.textContent = "Send message";
-					submit.disabled = false;
-				} catch {
-					status.textContent =
-						"The message did not send. Check the connection and try again.";
-					submit.disabled = false;
-					submit.textContent = original;
-				}
-			});
-		}
-
-		document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((button) => {
-			if (button.dataset.ready === "1") return;
-			button.dataset.ready = "1";
-			button.addEventListener("click", () => {
-				const kind = button.dataset.filter;
-				document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((item) => {
-					item.setAttribute("aria-pressed", String(item === button));
-				});
-				document.querySelectorAll<HTMLElement>("[data-kind]").forEach((row) => {
-					const show = kind === "all" || row.dataset.kind === kind;
-					row.hidden = !show;
-				});
-			});
-		});
-
-		const hashed = location.hash.replace("#", "");
-		if (hashed) {
-			document
-				.querySelector<HTMLButtonElement>(`[data-filter="${CSS.escape(hashed)}"]`)
-				?.click();
-		}
-
-		if (!document.documentElement.dataset.hashFilter) {
-			document.documentElement.dataset.hashFilter = "1";
-			window.addEventListener("hashchange", () => {
-				const id = location.hash.replace("#", "");
-				if (!id) return;
-				document
-					.querySelector<HTMLButtonElement>(`[data-filter="${CSS.escape(id)}"]`)
-					?.click();
-			});
-		}
-
-		const syncHeader = () => {
-			const header = document.querySelector<HTMLElement>(".site-header");
-			if (!header) return;
-			if (!header.classList.contains("is-overlay")) {
-				header.classList.remove("is-solid");
-				return;
-			}
-			header.classList.toggle("is-solid", window.scrollY > 32);
-		};
-		syncHeader();
-		if (!document.documentElement.dataset.headerScroll) {
-			document.documentElement.dataset.headerScroll = "1";
-			window.addEventListener("scroll", syncHeader, { passive: true });
-		}
-	}
-
-	document.addEventListener("astro:page-load", boot);
-	boot();
+  disposePage = () => {
+   abortController.abort();
+   videoObserver.disconnect();
+   videos.forEach((video) => video.pause());
+   document.body.classList.remove("menuIsOpen");
+  };
+ }
+ document.addEventListener("astro:page-load", bootPage);
+ document.addEventListener("astro:before-swap", () => disposePage());
+ bootPage();
 </script>

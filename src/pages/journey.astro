@@ -1,57 +1,12 @@
 ---
-import Drawing from "../components/Drawing.astro";
-import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import { highlights } from "../data/content";
+import ButtonLink from "../components/ButtonLink.astro";
+import { highlights, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 ---
-
-<Base
-	title="Our Journey | Design10 Entire Interior"
-	description="On 6 October 1996 at 3:30 PM, Shahnawaz Ahmed began Design10. Three decades and 1000+ projects across India."
-	image="/posters/hall.jpg"
->
-	<PageHero variant="journey" />
-	<div class="wrap page">
-		<div class="stack section measure">
-			<p>
-				On {studio.founded}, Mr. Shahnawaz Ahmed began his professional journey in
-				architecture and design. What started as his first project has grown into a
-				remarkable journey spanning three decades of creativity, dedication and
-				architectural excellence.
-			</p>
-			<p>
-				With experience across India, Mr. Shahnawaz Ahmed has worked on a diverse
-				range of residential and commercial projects, transforming ideas into
-				thoughtfully designed spaces that balance space, aesthetic, functionality
-				and the unique identity of every client.
-			</p>
-			<p>
-				His portfolio includes 1000+ complete projects, reflecting a deep
-				understanding of design, space planning, detailing and client requirements.
-			</p>
-		</div>
-
-		<ul class="highlights section">
-			{
-				highlights.map((item) => (
-					<li>
-						<strong>{item.figure}</strong>
-						<span>{item.label}</span>
-					</li>
-				))
-			}
-		</ul>
-
-		<blockquote class="pull section">
-			<p>{studio.quote}</p>
-			<footer>{studio.principal}</footer>
-		</blockquote>
-
-		<div class="drawing-row section">
-			<Drawing kind="pavilion" label="A front elevation" />
-			<Drawing kind="court" label="A residential plan" />
-			<Drawing kind="vitrine" label="A jewellery showroom plan" />
-		</div>
-	</div>
+<Base title="Our Journey | Design10 Entire Interior" description="On 6 October 1996, Shahnawaz Ahmed began Design10. Three decades and 1000+ projects across India.">
+ <header class="journeyIntro wrap"><div><p class="sectionLabel">{studioCopy.introductionTitle}</p><h1>Our Journey</h1><p>{studioCopy.introduction}</p></div><div class="journeyYear" aria-label="Established 1996"><span>19</span><span>96</span><small>6 October / The first project</small></div></header>
+ <section class="journeyStory wrap sectionSpace"><div class="journeyStoryImage"><img src="/images/urmilBefore.webp" alt="Architectural design visualisation of Urmil Jewellers at dusk" width="1348" height="1455" loading="lazy" /><span>Urmil Jewellers / Design visualisation</span></div><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/portfolio">See the portfolio</ButtonLink></div></section>
+ <div class="wrap"><dl class="studioFacts journeyHighlights">{highlights.map((item) => <div><dt>{item.figure}</dt><dd>{item.label}</dd></div>)}</dl></div>
+ <section class="founderQuote wrap sectionSpace"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal} <span>{studio.founderTitle}</span></footer></blockquote></section>
 </Base>

@@ -5,8 +5,10 @@ export const studio = {
 	principal: "Mr. Shahnawaz Ahmed",
 	founderTitle: "Founder & Principal Designer",
 	role: "Founder & Principal Designer",
+	// Set this path when the client supplies the founder portrait.
+	portrait: "",
 	since: 1996,
-	founded: "6 October 1996, 3:30 PM",
+	founded: "6 October 1996",
 	email: "studio@design10.example",
 	phone: "+91 00000 00000",
 	phoneHref: "tel:+910000000000",

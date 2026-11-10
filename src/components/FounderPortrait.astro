@@ -1,0 +1,11 @@
+---
+import { studio } from "../data/site";
+interface Props { large?: boolean; hero?: boolean; }
+const { large = false, hero = false } = Astro.props;
+---
+<figure class:list={["founderPortrait", { "founderPortrait--large": large, "founderPortrait--hero": hero }]}>
+ <div class="portraitWindow">
+  {studio.portrait ? <img src={studio.portrait} alt="Shahnawaz Ahmed, founder of Design10" width="600" height="800" loading={large ? "lazy" : "eager"} /> : <div class="portraitPlaceholder" aria-label="Space reserved for Shahnawaz Ahmed’s portrait"><div class="portraitArch"><span>SA</span></div><span class="portraitPending">Founder portrait to follow</span></div>}
+ </div>
+ <figcaption><strong>Shahnawaz Ahmed</strong><span>{studio.founderTitle}</span></figcaption>
+</figure>
