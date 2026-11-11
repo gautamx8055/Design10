@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import ProjectImage from "../components/ProjectImage.astro";
 import BackgroundFilm from "../components/BackgroundFilm.astro";
 import FounderPortrait from "../components/FounderPortrait.astro";
 import ButtonLink from "../components/ButtonLink.astro";
@@ -35,10 +36,10 @@ const organization = { "@context": "https://schema.org", "@type": "Organization"
   </dl>
  </section>
  <PortfolioShowcase />
- <section class="homeJourney wrap sectionSpace"><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p></div><figure><img src="/images/projects/urmilYamunaVihar/urmilInterior.webp" alt="Urmil Jewellers interior designed with curved counters, warm timber and carefully placed lighting" width="1500" height="1050" loading="lazy" /><figcaption>Urmil Jewellers</figcaption></figure></section>
+ <section class="homeJourney wrap sectionSpace"><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p></div><figure><ProjectImage src="/images/projects/urmilYamunaVihar/urmilInterior.webp" alt="Urmil Jewellers interior designed with curved counters, warm timber and carefully placed lighting" width={1500} height={1050} loading="lazy" /><figcaption>Urmil Jewellers</figcaption></figure></section>
  <section class="selectedWork wrap sectionSpace" id="selectedWork"><div class="sectionHeading"><div><p class="sectionLabel">Design10</p><h2>{studioCopy.portfolioTitle}</h2></div><p>{studioCopy.clients}</p></div><div class="clientGroups homeClientGroups">{multiLocationClients.map((client) => <article><h3>{client.name}</h3><p>{client.locations.join(", ")}</p></article>)}</div><ul class="featuredClientNames">{featuredClients.map((client) => <li>{client.name}</li>)}</ul><ButtonLink href="/portfolio">See the client list</ButtonLink></section>
  <div class="studyBackground"><div class="wrap"><UrmilStudy /></div></div>
- <section class="expertiseSection sectionSpace"><div class="wrap expertiseGrid"><div class="expertiseIntro"><p class="sectionLabel">{studio.disciplines}</p><h2>{studioCopy.expertiseTitle}</h2><p>{studioCopy.expertise}</p><figure><img src="/images/projects/giriZewarMahal/giriInterior1.webp" alt="Giri Zewar Mahal showroom visualisation with a curved central counter and flowing ceiling" width="1280" height="720" loading="lazy" /><figcaption>Giri Zevar Mahal / Jewellery showroom</figcaption></figure></div><div class="expertiseList">{expertise.map((item) => <a href={`/services#${item.id}`}><div><h3>{item.title}</h3><p>{item.text}</p></div><IconArrow /></a>)}</div></div></section>
+ <section class="expertiseSection sectionSpace"><div class="wrap expertiseGrid"><div class="expertiseIntro"><p class="sectionLabel">{studio.disciplines}</p><h2>{studioCopy.expertiseTitle}</h2><p>{studioCopy.expertise}</p><figure><ProjectImage src="/images/projects/giriZewarMahal/giriInterior1.webp" alt="Giri Zewar Mahal showroom visualisation with a curved central counter and flowing ceiling" width={1280} height={720} loading="lazy" /><figcaption>Giri Zevar Mahal / Jewellery showroom</figcaption></figure></div><div class="expertiseList">{expertise.map((item) => <a href={`/services#${item.id}`}><div><h3>{item.title}</h3><p>{item.text}</p></div><IconArrow /></a>)}</div></div></section>
  <WorkProcess />
  <section class="founderQuote wrap sectionSpace"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal} <span>{studio.founderTitle}</span></footer></blockquote><a class="textLink" href="/journey">Our Journey <IconArrow /></a></section>
 </Base>

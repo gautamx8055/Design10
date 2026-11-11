@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
+import ProjectImage from "../components/ProjectImage.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import { highlights, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 ---
 <Base title="Our Journey | Design10 Entire Interior" description="On 6 October 1996, Shahnawaz Ahmed began Design10. Three decades and 1000+ projects across India.">
  <header class="journeyIntro wrap"><div><p class="sectionLabel">{studioCopy.introductionTitle}</p><h1>Our Journey</h1><p>{studioCopy.introduction}</p></div><div class="journeyYear" aria-label="Established 1996"><span>19</span><span>96</span><small>6 October / The first project</small></div></header>
- <section class="journeyStory wrap sectionSpace"><div class="journeyStoryImage"><img src="/images/projects/urmilYamunaVihar/urmilElevation.webp" alt="Architectural design visualisation of Urmil Jewellers at dusk" width="1348" height="1455" loading="lazy" /><span>Urmil Jewellers / Design visualisation</span></div><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/portfolio">See the portfolio</ButtonLink></div></section>
+ <section class="journeyStory wrap sectionSpace"><div class="journeyStoryImage"><ProjectImage src="/images/projects/urmilYamunaVihar/urmilElevation.webp" alt="Architectural design visualisation of Urmil Jewellers at dusk" width={1348} height={1455} loading="lazy" /><span>Urmil Jewellers / Design visualisation</span></div><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/portfolio">See the portfolio</ButtonLink></div></section>
  <div class="wrap"><dl class="studioFacts journeyHighlights">{highlights.map((item) => <div><dt>{item.figure}</dt><dd>{item.label}</dd></div>)}</dl></div>
  <section class="founderQuote wrap sectionSpace"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal} <span>{studio.founderTitle}</span></footer></blockquote></section>
 </Base>

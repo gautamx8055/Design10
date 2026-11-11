@@ -1,19 +1,20 @@
 ---
 import { projectAssets } from "../data/projects";
+import ProjectImage from "./ProjectImage.astro";
 ---
 <section class="urmilStudy sectionSpace" id="urmilStudy">
 	<div class="sectionHeading"><div><p class="sectionLabel">The idea & the outcome</p><h2>From a line<br />to a landmark.</h2></div><p>Follow Urmil from the first spatial idea to its presence on the street. A dialogue between the drawing, the design and the built space.</p></div>
 	<div class="studyGrid">
 		<figure class="comparisonFigure">
-			<div class="comparison" data-comparison style="--comparisonPosition: 50%">
-				<img class="comparisonBase" src={projectAssets.urmilAfter} alt="Built exterior of Urmil Jewellers, from the uploaded UrmilAfter photograph" width="1200" height="1600" loading="lazy" />
-				<img class="comparisonOverlay" src={projectAssets.urmilBefore} alt="Design visualisation of Urmil Jewellers, from the uploaded UrmilBefore image" width="1348" height="1455" loading="lazy" />
+			<div class="comparison" data-comparison data-image-frame="portrait" style="--comparisonPosition: 50%">
+				<div class="comparisonLayer comparisonBase"><img src={projectAssets.urmilAfter} alt="Built exterior of Urmil Jewellers, from the uploaded UrmilAfter photograph" width="1200" height="1600" loading="lazy" /></div>
+				<div class="comparisonLayer comparisonOverlay"><img src={projectAssets.urmilBefore} alt="Design visualisation of Urmil Jewellers, from the uploaded UrmilBefore image" width="1348" height="1455" loading="lazy" /></div>
 				<span class="comparisonLabel comparisonLabel--before">Design visualisation</span><span class="comparisonLabel comparisonLabel--after">Built result</span>
 				<div class="comparisonDivider" aria-hidden="true"><span>↔</span></div>
 				<label class="srOnly" for="urmilComparison">Compare Urmil’s design visualisation with the built result</label><input id="urmilComparison" class="comparisonRange" type="range" min="0" max="100" value="50" aria-valuetext="50 percent design visualisation" />
 			</div>
 			<figcaption><span>Urmil Jewellers</span><span>Drag to explore the transformation</span></figcaption>
 		</figure>
-		<div class="studyPlan"><figure><a href={projectAssets.urmilMap} target="_blank" rel="noopener" aria-label="Open Urmil’s spatial plan at full size"><img src={projectAssets.urmilMap} alt="Urmil’s three-dimensional floor plan showing counters, seating, entrance and back rooms" width="1500" height="1050" loading="lazy" /><span class="planImageOpen" aria-hidden="true">↗</span></a><figcaption>The space, seen from above.</figcaption></figure><h3>Every detail has its place.</h3><p>Circulation, display and the quieter spaces behind the showroom are considered together. The plan gives the experience its structure.</p></div>
+		<div class="studyPlan"><figure><a href={projectAssets.urmilMap} target="_blank" rel="noopener" aria-label="Open Urmil’s spatial plan at full size"><ProjectImage src={projectAssets.urmilMap} alt="Urmil’s three-dimensional floor plan showing counters, seating, entrance and back rooms" width={1500} height={1050} /><span class="planImageOpen" aria-hidden="true">↗</span></a><figcaption>The space, seen from above.</figcaption></figure><h3>Every detail has its place.</h3><p>Circulation, display and the quieter spaces behind the showroom are considered together. The plan gives the experience its structure.</p></div>
 	</div>
 </section>

@@ -1,18 +1,19 @@
 ---
 import IconArrow from "./IconArrow.astro";
+import ProjectImage from "./ProjectImage.astro";
 import { projectHref, type Project } from "../data/projects";
 interface Props { project: Project; featured?: boolean; }
 const { project, featured = false } = Astro.props;
 ---
 <a class:list={["projectCard", { "projectCard--featured": featured, projectCardInterior: project.cardImage.kind === "interior" }]} href={projectHref(project.id)}>
-	<div class="projectImage"><img src={project.cardImage.src} alt={project.cardImage.alt} width={project.cardImage.width} height={project.cardImage.height} loading="lazy" /><span class="projectOpen" aria-hidden="true"><IconArrow /></span></div>
+	<div class="projectImage"><ProjectImage src={project.cardImage.src} alt={project.cardImage.alt} width={project.cardImage.width} height={project.cardImage.height} /><span class="projectOpen" aria-hidden="true"><IconArrow /></span></div>
 	<div class="projectCaption"><h3>{project.name}</h3><span>{project.category}</span></div>
  <p class="projectSummary">{project.text}</p>
  <span class="projectStoryLink">Read the project story <IconArrow /></span>
 </a>
 <style>
- .projectSummary { color: var(--textMuted); font-size: 15px; margin-top: 16px; max-width: 58ch; }
- .projectStoryLink { display: flex; align-items: center; gap: 24px; margin-top: 20px; color: var(--goldDeep); font-size: 13px; min-height: 44px; }
- .projectImage img { aspect-ratio: 4 / 5; object-fit: contain; background: var(--surfaceDark); }
- .projectCardInterior .projectImage img { object-fit: cover; }
+ .projectCard { background: var(--surfaceRaised); border: 1px solid var(--borderSubtle); border-radius: var(--radiusCard); overflow: hidden; }
+ .projectCaption { margin-inline: 20px; }
+ .projectSummary { color: var(--textMuted); font-size: 15px; margin: 16px 20px 0; max-width: 58ch; }
+ .projectStoryLink { display: flex; align-items: center; gap: 24px; margin: 20px 20px 18px; color: var(--goldDeep); font-size: 13px; min-height: 44px; }
 </style>

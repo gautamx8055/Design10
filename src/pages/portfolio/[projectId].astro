@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import StoryFigure from "../../components/StoryFigure.astro";
+import ProjectImage from "../../components/ProjectImage.astro";
 import ProjectFilm from "../../components/ProjectFilm.astro";
 import ButtonLink from "../../components/ButtonLink.astro";
 import IconArrow from "../../components/IconArrow.astro";
@@ -17,9 +18,8 @@ const enquiryType = "Jewellery Showroom";
 <Base title={`${project.name} | Project story | Design10`} description={project.text} image={project.image}>
  <header class="storyHeader wrap">
   <nav class="storyBreadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/portfolio">Portfolio</a><span aria-hidden="true">/</span><span aria-current="page">{project.name}</span></nav>
-  <div class="storyHeading"><div><p class="sectionLabel">{story.location ? `${story.location} / ${project.category}` : project.category}</p><h1>{project.name}</h1></div><p>{story.lead}</p></div>
+  <div class="storyOpening"><div class="storyHeading"><p class="sectionLabel">{story.location ? `${story.location} / ${project.category}` : project.category}</p><h1>{project.name}</h1><p class="storyLead">{story.lead}</p></div><figure class="storyCover"><ProjectImage src={project.image} alt={project.alt} width={project.width} height={project.height} loading="eager" priority /><figcaption>{project.text}</figcaption></figure></div>
   <dl class="storyFacts"><div><dt>Client</dt><dd>{project.name}</dd></div><div><dt>Project focus</dt><dd>{project.category}</dd></div><div><dt>Project archive</dt><dd>{story.representation}</dd></div></dl>
-  <figure class="storyCover"><img src={project.image} alt={project.alt} width={project.width} height={project.height} loading="eager" fetchpriority="high" /><figcaption>{project.text}</figcaption></figure>
   <nav class="storyChapterNav" aria-label="Explore this project">{story.chapters.map((chapter) => <a href={`#${chapter.id}`}>{({ startingPoint: "The beginning", inspiration: "Inspiration", spacePlanning: "Space planning", materialsAndLight: "Materials & light" } as Record<string, string>)[chapter.id]}</a>)}{story.evolution && <a href="#conceptAndBuilt">Concept & built</a>}{story.film && <a href="#projectFilm">The walkthrough</a>}<a href="#projectOutcome">The outcome</a></nav>
  </header>
  <div class="storyChapters wrap">
@@ -31,7 +31,7 @@ const enquiryType = "Jewellery Showroom";
  {story.evolution && <section class="storyEvolution sectionSpace" id="conceptAndBuilt"><div class="wrap"><div class="sectionHeading"><div><p class="sectionLabel">From the archive</p><h2>From drawing<br />to the street.</h2></div><p>The elevation concept and the built exterior, shown side by side. Two views of the project's architectural identity.</p></div><div class="storyEvolutionGrid"><StoryFigure image={story.evolution.concept} /><StoryFigure image={story.evolution.built} /></div></div></section>}
  {story.film && <section class="storyWalkthrough wrap sectionSpace" id="projectFilm" aria-labelledby="walkthroughTitle"><div class="sectionHeading"><div><p class="sectionLabel">A closer look</p><h2 id="walkthroughTitle">Walk through<br />the idea.</h2></div><p>Explore the interior through the project's design walkthrough.</p></div><ProjectFilm film={story.film} /></section>}
  <section class="storyOutcome sectionSpace" id="projectOutcome"><div class="wrap storyOutcomeGrid"><div><p class="sectionLabel">The outcome</p><h2>{story.outcome.title}</h2></div><div><p>{story.outcome.text}</p><ul>{story.outcome.details.map((detail) => <li>{detail}</li>)}</ul><ButtonLink href={`/contact?project=${encodeURIComponent(enquiryType)}`}>Discuss your space</ButtonLink></div></div></section>
- <aside class="nextProject wrap sectionSpace" aria-label="Continue exploring"><a class="nextProjectLink" href={projectHref(nextProject.id)}><div><p class="sectionLabel">Next project</p><h2>{nextProject.name}</h2><span>Explore the story <IconArrow /></span></div><img src={nextProject.cardImage.src} alt={nextProject.cardImage.alt} width={nextProject.cardImage.width} height={nextProject.cardImage.height} loading="lazy" /></a><a class="textLink" href="/portfolio">Back to the portfolio <IconArrow /></a></aside>
+ <aside class="nextProject wrap sectionSpace" aria-label="Continue exploring"><a class="nextProjectLink" href={projectHref(nextProject.id)}><div><p class="sectionLabel">Next project</p><h2>{nextProject.name}</h2><span>Explore the story <IconArrow /></span></div><ProjectImage src={nextProject.cardImage.src} alt={nextProject.cardImage.alt} width={nextProject.cardImage.width} height={nextProject.cardImage.height} /></a><a class="textLink" href="/portfolio">Back to the portfolio <IconArrow /></a></aside>
 </Base>
 
 <style>
@@ -40,19 +40,19 @@ const enquiryType = "Jewellery Showroom";
  .storyBreadcrumb a { min-height: 44px; display: inline-flex; align-items: center; }
  .storyBreadcrumb > span { display: inline-flex; align-items: center; }
  .storyBreadcrumb a:hover { color: var(--goldDeep); }
- .storyHeading { display: grid; grid-template-columns: 1.1fr 1fr; gap: 10%; align-items: end; margin-block: 54px 40px; }
+ .storyOpening { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--projectImageGap); align-items: center; margin-block: 54px 40px; }
+ .storyHeading { min-width: 0; }
  .storyHeading .sectionLabel { color: var(--goldDeep); }
- .storyHeading h1 { font-size: clamp(46px, 6.1vw, 88px); max-width: 12ch; line-height: 1.05; text-wrap: balance; }
- .storyHeading > p { font-size: 17px; color: var(--textMuted); max-width: 48ch; }
+ .storyHeading h1 { font-size: clamp(42px, 5vw, 72px); max-width: 12ch; line-height: 1.05; text-wrap: balance; }
+ .storyLead { font-size: 17px; color: var(--textMuted); max-width: 48ch; margin-top: 28px; }
  .storyFacts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 24px; border-top: 1px solid var(--borderSubtle); }
  .storyFacts dt { font-size: 11px; color: var(--textMuted); }
  .storyFacts dd { font-size: 14px; margin-top: 7px; }
- .storyCover img { width: 100%; max-height: 760px; object-fit: cover; }
  .storyCover figcaption { padding-block: 16px; font-size: 12px; line-height: 1.6; color: var(--textMuted); background: var(--surfaceBase); }
  .storyChapterNav { display: flex; flex-wrap: wrap; gap: 8px 28px; padding-block: 22px 26px; border-bottom: 1px solid var(--borderSubtle); }
  .storyChapterNav a { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; border-bottom: 1px solid var(--gold); }
  .storyChapterNav a:hover { color: var(--goldDeep); }
- .storyChapter { display: grid; grid-template-columns: 1fr 1.05fr; gap: 10%; padding-block: clamp(56px, 7vw, 104px); border-bottom: 1px solid var(--borderSubtle); }
+ .storyChapter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--projectImageGap); padding-block: clamp(56px, 7vw, 104px); border-bottom: 1px solid var(--borderSubtle); }
  .storyChapter:last-child { border-bottom: 0; }
  .storyChapter h2 { font-size: clamp(32px, 3.3vw, 48px); max-width: 17ch; line-height: 1.15; text-wrap: balance; }
  .storyChapter--withImage { align-items: center; }
@@ -61,8 +61,7 @@ const enquiryType = "Jewellery Showroom";
  .storyChapterText p + p { margin-top: 22px; }
  .storyMaterials { display: flex; flex-wrap: wrap; gap: 10px 24px; list-style: none; padding: 24px 0 0; margin: 24px 0 0; border-top: 1px solid var(--borderSubtle); font-size: 13px; color: var(--goldDeep); }
  .storyEvolution { background: var(--surfaceSoft); }
- .storyEvolutionGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
- .storyEvolutionGrid :global(img) { width: 100%; aspect-ratio: 3 / 4; object-fit: contain; }
+ .storyEvolutionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--projectImageGap); }
  .storyOutcome { background: var(--surfaceDark); color: var(--surfaceRaised); }
  .storyOutcomeGrid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 10%; }
  .storyOutcome .sectionLabel { color: var(--goldLight); }
@@ -72,27 +71,24 @@ const enquiryType = "Jewellery Showroom";
  .storyOutcome li { padding-block: 14px; border-top: 1px solid var(--borderOnDark); font-size: 14px; color: var(--goldLight); }
  .storyOutcome :global(.button) { --buttonSurface: var(--gold); --buttonHoverSurface: var(--goldLight); --buttonText: var(--surfaceDark); --buttonBorder: var(--gold); --buttonIconSurface: var(--surfaceDark); --buttonIconText: var(--goldLight); }
  .storyOutcome :global(:focus-visible) { outline-color: var(--goldLight); }
- .nextProjectLink { display: grid; grid-template-columns: 1fr 280px; gap: 50px; align-items: center; padding-bottom: 40px; border-bottom: 1px solid var(--borderSubtle); }
+ .nextProjectLink { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--projectImageGap); align-items: center; padding-bottom: 40px; border-bottom: 1px solid var(--borderSubtle); }
  .nextProjectLink h2 { font-size: clamp(36px, 4.5vw, 64px); }
  .nextProjectLink span { display: flex; align-items: center; gap: 24px; color: var(--goldDeep); margin-top: 24px; font-size: 14px; }
- .nextProjectLink img { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: var(--surfaceDark); }
  .nextProject > .textLink { margin-top: 30px; }
  @media (max-width: 900px) {
-  .storyHeading, .storyChapter, .storyOutcomeGrid { gap: 6%; }
-  .storyHeading > p, .storyChapterText p { font-size: 15px; }
+  .storyOutcomeGrid { gap: 6%; }
+  .storyLead, .storyChapterText p { font-size: 15px; }
   .storyChapter h2 { font-size: 34px; }
-  .nextProjectLink { grid-template-columns: 1fr 210px; }
  }
  @media (max-width: 600px) {
   .storyHeader { padding-top: 14px; }
   .storyBreadcrumb { gap: 8px; font-size: 11px; }
-  .storyHeading { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-block: 32px; }
+  .storyOpening { grid-template-columns: minmax(0, 1fr); gap: var(--projectImageGap); margin-block: 32px; }
   .storyHeading h1 { font-size: clamp(42px, 12vw, 64px); }
   .storyHeading .sectionLabel { margin-bottom: 18px; }
   .storyFacts { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .storyFacts > div { display: flex; justify-content: space-between; gap: 20px; }
   .storyFacts dd { margin: 0; text-align: right; font-size: 12px; }
-  .storyCover img { max-height: 580px; }
   .storyCover figcaption { font-size: 11px; }
   .storyChapterNav { gap: 4px 22px; padding-block: 10px 24px; }
   .storyChapterNav a { font-size: 12px; }
@@ -104,6 +100,5 @@ const enquiryType = "Jewellery Showroom";
   .storyOutcome h2 { font-size: 36px; }
   .nextProjectLink { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-bottom: 28px; }
   .nextProjectLink h2 { font-size: 36px; }
-  .nextProjectLink img { max-height: 420px; }
  }
 </style>

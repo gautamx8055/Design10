@@ -8,7 +8,7 @@ const { film } = Astro.props;
  <figcaption id="projectFilmCaption">{film.caption}</figcaption>
 </figure>
 <style>
- .projectFilm { background: var(--surfaceDark); }
- .projectFilm video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; pointer-events: none; }
+ .projectFilm { background: var(--surfaceDark); border-radius: var(--radiusCard); overflow: hidden; }
+ .projectFilm video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radiusMedia); pointer-events: none; }
  .projectFilm figcaption { padding: 16px 20px; color: var(--goldLight); font-size: 12px; }
 </style>

@@ -12,6 +12,7 @@ const excludedPublicAssets = [
 	"ganga jeweller lal quater 1.pdf", "images/gangaJewellerPlan.webp",
 	"Urmil Yamuna Vihar/", "Giri Zewar Mahal/", "Mr.ShahnawazDesign10Owner.png",
 	"Ganga Jewellers/",
+	"GuruKripaJewellers/",
 ];
 
 // Replace `site` with the real domain before launch. Canonical URLs and the sitemap use it.

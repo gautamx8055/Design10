@@ -46,7 +46,7 @@ import { workProcessSteps } from "../data/content";
 <style>
  .workProcess { background: var(--surfaceRaised); }
  .processWorkspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: clamp(40px, 6vw, 88px); align-items: start; }
- .processDraft { position: sticky; top: calc(var(--headerHeight) + 24px); background: var(--surfaceDark); color: var(--surfaceRaised); padding: 28px 30px 24px; border-top: 2px solid var(--gold); }
+ .processDraft { position: sticky; top: calc(var(--headerHeight) + 24px); background: var(--surfaceDark); color: var(--surfaceRaised); padding: 28px 30px 24px; border-top: 2px solid var(--gold); border-radius: var(--radiusCard); overflow: hidden; }
  .processDraftHeader { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 12px; }
  .processDraftHeader > span:first-child { color: var(--textOnDark); }
  .processDraftHeader > span:last-child { font: 450 23px/1 var(--heading); color: var(--goldLight); letter-spacing: -.04em; }

@@ -142,4 +142,36 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    details: ["A connected arrangement of arrival and display", "A separate setting for private consultation", "A consistent material and lighting language"],
   },
  },
+ guruKripaJewellers: {
+  representation: "Interior & elevation concepts",
+  lead: "A jewellery house expressed through a strong outer frame and a softer interior. The Guru Kripa Jewellers concepts bring together a recognisable frontage, carefully arranged displays and a comfortable setting for conversation.",
+  materials: ["Cream surfaces", "Dark facade framing", "Warm metallic accents", "Layered lighting"],
+  chapters: [
+   {
+    id: "startingPoint", title: "An invitation, framed from the street.",
+    image: { src: "/images/projects/guruKripaJewellers/guruKripaElivation.webp", width: 1500, height: 1800, alt: "Guru Kripa Jewellers elevation visualisation with a tall dark frame, illuminated entrance and vertical brand signage", caption: "Guru Kripa Jewellers / Elevation concept" },
+    paragraphs: ["The starting point for this design story is the connection between a jewellery house and its address. The elevation concepts use a clear architectural frame to make the entrance and the brand easy to recognise.", "Glazed openings reveal something of the interior before the visitor steps inside. The strong exterior composition gives way to a brighter, more intimate setting at the counter."],
+   },
+   {
+    id: "inspiration", title: "A room shaped around the brand.",
+    image: { src: "/images/projects/guruKripaJewellers/guruKripaInterior3.webp", width: 1500, height: 1125, alt: "Guru Kripa Jewellers interior looking towards the glazed entrance, with jewellery displays, cream chairs and geometric wall panels", caption: "Guru Kripa Jewellers / Showroom interior concept" },
+    paragraphs: ["Geometric wall panels and the central brand motif give the interior a distinct focal point. Their angled lines contrast with the softer seating and pale finishes around them.", "The design draws its character from that balance: a precise identity for the jewellery house, expressed within a room that feels comfortable and welcoming."],
+   },
+   {
+    id: "spacePlanning", title: "Making the arrangement easy to understand.",
+    image: { src: "/images/projects/guruKripaJewellers/guruKripaInterior2.webp", width: 1600, height: 1280, alt: "Elevated cutaway view of Guru Kripa Jewellers showing the glass counter arrangement, visitor chairs and a separate seating area", caption: "Guru Kripa Jewellers / Spatial arrangement study" },
+    paragraphs: ["The elevated view reveals the relationship between the counters, visitor chairs and a separate seating area. The arrangement gives each activity a place while keeping movement through the room clear.", "Transparent display counters maintain an open view across the showroom. Seating supports both time at the counter and quieter pauses within the wider space."],
+   },
+   {
+    id: "materialsAndLight", title: "One language, across the whole project.",
+    image: { src: "/images/projects/guruKripaJewellers/guruKripaElevation1.webp", width: 1600, height: 1493, alt: "Front elevation concept for Guru Kripa Jewellers showing the illuminated showroom, dark frame and vertical signage", caption: "Guru Kripa Jewellers / Alternative elevation concept" },
+    paragraphs: ["The interior combines cream surfaces, reflective display glazing and warm accents. Ceiling lighting and decorative fixtures give the room a sense of occasion while drawing attention towards the collection.", "The elevation studies explore different expressions of the same recognisable frame. Together with the interior views, they present a coordinated design direction rather than a record of a completed site."],
+   },
+  ],
+  outcome: {
+   title: "A clear identity. A considered experience.",
+   text: "The five supplied concepts connect the street-facing architecture with the experience inside. The design story is carried by a strong frame, an ordered display arrangement and a softer setting for the people who use it.",
+   details: ["A recognisable showroom frontage", "A clear arrangement of display and seating", "A consistent relationship between identity, material and light"],
+  },
+ },
 };

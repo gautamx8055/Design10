@@ -1,0 +1,17 @@
+---
+interface Props {
+ src: string;
+ alt: string;
+ width: number;
+ height: number;
+ loading?: "eager" | "lazy";
+ priority?: boolean;
+ srcset?: string;
+ sizes?: string;
+ fit?: "contain" | "cover";
+}
+const { src, alt, width, height, loading = "lazy", priority = false, srcset, sizes, fit = "contain" } = Astro.props;
+---
+<div class:list={["imageFrame", { imageFrameCover: fit === "cover" }]} data-image-frame="landscape">
+ <img class="imageFrameImage" src={src} alt={alt} width={width} height={height} loading={loading} fetchpriority={priority ? "high" : "auto"} srcset={srcset} sizes={sizes} />
+</div>
