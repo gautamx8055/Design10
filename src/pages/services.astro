@@ -5,16 +5,34 @@ import IconArrow from "../components/IconArrow.astro";
 import { expertise, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 const serviceMedia = [
- { src: "/posters/residence.jpg", alt: "Residential interior reference showing a light-filled dining area", note: "Residential design reference" },
- { src: "/images/giriZevarMahal.webp", alt: "Giri Zevar Mahal jewellery showroom with green panelling and brass detailing", note: "Giri Zevar Mahal" },
- { src: "/images/prabhuDayal.webp", alt: "Prabhu Dayal showroom with a clear arrangement of counters and lighting", note: "Prabhu Dayal" },
- { src: "/images/kamalJewl.webp", alt: "Kamal Jewellers facade architectural visualisation", note: "Kamal Jewellers / Architectural visualisation" },
+ null,
+ { src: "/images/projects/giriZewarMahal/giriZevarMahalInterior.webp", width: 1500, height: 1050, alt: "Giri Zevar Mahal jewellery showroom with green panelling and brass detailing", note: "Giri Zevar Mahal / Interior design visualisation" },
+ { src: "/images/projects/urmilYamunaVihar/urmilInterior.webp", width: 1500, height: 1050, alt: "Urmil Jewellers showroom with curved glass displays and warm timber details", note: "Urmil Jewellers / Commercial interior design" },
+ { src: "/images/projects/giriZewarMahal/giriZewarMahalElevation.webp", width: 1594, height: 1800, alt: "Giri Zewar Mahal elevation concept with decorative columns and an ornate entrance", note: "Giri Zevar Mahal / Elevation design visualisation" },
 ];
 ---
 <Base title="Services | Design10 Entire Interior" description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India.">
  <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>Services</h1><p>{studioCopy.expertise}</p></div></header>
  <div class="wrap"><nav class="projectNavigation" aria-label="Our expertise">{expertise.map((item) => <a href={`#${item.id}`}>{item.title}<IconArrow direction="down" /></a>)}</nav>
- <div class="serviceProjects">{expertise.map((item, index) => <section class="serviceProject" id={item.id}><div class="serviceCopy"><h2>{item.title}</h2><p>{item.text}</p><ButtonLink href={`/contact?project=${encodeURIComponent(item.title)}`} variant="outline">Start a conversation</ButtonLink></div><figure><img src={serviceMedia[index].src} alt={serviceMedia[index].alt} width={index === 3 ? 1200 : 1500} height={index === 3 ? 1800 : 1050} loading="lazy" /><figcaption>{serviceMedia[index].note}</figcaption></figure></section>)}</div>
+ <div class="serviceProjects">{expertise.map((item, index) => {
+  const media = serviceMedia[index];
+  return <section class:list={["serviceProject", { serviceProjectTextOnly: !media }]} id={item.id}>
+   <div class="serviceCopy"><h2>{item.title}</h2><p>{item.text}</p><ButtonLink href={`/contact?project=${encodeURIComponent(item.title)}`} variant="outline">Start a conversation</ButtonLink></div>
+   {media && <figure><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" /><figcaption>{media.note}</figcaption></figure>}
+  </section>;
+ })}</div>
  <div class="pageActions"><ButtonLink href="/contact">Start a conversation</ButtonLink><a class="textLink" href="/portfolio">See the clients <IconArrow /></a></div>
  </div>
 </Base>
+<style>
+ .serviceProjectTextOnly { display: block; }
+ .serviceProjectTextOnly .serviceCopy { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 11%; }
+ .serviceProjectTextOnly h2 { grid-row: 1 / 3; }
+ .serviceProjectTextOnly .serviceCopy > p { margin-top: 0; }
+ .serviceProjectTextOnly :global(.button) { justify-self: start; margin-top: 0; }
+ @media (max-width: 600px) {
+  .serviceProjectTextOnly .serviceCopy { display: block; }
+  .serviceProjectTextOnly .serviceCopy > p { margin-top: 24px; }
+  .serviceProjectTextOnly :global(.button) { margin-top: 28px; }
+ }
+</style>

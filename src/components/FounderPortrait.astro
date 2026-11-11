@@ -5,7 +5,7 @@ const { large = false, hero = false } = Astro.props;
 ---
 <figure class:list={["founderPortrait", { "founderPortrait--large": large, "founderPortrait--hero": hero }]}>
  <div class="portraitWindow">
-  {studio.portrait ? <img src={studio.portrait} alt="Shahnawaz Ahmed, founder of Design10" width="600" height="800" loading={large ? "lazy" : "eager"} /> : <div class="portraitPlaceholder" aria-label="Space reserved for Shahnawaz Ahmed’s portrait"><div class="portraitArch"><span>SA</span></div><span class="portraitPending">Founder portrait to follow</span></div>}
+  {studio.portrait ? <img src={studio.portrait} srcset="/images/mrShahnawazDesign10Owner640.webp 640w, /images/mrShahnawazDesign10Owner960.webp 960w, /images/mrShahnawazDesign10Owner.webp 1440w" sizes={hero ? "(min-width: 901px) 46vw, 90vw" : "(min-width: 801px) 38vw, 90vw"} alt="Shahnawaz Ahmed, founder of Design10, seated in his studio" width="1440" height="960" loading={hero ? "eager" : "lazy"} fetchpriority={hero ? "high" : "auto"} /> : <div class="portraitPlaceholder" aria-label="Space reserved for Shahnawaz Ahmed’s portrait"><div class="portraitArch"><span>SA</span></div><span class="portraitPending">Founder portrait to follow</span></div>}
  </div>
  <figcaption><strong>Shahnawaz Ahmed</strong><span>{studio.founderTitle}</span></figcaption>
 </figure>

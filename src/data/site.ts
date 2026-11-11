@@ -5,8 +5,7 @@ export const studio = {
 	principal: "Mr. Shahnawaz Ahmed",
 	founderTitle: "Founder & Principal Designer",
 	role: "Founder & Principal Designer",
-	// Set this path when the client supplies the founder portrait.
-	portrait: "",
+	portrait: "/images/mrShahnawazDesign10Owner.webp",
 	since: 1996,
 	founded: "6 October 1996",
 	email: "studio@design10.example",

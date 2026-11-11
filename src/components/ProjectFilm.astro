@@ -1,0 +1,14 @@
+---
+import type { ProjectStory } from "../data/projectStories";
+interface Props { film: NonNullable<ProjectStory["film"]>; }
+const { film } = Astro.props;
+---
+<figure class="projectFilm">
+ <video src={film.src} poster={film.poster} width={film.width} height={film.height} autoplay muted loop playsinline disablepictureinpicture disableRemotePlayback preload="none" data-background-film aria-describedby="projectFilmCaption" tabindex="-1"></video>
+ <figcaption id="projectFilmCaption">{film.caption}</figcaption>
+</figure>
+<style>
+ .projectFilm { background: var(--surfaceDark); }
+ .projectFilm video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; pointer-events: none; }
+ .projectFilm figcaption { padding: 16px 20px; color: var(--goldLight); font-size: 12px; }
+</style>

@@ -3,12 +3,15 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import { rm } from "node:fs/promises";
 
-// Keep the uploaded masters in public/ for the client, but publish their
-// optimised derivatives. Only generated build copies are removed here.
-const sourceMasters = [
+// Keep uploaded masters and retired drawings locally. Only active browser
+// assets are published; this removes generated build copies, never source files.
+const excludedPublicAssets = [
 	"ArchitectDesignDemoVideo.mp4", "KamalJewl.tif", "Urmil.jpg",
 	"UrmilBefore.jpg", "UrmilAfter.jpg", "Urmilmap.jpg",
 	"GiriZevarMahal.jpg", "PrabhuDayal.jpg",
+	"ganga jeweller lal quater 1.pdf", "images/gangaJewellerPlan.webp",
+	"Urmil Yamuna Vihar/", "Giri Zewar Mahal/", "Mr.ShahnawazDesign10Owner.png",
+	"Ganga Jewellers/",
 ];
 
 // Replace `site` with the real domain before launch. Canonical URLs and the sitemap use it.
@@ -19,7 +22,7 @@ export default defineConfig({
 			name: "optimisedProjectMedia",
 			hooks: {
 				"astro:build:done": async ({ dir }) => {
-					await Promise.all(sourceMasters.map((filename) => rm(new URL(filename, dir), { force: true })));
+					await Promise.all(excludedPublicAssets.map((filename) => rm(new URL(filename, dir), { force: true, recursive: true })));
 				},
 			},
 		},

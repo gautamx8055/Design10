@@ -46,3 +46,55 @@ export const expertise = [
 		text: "Architecture that holds the interior: structure, section, and the long life of the building.",
 	},
 ];
+
+/** Draft process copy for client review; illustrative, without fixed delivery promises. */
+export const workProcessSteps = [
+	{
+		id: "discoverVision",
+		title: "Discover your vision",
+		text: "Every project starts with listening. We discuss your ideas, lifestyle or business needs, budget and expectations to build a clear shared brief.",
+		outcome: "A shared project brief",
+	},
+	{
+		id: "siteStudy",
+		title: "Understand the site",
+		text: "We visit the site, take measurements and study light, access and existing conditions, uncovering both practical constraints and opportunities.",
+		outcome: "A clear site assessment",
+	},
+	{
+		id: "spacePlanning",
+		title: "Plan the space",
+		text: "Thoughtful layouts bring clarity to how the space will work. We explore zoning, movement, furniture and display arrangements around your needs.",
+		outcome: "A functional spatial layout",
+	},
+	{
+		id: "designConcept",
+		title: "Shape the concept",
+		text: "Mood boards, material palettes and 3D views bring the concept to life, helping you see the character and atmosphere of the proposed space.",
+		outcome: "A clear visual concept",
+	},
+	{
+		id: "designDevelopment",
+		title: "Refine every detail",
+		text: "We refine the design together, confirm finishes and details, and prepare drawings and specifications that guide the work ahead.",
+		outcome: "Drawings and specifications",
+	},
+	{
+		id: "siteExecution",
+		title: "Bring it to life",
+		text: "The agreed design takes shape on site, with coordination and progress reviews focused on materials, workmanship and attention to detail.",
+		outcome: "Coordinated site execution",
+	},
+	{
+		id: "finalReview",
+		title: "Review and perfect",
+		text: "We review the completed work, check the finishes and identify final adjustments, bringing the space closer to the standard we envisioned together.",
+		outcome: "Final checks and refinements",
+	},
+	{
+		id: "projectHandover",
+		title: "Hand over your space",
+		text: "A final walkthrough brings the journey to a close. We hand over the finished space with guidance on its details and care.",
+		outcome: "Your completed space, ready to use",
+	},
+] as const;

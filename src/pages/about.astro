@@ -1,14 +1,48 @@
 ---
 import Base from "../layouts/Base.astro";
 import FounderPortrait from "../components/FounderPortrait.astro";
-import BackgroundFilm from "../components/BackgroundFilm.astro";
 import ButtonLink from "../components/ButtonLink.astro";
+import IconArrow from "../components/IconArrow.astro";
 import { studioCopy } from "../data/content";
 import { studio } from "../data/site";
 ---
 <Base title="About Design10 Entire Interior" description="About Design10 Entire Interior Pvt. Ltd. and its founder, Shahnawaz Ahmed, who began the practice on 6 October 1996.">
  <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>About</h1><p>{studio.name}. Founded by {studio.principal}, {studio.founderTitle}.</p></div></header>
  <section class="aboutFounder wrap sectionSpace"><FounderPortrait large /><div class="aboutFounderCopy"><p class="sectionLabel">{studio.founderTitle}</p><h2>Shahnawaz<br />Ahmed</h2><p>{studioCopy.introduction}</p><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/journey" variant="outline">Our Journey</ButtonLink></div></section>
- <section class="aboutFilm"><BackgroundFilm /><div class="wrap"><p>{studio.name}</p><h2>Architecture.<br />Interior. Design.</h2><span>Urmil Jewellers / Design walkthrough</span></div></section>
+ <section class="aboutDesignStudy sectionSpace" aria-labelledby="aboutStudyTitle"><div class="wrap aboutStudyGrid">
+  <div class="aboutStudyHeading"><p class="sectionLabel">{studio.name}</p><h2 id="aboutStudyTitle">Architecture.<br />Interior. Design.</h2><a class="textLink" href="/portfolio">Explore our work <IconArrow /></a></div>
+  <div class="aboutStudyGallery">
+   <figure class="aboutStudyExterior"><a href="/portfolio/giriZevarMahal" aria-label="Explore the Giri Zevar Mahal project"><img src="/images/projects/giriZewarMahal/giriZewarElevationIRL.webp" alt="Built Giri Zevar Mahal exterior with illuminated columns and decorative architectural details" width="1200" height="1600" loading="lazy" /></a><figcaption>Architecture / Giri Zevar Mahal</figcaption></figure>
+   <figure class="aboutStudyInterior"><a href="/portfolio/gangaJewellers" aria-label="Explore the Ganga Jewellers project"><img src="/images/projects/gangaJewellers/ganga3.webp" alt="Ganga Jewellers interior study with cream seating, timber details and sculptural lighting" width="1600" height="1008" loading="lazy" /></a><figcaption>Interior / Ganga Jewellers</figcaption></figure>
+  </div>
+ </div></section>
  <section class="practiceSection wrap sectionSpace"><div class="sectionHeading"><h2>The practice</h2><p>{studioCopy.practice}</p></div><div class="founderQuote"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal}</footer></blockquote></div><ButtonLink href="/contact">Contact the studio</ButtonLink></section>
 </Base>
+<style>
+ .aboutDesignStudy { background: var(--surfaceDark); color: var(--surfaceRaised); }
+ .aboutStudyGrid { display: grid; grid-template-columns: minmax(240px, .85fr) minmax(0, 1.5fr); gap: 7%; align-items: center; }
+ .aboutStudyHeading .sectionLabel { color: var(--goldLight); max-width: 26ch; }
+ .aboutStudyHeading h2 { font-size: clamp(36px, 4.25vw, 68px); line-height: 1.15; letter-spacing: -.045em; }
+ .aboutStudyHeading .textLink { margin-top: 34px; color: var(--goldLight); }
+ .aboutStudyHeading :global(.iconArrow) { color: var(--goldLight); }
+ .aboutStudyGallery { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; align-items: center; }
+ .aboutStudyGallery figure { min-width: 0; }
+ .aboutStudyGallery a { display: block; }
+ .aboutStudyGallery img { width: 100%; height: auto; }
+ .aboutStudyExterior { padding-top: 26px; border-top: 1px solid var(--gold); }
+ .aboutStudyInterior { transform: translateY(40px); }
+ .aboutStudyGallery figcaption { color: var(--textOnDark); font-size: 11px; line-height: 1.6; margin-top: 14px; }
+ .aboutDesignStudy :focus-visible { outline-color: var(--goldLight); }
+ @media (max-width: 900px) {
+  .aboutStudyGrid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
+  .aboutStudyHeading h2 { font-size: 52px; }
+  .aboutStudyGallery { max-width: 760px; padding-bottom: 40px; }
+ }
+ @media (max-width: 600px) {
+  .aboutStudyHeading h2 { font-size: 42px; }
+  .aboutStudyHeading .textLink { margin-top: 24px; }
+  .aboutStudyGallery { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 0; }
+  .aboutStudyExterior img { max-height: 420px; object-fit: contain; }
+  .aboutStudyInterior { transform: none; }
+ }
+</style>

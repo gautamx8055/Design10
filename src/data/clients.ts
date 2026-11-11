@@ -1,7 +1,7 @@
 export const multiLocationClients = [
 	{
 		name: "Urmil Jeweller",
-		locations: ["Yamuna Vihar", "Madhu Vihar", "Ramnagar", "Mandoli Road", "Durgapuri"],
+		locations: ["Madhu Vihar", "Ramnagar", "Mandoli Road", "Durgapuri"],
 	},
 	{
 		name: "Ganga Jeweller",

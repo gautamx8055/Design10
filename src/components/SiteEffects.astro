@@ -1,4 +1,7 @@
 <script>
+ import { createHeaderState, updateHeaderState } from "../lib/headerState";
+ import { initProjectDeck } from "../lib/projectDeck";
+ import { initWorkProcess } from "../lib/workProcess";
  let disposePage = () => {};
 
  function bootPage() {
@@ -8,12 +11,44 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const root = document.documentElement;
 
+  let loaderTimer: number | undefined;
   if (!root.classList.contains("isLoaded")) {
-   window.setTimeout(() => {
+   loaderTimer = window.setTimeout(() => {
     root.classList.add("isLoaded");
     try { sessionStorage.setItem("design10Loaded", "1"); } catch { /* Session storage is optional. */ }
    }, 1700);
   }
+
+  const header = document.querySelector<HTMLElement>(".siteHeader");
+  let headerState = createHeaderState(window.scrollY);
+  let headerFrame = 0;
+  let hideAfter = (header?.offsetHeight || 88) + 28;
+  const getScrollPosition = () => Math.max(0, Math.min(window.scrollY, Math.max(0, document.documentElement.scrollHeight - window.innerHeight)));
+  const syncHeader = () => {
+   headerFrame = 0;
+   if (!header) return;
+   // Pointer focus can remain on the menu button after closing it. Only keyboard
+   // focus should keep navigation on screen while the visitor scrolls.
+   const lockVisible = document.body.classList.contains("menuIsOpen") || Boolean(header.querySelector(":focus-visible"));
+   headerState = updateHeaderState(headerState, getScrollPosition(), { lockVisible, hideAfter });
+   header.classList.toggle("isAtTop", headerState.isAtTop);
+   header.classList.toggle("isHidden", headerState.isHidden);
+  };
+  const scheduleHeaderUpdate = () => {
+   if (!headerFrame) headerFrame = requestAnimationFrame(syncHeader);
+  };
+  window.addEventListener("scroll", scheduleHeaderUpdate, { passive: true, signal });
+  window.addEventListener("pageshow", () => {
+   headerState = createHeaderState(getScrollPosition());
+   scheduleHeaderUpdate();
+  }, { signal });
+  window.addEventListener("resize", () => { hideAfter = (header?.offsetHeight || 88) + 28; scheduleHeaderUpdate(); }, { passive: true, signal });
+  header?.addEventListener("focusin", () => {
+   if (headerFrame) cancelAnimationFrame(headerFrame);
+   syncHeader();
+  }, { signal });
+  header?.addEventListener("focusout", scheduleHeaderUpdate, { signal });
+  syncHeader();
 
   const menuToggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const siteNav = document.querySelector<HTMLElement>("#siteNav");
@@ -21,6 +56,9 @@
    menuToggle?.setAttribute("aria-expanded", String(open));
    siteNav?.classList.toggle("isOpen", open);
    document.body.classList.toggle("menuIsOpen", open);
+   header?.classList.toggle("isMenuOpen", open);
+   if (headerFrame) cancelAnimationFrame(headerFrame);
+   syncHeader();
    const label = menuToggle?.querySelector("[data-menu-label]");
    if (label) label.textContent = open ? "Close" : "Menu";
    if (restoreFocus) menuToggle?.focus();
@@ -41,6 +79,52 @@
   }, { signal });
   const desktopMedia = window.matchMedia("(min-width: 801px)");
   desktopMedia.addEventListener("change", () => { if (desktopMedia.matches) setMenuOpen(false); }, { signal });
+
+  document.querySelectorAll<HTMLElement>("[data-project-deck]").forEach((deck) => initProjectDeck(deck, signal));
+  document.querySelectorAll<HTMLElement>("[data-work-process]").forEach((workspace) => initWorkProcess(workspace, signal));
+
+  // Apply animation only after the observer is ready; content remains visible without JS.
+  let motionObserver: IntersectionObserver | undefined;
+  const motionTargets = new Set<HTMLElement>();
+  const resetMotion = () => {
+   motionObserver?.disconnect();
+   motionTargets.forEach((element) => { element.classList.remove("motionReady"); element.classList.add("isVisible"); });
+  };
+  const prepareMotion = () => {
+   if (reduceMotion.matches) { resetMotion(); return; }
+   motionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+     if (!entry.isIntersecting) return;
+     entry.target.classList.add("isVisible");
+     motionObserver?.unobserve(entry.target);
+    });
+   }, { threshold: .12, rootMargin: "0px 0px -32px 0px" });
+   const groups = [
+    { selector: ".projectImage, .portfolioImage, .homeJourney figure, .studyPlan figure, .serviceProject figure, .journeyStoryImage, .expertiseIntro figure, .storyChapter .storyFigure", type: "image", stagger: false },
+    { selector: ".sectionHeading h2, .introductionBody > h2, .homeJourney h2, .expertiseIntro h2, .serviceCopy h2, .journeyStory h2, .aboutFounderCopy h2, .footerInvitation h2, .storyChapter h2", type: "heading", stagger: false },
+    { selector: ".studioFacts > div, .expertiseList > a, .homeClientGroups > article", type: "detail", stagger: true },
+    { selector: ".introductionMilestones", type: "detail", stagger: false },
+    { selector: ".processTimeline > li", type: "process", stagger: false },
+   ];
+   groups.forEach(({ selector, type, stagger }) => {
+    document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
+     element.dataset.motion = type;
+     if (stagger && element.parentElement) {
+      const siblingIndex = Array.from(element.parentElement.children).indexOf(element);
+      element.style.setProperty("--revealDelay", `${Math.min(siblingIndex, 4) * 70}ms`);
+     }
+     element.classList.add("motionReady");
+     if (element.getBoundingClientRect().bottom <= 0) element.classList.add("isVisible");
+     motionTargets.add(element);
+     motionObserver?.observe(element);
+    });
+   });
+  };
+  prepareMotion();
+  reduceMotion.addEventListener("change", () => {
+   resetMotion();
+   if (!reduceMotion.matches) prepareMotion();
+  }, { signal });
 
   document.querySelectorAll<HTMLElement>("[data-comparison]").forEach((comparison) => {
    const range = comparison.querySelector<HTMLInputElement>("input[type=range]");
@@ -125,10 +209,19 @@
   disposePage = () => {
    abortController.abort();
    videoObserver.disconnect();
+   motionObserver?.disconnect();
+   if (loaderTimer !== undefined) window.clearTimeout(loaderTimer);
+   if (headerFrame) cancelAnimationFrame(headerFrame);
    videos.forEach((video) => video.pause());
    document.body.classList.remove("menuIsOpen");
   };
  }
+ // Restore contrast before the next route is painted, including history restores.
+ document.addEventListener("astro:after-swap", () => {
+  const header = document.querySelector<HTMLElement>(".siteHeader");
+  header?.classList.toggle("isAtTop", window.scrollY <= 0);
+  header?.classList.remove("isHidden");
+ });
  document.addEventListener("astro:page-load", bootPage);
  document.addEventListener("astro:before-swap", () => disposePage());
  bootPage();

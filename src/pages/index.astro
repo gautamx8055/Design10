@@ -4,11 +4,10 @@ import BackgroundFilm from "../components/BackgroundFilm.astro";
 import FounderPortrait from "../components/FounderPortrait.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import IconArrow from "../components/IconArrow.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import PortfolioShowcase from "../components/PortfolioShowcase.astro";
 import UrmilStudy from "../components/UrmilStudy.astro";
-import PlanViewer from "../components/PlanViewer.astro";
+import WorkProcess from "../components/WorkProcess.astro";
 import { clients, multiLocationClients } from "../data/clients";
-import { projects } from "../data/projects";
 import { expertise, highlights, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 const featuredClients = clients.slice(0, 6);
@@ -24,11 +23,22 @@ const organization = { "@context": "https://schema.org", "@type": "Organization"
   </div>
   <div class="heroBottom"><span>Residential & commercial projects</span><a href="#studioIntroduction">Discover the practice <IconArrow direction="down" /></a></div>
  </div></section>
- <section class="introduction wrap sectionSpace" id="studioIntroduction"><div class="sectionLabel">Since {studio.since}</div><div class="introductionBody"><h2>{studioCopy.introductionTitle}</h2><div class="introductionText"><p>{studioCopy.introduction}</p></div><ButtonLink href="/journey" variant="outline">Know more about his journey</ButtonLink><dl class="studioFacts">{highlights.map((item) => <div><dt>{item.figure}</dt><dd>{item.label}</dd></div>)}</dl></div></section>
- <section class="homeJourney wrap sectionSpace"><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p></div><figure><img src="/images/urmil.webp" alt="Urmil Jewellers interior designed with curved counters, warm timber and carefully placed lighting" width="1500" height="1050" loading="lazy" /><figcaption>Urmil Jewellers</figcaption></figure></section>
- <section class="selectedWork wrap sectionSpace" id="selectedWork"><div class="sectionHeading"><div><p class="sectionLabel">Design10</p><h2>{studioCopy.portfolioTitle}</h2></div><p>{studioCopy.clients}</p></div><div class="selectedGrid"><ProjectCard project={projects[0]} featured /><ProjectCard project={projects[1]} /><ProjectCard project={projects[2]} /></div><div class="clientGroups homeClientGroups">{multiLocationClients.map((client) => <article><h3>{client.name}</h3><p>{client.locations.join(", ")}</p></article>)}</div><ul class="featuredClientNames">{featuredClients.map((client) => <li>{client.name}</li>)}</ul><ButtonLink href="/portfolio">See the client list</ButtonLink></section>
+ <section class="introduction wrap sectionSpace" id="studioIntroduction" aria-labelledby="introductionTitle">
+  <div class="introductionBody">
+   <p class="introductionSince">Since {studio.since}</p>
+   <h2 id="introductionTitle">{studioCopy.introductionTitle}</h2>
+   <p class="introductionText">{studioCopy.introduction}</p>
+   <ButtonLink href="/journey">Know more about his journey</ButtonLink>
+  </div>
+  <dl class="introductionMilestones" aria-label="The practice at a glance">
+   {highlights.map((item) => <div><dt>{item.figure}</dt><dd>{item.label}</dd></div>)}
+  </dl>
+ </section>
+ <PortfolioShowcase />
+ <section class="homeJourney wrap sectionSpace"><div><p class="sectionLabel">{studioCopy.journeyLead}</p><h2>{studioCopy.journeyTitle}</h2><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p></div><figure><img src="/images/projects/urmilYamunaVihar/urmilInterior.webp" alt="Urmil Jewellers interior designed with curved counters, warm timber and carefully placed lighting" width="1500" height="1050" loading="lazy" /><figcaption>Urmil Jewellers</figcaption></figure></section>
+ <section class="selectedWork wrap sectionSpace" id="selectedWork"><div class="sectionHeading"><div><p class="sectionLabel">Design10</p><h2>{studioCopy.portfolioTitle}</h2></div><p>{studioCopy.clients}</p></div><div class="clientGroups homeClientGroups">{multiLocationClients.map((client) => <article><h3>{client.name}</h3><p>{client.locations.join(", ")}</p></article>)}</div><ul class="featuredClientNames">{featuredClients.map((client) => <li>{client.name}</li>)}</ul><ButtonLink href="/portfolio">See the client list</ButtonLink></section>
  <div class="studyBackground"><div class="wrap"><UrmilStudy /></div></div>
- <section class="expertiseSection sectionSpace"><div class="wrap expertiseGrid"><div class="expertiseIntro"><p class="sectionLabel">{studio.disciplines}</p><h2>{studioCopy.expertiseTitle}</h2><p>{studioCopy.expertise}</p><figure><img src="/images/prabhuDayal.webp" alt="Prabhu Dayal jewellery showroom with glass displays and a detailed ceiling" width="1500" height="714" loading="lazy" /><figcaption>Prabhu Dayal / Jewellery showroom</figcaption></figure></div><div class="expertiseList">{expertise.map((item) => <a href={`/services#${item.id}`}><div><h3>{item.title}</h3><p>{item.text}</p></div><IconArrow /></a>)}</div></div></section>
- <div class="wrap"><PlanViewer /></div>
+ <section class="expertiseSection sectionSpace"><div class="wrap expertiseGrid"><div class="expertiseIntro"><p class="sectionLabel">{studio.disciplines}</p><h2>{studioCopy.expertiseTitle}</h2><p>{studioCopy.expertise}</p><figure><img src="/images/projects/giriZewarMahal/giriInterior1.webp" alt="Giri Zewar Mahal showroom visualisation with a curved central counter and flowing ceiling" width="1280" height="720" loading="lazy" /><figcaption>Giri Zevar Mahal / Jewellery showroom</figcaption></figure></div><div class="expertiseList">{expertise.map((item) => <a href={`/services#${item.id}`}><div><h3>{item.title}</h3><p>{item.text}</p></div><IconArrow /></a>)}</div></div></section>
+ <WorkProcess />
  <section class="founderQuote wrap sectionSpace"><span class="quoteMark" aria-hidden="true">“</span><blockquote><p>{studio.quote}</p><footer>{studio.principal} <span>{studio.founderTitle}</span></footer></blockquote><a class="textLink" href="/journey">Our Journey <IconArrow /></a></section>
 </Base>

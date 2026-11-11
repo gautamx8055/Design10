@@ -6,7 +6,7 @@ import Loader from "../components/Loader.astro";
 import SiteEffects from "../components/SiteEffects.astro";
 import "../styles/global.css";
 interface Props { title: string; description: string; image?: string; }
-const { title, description, image = "/images/giriZevarMahal.webp" } = Astro.props;
+const { title, description, image = "/images/projects/giriZewarMahal/giriZevarMahalInterior.webp" } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
 ---
@@ -33,5 +33,5 @@ const imageUrl = new URL(image, Astro.site);
   </script>
   <ClientRouter /><slot name="head" />
  </head>
- <body id="top"><Loader /><Header /><main id="content"><slot /></main><Footer /><SiteEffects /></body>
+ <body id="top" class:list={{ homePage: Astro.url.pathname === "/" }}><Loader /><Header /><main id="content"><slot /></main><Footer /><SiteEffects /></body>
 </html>

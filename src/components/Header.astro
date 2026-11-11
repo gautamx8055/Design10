@@ -3,14 +3,15 @@ import Logo from "./Logo.astro";
 import IconArrow from "./IconArrow.astro";
 import { nav } from "../data/site";
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const navCurrent = (href: string) => currentPath === href ? "page" as const : currentPath.startsWith(`${href}/`) ? "true" as const : undefined;
 ---
 <a class="skipLink" href="#content">Skip to content</a>
-<header class="siteHeader">
+<header class="siteHeader isAtTop" data-header-theme={currentPath === "/" ? "dark" : "light"}>
  <div class="headerInner wrap">
   <Logo href="/" />
   <button class="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav" data-menu-toggle><span data-menu-label>Menu</span><span class="menuIcon" aria-hidden="true"><i></i><i></i></span></button>
   <nav id="siteNav" class="siteNav" aria-label="Main navigation">
-   {nav.map((item) => item.href === "/contact" ? <a class="button navContact" href={item.href} aria-current={currentPath === item.href ? "page" : undefined}><span class="buttonLabel">{item.label}</span><span class="buttonIcon"><IconArrow /></span></a> : <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>)}
+   {nav.map((item, index) => item.href === "/contact" ? <a class="button navContact" href={item.href} style={`--navIndex: ${index}`} aria-current={navCurrent(item.href)}><span class="buttonLabel">{item.label}</span><span class="buttonIcon"><IconArrow /></span></a> : <a href={item.href} style={`--navIndex: ${index}`} aria-current={navCurrent(item.href)}>{item.label}</a>)}
   </nav>
  </div>
 </header>

@@ -8,14 +8,14 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.8",
-    "pdfjs-dist": "^6.5.438"
+    "astro": "^7.3.8"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",

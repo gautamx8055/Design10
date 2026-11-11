@@ -1,0 +1,116 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+import { workProcessSteps } from "../data/content";
+---
+<section class="workProcess sectionSpace" id="ourProcess" aria-labelledby="processTitle">
+ <div class="wrap">
+  <div class="sectionHeading">
+   <div><p class="sectionLabel">Our process</p><h2 id="processTitle">From concept<br />to completion.</h2></div>
+   <p>A clear path from understanding your vision to handing over the finished space, with care and collaboration at every step.</p>
+  </div>
+  <div class="processWorkspace" data-work-process>
+   <div class="processDraft" aria-hidden="true">
+    <div class="processDraftHeader"><span>Design in the making</span><span data-process-counter hidden>01 / 08</span></div>
+    <div class="processDiagram">
+     <svg viewBox="0 0 640 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g class="draftGuides"><path d="M48 310 320 450 598 300M320 450v-18M48 310v-18M598 300v-18M95 95h50m-25-25v50M535 390h30m-15-15v30" /><path d="m106 338 214 110 216-117" stroke-dasharray="3 8" /></g>
+      <g class="draftStage" data-draft-stage="0"><path pathLength="1" d="m80 310 240 125 250-135-240-122L80 310Z" /></g>
+      <g class="draftStage" data-draft-stage="1"><path pathLength="1" d="m170 300 145 74 155-84-145-74-155 84Zm0 0v12l145 74 155-84v-12M315 374v12" /></g>
+      <g class="draftStage" data-draft-stage="2"><path pathLength="1" d="M170 300V130M315 374V204M470 290V120M325 216V46" /></g>
+      <g class="draftStage" data-draft-stage="3"><path pathLength="1" d="m170 130 155-84 145 74-155 84-145-74Zm0 0v-13l155-84 145 74v13M315 191v13" /></g>
+      <g class="draftStage" data-draft-stage="4"><path pathLength="1" d="m170 208 145 74 155-84M170 220l145 74 155-84M315 282v12" /></g>
+      <g class="draftStage" data-draft-stage="5"><path pathLength="1" d="m191 158 45 23v39l-45-23v-39Zm61 31 43 22v39l-43-22v-39Zm84 24 46-25v42l-46 25v-42Zm63-34 48-26v42l-48 26v-42Z" /></g>
+      <g class="draftStage" data-draft-stage="6"><path pathLength="1" d="m228 330 48 25v-69l-48-25v69Zm89 23 132-71v-47l-132 72M251 273v69M341 295v45M374 278v45M410 258v46M170 143l145 74 155-84" /></g>
+      <g class="draftStage" data-draft-stage="7"><path pathLength="1" d="m228 330-32 18 49 25 31-18m-80-7v10l49 25 31-18v-10m-31 18v10M518 331v-52m0 28-13-13m13 0 14-14m-27 52 14 7 15-8" /><circle pathLength="1" cx="518" cy="269" r="24" /></g>
+     </svg>
+    </div>
+    <div class="processDraftCaption"><p data-process-draft-title>From concept to completion.</p><span data-process-draft-outcome>With care and collaboration at every step.</span></div>
+    <div class="processDraftScale">{workProcessSteps.map((_, index) => <span data-process-marker={index}><i></i>{String(index + 1).padStart(2, "0")}</span>)}</div>
+   </div>
+   <div class="processStages">
+    <p class="processHint">Explore the eight stages of your project.</p>
+    <ol class="processTimeline" role="list">
+     {workProcessSteps.map((step, index) => <li id={step.id}>
+      <details class="processStep" name="designProcess" open={index === 0} data-process-step data-process-title={step.title} data-process-outcome={step.outcome}>
+       <summary><h3><span class="processNumber" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span class="processStepTitle"><span class="srOnly">Step {index + 1}: </span>{step.title}</span><span class="processToggle" aria-hidden="true"></span></h3></summary>
+       <div class="processBody"><p>{step.text}</p><div class="processOutcome"><span>At this stage</span><strong>{step.outcome}</strong></div></div>
+      </details>
+     </li>)}
+    </ol>
+   </div>
+  </div>
+  <div class="processInvitation"><p>Have a space in mind?<br /><strong>Let’s take the first step together.</strong></p><ButtonLink href="/contact">Discuss your project</ButtonLink></div>
+ </div>
+</section>
+
+<style>
+ .workProcess { background: var(--surfaceRaised); }
+ .processWorkspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: clamp(40px, 6vw, 88px); align-items: start; }
+ .processDraft { position: sticky; top: calc(var(--headerHeight) + 24px); background: var(--surfaceDark); color: var(--surfaceRaised); padding: 28px 30px 24px; border-top: 2px solid var(--gold); }
+ .processDraftHeader { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 12px; }
+ .processDraftHeader > span:first-child { color: var(--textOnDark); }
+ .processDraftHeader > span:last-child { font: 450 23px/1 var(--heading); color: var(--goldLight); letter-spacing: -.04em; }
+ .processDiagram { margin: 24px -14px 0; }
+ .processDiagram svg { display: block; width: 100%; max-height: clamp(200px, 38svh, 350px); overflow: visible; }
+ .draftGuides { stroke: var(--gold); opacity: .25; stroke-width: 1; }
+ .draftStage { stroke: var(--textOnDark); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: opacity .3s, stroke .3s; }
+ .isInteractive .draftStage { opacity: .12; }
+ .isInteractive .draftStage.isReached { opacity: .85; }
+ .isInteractive .draftStage.isCurrent { opacity: 1; stroke: var(--goldLight); stroke-width: 2.5; }
+ .isInteractive .draftStage.isCurrent :is(path, circle) { animation: processDraftIn .8s cubic-bezier(.22, 1, .36, 1) both; }
+ .processDraftCaption { min-height: 86px; padding-top: 18px; }
+ .processDraftCaption p { font: 450 clamp(24px, 2.5vw, 34px)/1.2 var(--heading); letter-spacing: -.035em; text-wrap: balance; }
+ .processDraftCaption > span { display: block; color: var(--goldLight); font-size: 12px; margin-top: 12px; }
+ .processDraftScale { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin-top: 28px; }
+ .processDraftScale > span { color: var(--textOnDark); font-size: 10px; }
+ .processDraftScale i { display: block; height: 3px; background: var(--borderOnDark); margin-bottom: 10px; transition: background .25s; }
+ .processDraftScale > .isReached { color: var(--goldLight); }
+ .processDraftScale > .isReached i { background: var(--gold); }
+ .processHint { color: var(--textMuted); font-size: 12px; padding-bottom: 18px; }
+ .processTimeline { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--borderSubtle); }
+ .processTimeline > li { border-bottom: 1px solid var(--borderSubtle); }
+ .processStep summary { display: flex; align-items: center; min-height: 82px; padding: 20px 8px; list-style: none; cursor: pointer; transition: color .2s; }
+ .processStep summary::-webkit-details-marker { display: none; }
+ .processStep summary:hover { color: var(--goldDeep); }
+ .processStep summary:focus-visible { outline-offset: -2px; }
+ .processNumber { font: 450 22px/1 var(--heading); letter-spacing: -.04em; color: var(--textMuted); }
+ .processStep h3 { display: grid; width: 100%; grid-template-columns: 42px minmax(0, 1fr) 28px; align-items: center; gap: 20px; font-size: clamp(20px, 1.85vw, 27px); line-height: 1.25; letter-spacing: -.035em; }
+ .processToggle { width: 28px; height: 28px; position: relative; border: 1px solid var(--borderSubtle); border-radius: 50%; }
+ .processToggle::before, .processToggle::after { content: ""; position: absolute; background: var(--goldDeep); top: 50%; left: 50%; width: 10px; height: 1px; transform: translate(-50%, -50%); transition: transform .2s; }
+ .processToggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+ .processStep[open] .processToggle { border-color: var(--goldDeep); }
+ .processStep[open] .processToggle::after { transform: translate(-50%, -50%) rotate(0); }
+ .processStep[open] .processNumber { color: var(--goldDeep); }
+ .processBody { padding: 0 40px 26px 70px; }
+ .processBody > p { color: var(--textMuted); font-size: 14px; line-height: 1.8; max-width: 54ch; }
+ .processStep[open] .processBody { animation: processBodyIn .25s ease both; }
+ .processOutcome { margin-top: 20px; padding-left: 14px; border-left: 2px solid var(--gold); }
+ .processOutcome > span { display: block; font-size: 10px; color: var(--textMuted); margin-bottom: 5px; }
+ .processOutcome strong { display: block; font-size: 12px; line-height: 1.5; font-weight: 500; color: var(--goldDeep); }
+ .processInvitation { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-top: 48px; padding-top: 30px; border-top: 1px solid var(--borderSubtle); }
+ .processInvitation p { font-size: 14px; color: var(--textMuted); }
+ .processInvitation strong { color: var(--textPrimary); font-weight: 500; }
+ @keyframes processDraftIn { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+ @keyframes processBodyIn { from { opacity: .4; } to { opacity: 1; } }
+ @media (max-width: 900px) {
+  .processWorkspace { gap: 32px; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .processDraft { padding: 24px 20px; }
+  .processStep summary { min-height: 78px; padding-inline: 4px; }
+  .processBody { padding-left: 50px; padding-right: 4px; }
+  .processStep h3 { grid-template-columns: 34px minmax(0, 1fr) 28px; gap: 12px; font-size: 20px; }
+ }
+ @media (max-width: 700px) {
+  .processWorkspace { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .processDraft { position: relative; top: auto; padding: 22px; }
+  .processDiagram { max-width: 380px; margin: 8px auto 0; }
+  .processDiagram svg { max-height: 270px; }
+  .processDraftCaption { min-height: 74px; padding-top: 8px; }
+  .processDraftCaption p { font-size: 26px; }
+  .processDraftScale { margin-top: 18px; }
+  .processStep summary { min-height: 74px; }
+  .processBody { padding-bottom: 24px; }
+  .processInvitation { align-items: flex-start; flex-direction: column; gap: 22px; margin-top: 32px; }
+  .workProcess :global(.motionReady[data-motion="process"]) { transition-delay: 0ms; }
+ }
+ @media (max-height: 700px) { .processDraft { position: relative; top: auto; } }
+</style>
