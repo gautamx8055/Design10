@@ -374,20 +374,17 @@ a:hover .projectOpen { color: var(--textPrimary); background: var(--gold); }
 .clientDirectoryList li strong { font-weight: 500; font-size: 14px; }
 .clientDirectoryList li span { color: var(--textMuted); font-size: 12px; margin-top: 5px; }
 
-/* A short architectural line drawing introduces the first visit only. */
-.siteLoader { display: none; }
-.hasJs:not(.isLoaded) .siteLoader { display: grid; }
-.siteLoader { position: fixed; inset: 0; z-index: 100; background: var(--surfaceBase); place-items: center; pointer-events: none; animation: loaderSafety 3s forwards; }
-.loaderDrawing { text-align: center; width: 280px; }
-.loaderDrawing > svg { width: 210px; margin: 0 auto 25px; display: block; }
-.loaderLine, .loaderArc { stroke: var(--textPrimary); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawPlan 1.45s cubic-bezier(.22,.61,.36,1) forwards; }
-.loaderArc { stroke: var(--gold); animation-delay: .2s; }
-.loaderDrawing > p { font-size: 12px; margin-top: 18px; color: var(--textMuted); }
-.loaderProgress { display: block; margin-top: 35px; height: 1px; width: 100%; background: var(--borderSubtle); overflow: hidden; }
-.loaderProgress::after { content: ""; display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--goldDeep); animation: progressLine 1.6s ease forwards; }
-@keyframes drawPlan { to { stroke-dashoffset: 0; } }
+/* A brief logo and progress line introduce the first visit only. */
+.siteLoader { display: grid; position: fixed; inset: 0; z-index: 100; background: var(--surfaceDark); color: var(--surfaceRaised); place-items: center; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .18s, visibility .18s; }
+.hasJs:not(.isLoaded) .siteLoader { opacity: 1; visibility: visible; animation: loaderSafety 1.5s forwards; }
+.loaderMark { width: 240px; text-align: center; }
+.siteLoader .logoSymbol, .siteLoader .logoName > span { color: var(--gold); }
+.siteLoader .logoDescriptor { color: var(--textOnDark); }
+.loaderProgress { display: block; margin-top: 24px; height: 1px; width: 100%; background: var(--borderOnDark); overflow: hidden; }
+.loaderProgress::after { content: ""; display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--goldLight); }
+.hasJs:not(.isLoaded) .loaderProgress::after { animation: progressLine .65s ease-out forwards; }
 @keyframes progressLine { to { transform: scaleX(1); } }
-@keyframes loaderSafety { 0%, 80% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes loaderSafety { 0%, 75% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
 @media (max-width: 1100px) {
  .siteNav { gap: 22px; }
  .portraitPending { font-size: 8px; }

@@ -48,6 +48,8 @@ The header overlays the top of each page transparently. Its text is white and li
 
 The hero has one entrance sequence, project images reveal as they enter view, and selected section headings and controls use restrained motion. Studio facts, expertise links and featured client groups reveal in a short stagger, and the mobile menu opens with a brief entrance animation. Reduced-motion preferences show all content immediately and remove the animations. The fixed header is included in the homepage's single-viewport layout.
 
+The loading screen uses only the logo and a thin gold progress line on black, with a brief fade out after 750ms. It appears once per session, is skipped for reduced-motion preferences, and has a 1.5-second fallback if the page script is delayed.
+
 Run the header, project-deck and process interaction tests with `npm test`.
 
 ## Client assets

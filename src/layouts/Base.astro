@@ -29,7 +29,7 @@ const imageUrl = new URL(image, Astro.site);
    document.addEventListener("astro:after-swap", () => {
     document.documentElement.classList.add("hasJs", "isLoaded");
    });
-   window.setTimeout(() => document.documentElement.classList.add("isLoaded"), 3000);
+   window.setTimeout(() => document.documentElement.classList.add("isLoaded"), 1500);
   </script>
   <ClientRouter /><slot name="head" />
  </head>
