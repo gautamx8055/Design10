@@ -14,16 +14,17 @@ export function getStaticPaths() {
 interface Props { project: Project; story: ProjectStory; nextProject: Project; }
 const { project, story, nextProject } = Astro.props;
 const enquiryType = "Jewellery Showroom";
+const imageChapters = story.chapters.filter((chapter) => chapter.image);
 ---
 <Base title={`${project.name} | Project story | Design10`} description={project.text} image={project.image}>
  <header class="storyHeader wrap">
   <nav class="storyBreadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/portfolio">Portfolio</a><span aria-hidden="true">/</span><span aria-current="page">{project.name}</span></nav>
   <div class="storyOpening"><div class="storyHeading"><p class="sectionLabel">{story.location ? `${story.location} / ${project.category}` : project.category}</p><h1>{project.name}</h1><p class="storyLead">{story.lead}</p></div><figure class="storyCover"><ProjectImage src={project.image} alt={project.alt} width={project.width} height={project.height} loading="eager" priority /><figcaption>{project.text}</figcaption></figure></div>
   <dl class="storyFacts"><div><dt>Client</dt><dd>{project.name}</dd></div><div><dt>Project focus</dt><dd>{project.category}</dd></div><div><dt>Project archive</dt><dd>{story.representation}</dd></div></dl>
-  <nav class="storyChapterNav" aria-label="Explore this project">{story.chapters.map((chapter) => <a href={`#${chapter.id}`}>{({ startingPoint: "The beginning", inspiration: "Inspiration", spacePlanning: "Space planning", materialsAndLight: "Materials & light" } as Record<string, string>)[chapter.id]}</a>)}{story.evolution && <a href="#conceptAndBuilt">Concept & built</a>}{story.film && <a href="#projectFilm">The walkthrough</a>}<a href="#projectOutcome">The outcome</a></nav>
+  <nav class="storyChapterNav" aria-label="Explore this project">{story.chapters.map((chapter) => <a href={`#${chapter.id}`}>{({ startingPoint: "The beginning", inspiration: "Inspiration", spacePlanning: "Space planning", materialsAndLight: "Materials & light", privateConsultation: "Consultation", displayDetail: "Display detail" } as Record<string, string>)[chapter.id]}</a>)}{story.evolution && <a href="#conceptAndBuilt">Concept & built</a>}{story.film && <a href="#projectFilm">The walkthrough</a>}<a href="#projectOutcome">The outcome</a></nav>
  </header>
  <div class="storyChapters wrap">
-  {story.chapters.map((chapter) => <section id={chapter.id} class:list={["storyChapter", { "storyChapter--withImage": Boolean(chapter.image) }]}>
+  {story.chapters.map((chapter) => <section id={chapter.id} class:list={["storyChapter", { "storyChapter--withImage": Boolean(chapter.image), "storyChapter--imageLeft": Boolean(chapter.image) && imageChapters.indexOf(chapter) % 2 === 0 }]}>
    <div class="storyChapterTitle"><h2>{chapter.title}</h2>{chapter.image && <div class="storyChapterText">{chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>}</div>
    {chapter.image ? <StoryFigure image={chapter.image} /> : <div class="storyChapterText">{chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{chapter.id === "materialsAndLight" && <ul class="storyMaterials">{story.materials.map((material) => <li>{material}</li>)}</ul>}</div>}
   </section>)}
@@ -55,7 +56,10 @@ const enquiryType = "Jewellery Showroom";
  .storyChapter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--projectImageGap); padding-block: clamp(56px, 7vw, 104px); border-bottom: 1px solid var(--borderSubtle); }
  .storyChapter:last-child { border-bottom: 0; }
  .storyChapter h2 { font-size: clamp(32px, 3.3vw, 48px); max-width: 17ch; line-height: 1.15; text-wrap: balance; }
- .storyChapter--withImage { align-items: center; }
+ .storyChapter--withImage { align-items: center; grid-template-areas: "content image"; }
+ .storyChapter--withImage .storyChapterTitle { grid-area: content; }
+ .storyChapter--withImage > :global(.storyFigure) { grid-area: image; }
+ .storyChapter--imageLeft { grid-template-areas: "image content"; }
  .storyChapter--withImage .storyChapterText { margin-top: 28px; }
  .storyChapterText p { max-width: 58ch; color: var(--textMuted); line-height: 1.85; }
  .storyChapterText p + p { margin-top: 22px; }
@@ -93,6 +97,7 @@ const enquiryType = "Jewellery Showroom";
   .storyChapterNav { gap: 4px 22px; padding-block: 10px 24px; }
   .storyChapterNav a { font-size: 12px; }
   .storyChapter { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 48px; }
+  .storyChapter--withImage { grid-template-areas: "content" "image"; }
   .storyChapter h2 { max-width: 20ch; font-size: 32px; }
   .storyChapter--withImage .storyChapterText { margin-top: 24px; }
   .storyEvolutionGrid { grid-template-columns: minmax(0, 1fr); gap: 32px; }

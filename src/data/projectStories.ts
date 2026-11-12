@@ -26,15 +26,15 @@ export interface ProjectStory {
  outcome: { title: string; text: string; details: string[] };
 }
 
-const urmilInterior: StoryImage = {
- src: "/images/projects/urmilYamunaVihar/urmilInterior.webp", width: 1500, height: 1050,
- alt: "Urmil interior design showing curved glass displays, cream seating, timber ceiling details and illuminated jewellery niches",
- caption: "Urmil / Interior design visualisation",
+const urmilMadhuInterior: StoryImage = {
+ src: "/images/projects/urmilMadhuVihar/urmilInterior.webp", width: 1500, height: 1050,
+ alt: "Urmil Madhu Vihar interior design showing curved glass displays, cream seating, timber ceiling details and illuminated jewellery niches",
+ caption: "Urmil Jewellers Madhu Vihar / Interior design visualisation",
 };
-const urmilSpatialPlan: StoryImage = {
- src: "/images/projects/urmilYamunaVihar/urmilSpatialPlan.webp", width: 1500, height: 1050,
- alt: "Three-dimensional spatial study of Urmil showing the display counters, visitor seating, circulation and rooms behind the showroom",
- caption: "Urmil / Three-dimensional spatial study",
+const urmilMadhuSpatialPlan: StoryImage = {
+ src: "/images/projects/urmilMadhuVihar/urmilSpatialPlan.webp", width: 1500, height: 1050,
+ alt: "Three-dimensional spatial study of Urmil Madhu Vihar showing the display counters, visitor seating, circulation and rooms behind the showroom",
+ caption: "Urmil Jewellers Madhu Vihar / Three-dimensional spatial study",
 };
 const giriInterior: StoryImage = {
  src: "/images/projects/giriZewarMahal/giriInterior1.webp", width: 1280, height: 720,
@@ -48,35 +48,109 @@ const giriInterior: StoryImage = {
  */
 export const projectStories: Record<ProjectId, ProjectStory> = {
  urmil: {
-  representation: "Design & built exterior",
+  representation: "Facade concepts & site photography",
+  lead: "A jewellery house with a presence on two streets. The Urmil archive brings together corner elevation concepts, a detailed storefront study and site photographs, exploring how a recognisable identity becomes part of the architecture.",
+  materials: ["Pale facade surfaces", "Angular glazing", "Illuminated edges", "Warm display details"],
+  chapters: [
+   {
+    id: "startingPoint", title: "An identity that turns the corner.",
+    paragraphs: ["The corner gives the building more than one public face. The elevation concepts connect those faces through a common roofline, carefully placed branding and large openings towards the street.", "The entrance and vertical signage give the arrival a clear address, while the broader surfaces create room for the jewellery house's name and identity to be read from a distance."],
+   },
+   {
+    id: "inspiration", title: "A frame with a distinctive silhouette.",
+    image: { src: "/images/projects/urmilYamunaVihar/urmilYamunaViharElevation2.webp", width: 1668, height: 1412, alt: "Urmil Jewellers evening elevation concept with dark angular frames, illuminated glazing edges and a large central brand emblem", caption: "Urmil Jewellers / Evening elevation concept" },
+    paragraphs: ["The evening study gives the glazing a strong geometric outline. Dark frames and illuminated edges turn the windows into a recognisable feature of the facade.", "The larger brand emblem, wall lettering and vertical sign work at different scales. Together they connect the wider street presence with the detail of the storefront."],
+   },
+   {
+    id: "spacePlanning", title: "The display begins at the street.",
+    image: { src: "/images/projects/urmilYamunaVihar/urmilYamunaViharStore.webp", width: 1800, height: 1350, alt: "Urmil Jewellers storefront concept with jewellery displays behind wide glass bays, patterned metallic screens and planted edges", caption: "Urmil Jewellers / Street-facing display concept" },
+    paragraphs: ["The storefront study brings the architecture down to the scale of the individual display. Jewellery stands sit behind broad glazed bays, with patterned screens and warm finishes providing a layered backdrop.", "A sheltered edge, lighting and planting frame the windows without closing off the view inside. The display becomes part of the visitor's first encounter with the jewellery house."],
+   },
+   {
+    id: "materialsAndLight", title: "A presence after dark.",
+    image: { src: "/images/projects/urmilYamunaVihar/urmilYamunaViharElevation3.webp", width: 1159, height: 1253, alt: "Nighttime site photograph of the Urmil corner building with illuminated horizontal facade bands and signage, with scaffolding still visible", caption: "Urmil Jewellers / On-site exterior lighting photograph" },
+    paragraphs: ["The nighttime site photograph shows how light gives the building another reading. Horizontal bands, glazing edges and signage establish the main lines of the exterior.", "The concept views and site photographs show different expressions of the facade. They offer a useful record of the relationship between the jewellery house's visual identity, its display windows and its presence on the street."],
+   },
+  ],
+  evolution: {
+   concept: { src: "/images/projects/urmilYamunaVihar/urmilYamunaViharElevation.webp", width: 1800, height: 1350, alt: "Urmil Jewellers daytime corner elevation concept with angular glass openings and a pale illuminated facade", caption: "Elevation concept / Design visualisation" },
+   built: { src: "/images/projects/urmilYamunaVihar/urmilElevationIRL.webp", width: 1200, height: 1600, alt: "Daytime site photograph of the built Urmil Jewellers corner exterior with pale cladding, tall glazing and vertical signage", caption: "Built exterior / Site photograph" },
+  },
+  outcome: {
+   title: "A recognisable address, from every approach.",
+   text: "The five supplied images connect architectural scale with the detail of the display. Elevation concepts, a storefront study and site photography reveal a jewellery house whose identity reaches across both faces of the corner.",
+   details: ["A connected identity across two street-facing elevations", "Display windows shaped as architectural features", "A facade defined by glazing, signage and light"],
+  },
+ },
+ urmilMadhuVihar: {
+  representation: "Interior & elevation concepts",
   lead: "A jewellery showroom shaped around a simple idea: make a significant purchase feel personal. From the street-facing identity to the conversation at the counter, Urmil brings display, comfort and a sense of occasion together.",
   materials: ["Warm timber", "Cream tones", "Glass displays", "Layered light"],
   chapters: [
    {
     id: "startingPoint", title: "A personal experience, from the first step.",
+    image: { src: "/images/projects/urmilMadhuVihar/urmilElevation.webp", width: 745, height: 1787, alt: "Urmil Jewellers Madhu Vihar narrow elevation concept with layered white framing, gold signage and tall display windows", caption: "Urmil Jewellers Madhu Vihar / Elevation concept" },
     paragraphs: ["Jewellery is often chosen slowly, through conversation and close attention. The starting point for this design story is the relationship between the visitor, the piece and the person presenting it.", "The showroom brings those three elements into a shared setting. A clear arrival, comfortable seating and an open view of the displays give the experience a calm, welcoming structure."],
    },
    {
-    id: "inspiration", title: "Inspired by warmth and rhythm.", image: urmilInterior,
+    id: "inspiration", title: "Inspired by warmth and rhythm.", image: urmilMadhuInterior,
     paragraphs: ["The interior takes its character from warm timber, soft cream surfaces and a repeating rhythm of illuminated display niches. These elements give the room depth without competing with the jewellery.", "Curved counters and rounded ceiling forms soften the geometry. Their relationship creates a continuous visual language, carrying the eye from the display to the space above it."],
    },
    {
-    id: "spacePlanning", title: "A place for every conversation.", image: urmilSpatialPlan,
+    id: "spacePlanning", title: "A place for every conversation.", image: urmilMadhuSpatialPlan,
     paragraphs: ["The spatial study makes the organisation of the showroom easy to read. Counters define the visitor experience, seating supports longer conversations, and a clear route connects the entrance with the rest of the space.", "The quieter rooms sit behind the main showroom. Thinking about public and working areas together gives the customer-facing interior a practical foundation."],
    },
    {
     id: "materialsAndLight", title: "Details that let the jewellery lead.",
+    image: { src: "/images/projects/urmilMadhuVihar/urmilMadhuViharInterior2.webp", width: 1500, height: 900, alt: "Urmil Jewellers Madhu Vihar showroom concept with warm timber branding, illuminated wall niches, glass counters and pale visitor chairs", caption: "Urmil Jewellers Madhu Vihar / Materials and lighting concept" },
     paragraphs: ["Glass keeps the display visually open. Pale seating and floor finishes hold the room together, while timber accents introduce warmth and definition.", "Lighting works at different scales: a general layer makes the room comfortable, while focused illumination gives the display niches and counters their own presence. The aim is a space that feels considered from the whole room down to the individual piece."],
+   },
+   {
+    id: "displayDetail", title: "An invitation in the window.",
+    image: { src: "/images/projects/urmilMadhuVihar/urmilMadhuViharInterio3.webp", width: 1800, height: 1080, alt: "Urmil Jewellers Madhu Vihar window-display concept with jewellery busts on illuminated plinths, hanging bulbs and a flowing patterned backdrop", caption: "Urmil Jewellers Madhu Vihar / Window-display concept" },
+    paragraphs: ["The window study gives the collection a setting of its own. Jewellery stands rise on illuminated plinths against a flowing patterned backdrop, with hanging lights adding another layer of rhythm.", "The same pale surfaces and warm light used inside continue into the display. The result is a visual connection between the architecture, the collection and the visitor's first view from outside."],
+   },
+  ],
+  outcome: {
+   title: "An identity, inside and out.",
+   text: "The six supplied design views connect the slender facade, window display and showroom interior. Together with the spatial study, they reveal a welcoming setting shaped around the collection and the conversations it inspires.",
+   details: ["A welcoming showroom setting", "A clear relationship between display and seating", "An identity that extends to the street"],
+  },
+ },
+ urmilDurgapuri: {
+  representation: "Interior concepts & built exterior",
+  lead: "A jewellery house framed by light. The Urmil Durgapuri concepts connect a layered street-facing elevation with a calm showroom, where pale finishes, dark outlines and carefully lit displays give each piece a place to stand out.",
+  materials: ["Pale textured surfaces", "Dark display frames", "Warm metallic accents", "Linear crystal lighting"],
+  chapters: [
+   {
+    id: "startingPoint", title: "A clear welcome, from the entrance.",
+    image: { src: "/images/projects/urmilDurgapuri/urmilInterior1.webp", width: 1250, height: 1000, alt: "Urmil Jewellers Durgapuri entrance-area concept with glazed doors, a reception counter, jewellery display boxes and a rectangular chandelier", caption: "Urmil Jewellers Durgapuri / Entrance and reception concept" },
+    paragraphs: ["The glazed entrance offers an immediate view into the jewellery house. A reception setting, comfortable seating and framed display boxes organise the first encounter with the space.", "The design introduces its material language at the doorway: pale surfaces, slender metallic edges and dark frames that give the displays definition. Those details continue through the showroom."],
+   },
+   {
+    id: "inspiration", title: "Giving the room its own character.",
+    image: { src: "/images/projects/urmilDurgapuri/urmilInterior3.webp", width: 1250, height: 1000, alt: "Urmil Jewellers Durgapuri interior concept with fluted wall panels, a decorative oval feature, framed artwork and a long crystal ceiling light", caption: "Urmil Jewellers Durgapuri / Feature wall and interior character concept" },
+    paragraphs: ["Framing provides a consistent theme, from the decorative facade panels to the illuminated settings inside. Fluted wall sections and patterned surfaces introduce texture while the darker outlines keep the composition clear.", "The oval feature and framed imagery give visitors places to pause away from the counter. They add a more personal layer to a room whose main purpose remains the presentation of the collection."],
+   },
+   {
+    id: "spacePlanning", title: "A rhythm of display and pause.",
+    image: { src: "/images/projects/urmilDurgapuri/urmilInterior2.webp", width: 1600, height: 533, alt: "Wide interior concept for Urmil Jewellers Durgapuri showing a feature wall, visitor seating, jewellery display plinths and repeated framed wall panels", caption: "Urmil Jewellers Durgapuri / Panoramic interior study" },
+    paragraphs: ["The wide interior study shows how seating, display plinths and wall features relate along the room. Repeated frames and vertical panels give the different elements a shared rhythm.", "The counter view continues that arrangement through a line of visitor chairs and glass displays. Clear views across the room help connect the entrance, the collection and the places where visitors spend time."],
+   },
+   {
+    id: "materialsAndLight", title: "The piece, within a precise frame.",
+    image: { src: "/images/projects/urmilDurgapuri/urmilInterior4.webp", width: 1500, height: 1250, alt: "Urmil Jewellers Durgapuri display-detail concept with jewellery busts in glass boxes, a textured illuminated brand panel and dark architectural framing", caption: "Urmil Jewellers Durgapuri / Display and lighting detail concept" },
+    paragraphs: ["Glass display boxes give individual pieces their own setting, while textured backdrops and illuminated borders create depth around them. Dark frames draw a clear boundary between the collection and the surrounding wall.", "The lighting combines focused display illumination with softer ceiling lines and decorative crystal fixtures. Pale finishes and warm metallic details carry that light through the room without overwhelming the jewellery."],
    },
   ],
   evolution: {
-   concept: { src: "/images/projects/urmilYamunaVihar/urmilElevation.webp", width: 1348, height: 1455, alt: "Urmil facade concept at dusk with dark cladding, illuminated branding and tall glazed display windows", caption: "Elevation concept / Design visualisation" },
-   built: { src: "/images/projects/urmilYamunaVihar/urmilElevationIRL.webp", width: 1200, height: 1600, alt: "Photograph of the built Urmil Jewellers exterior with pale cladding and vertical showroom windows", caption: "Built exterior / Site photograph" },
+   concept: { src: "/images/projects/urmilDurgapuri/urmilElevation.webp", width: 893, height: 1151, alt: "Urmil Jewellers Durgapuri facade concept with decorative screen panels, a framed brand emblem, vertical signage and a glazed entrance", caption: "Urmil Jewellers Durgapuri / Elevation concept" },
+   built: { src: "/images/projects/urmilDurgapuri/urmilElevationIRL.webp", width: 960, height: 1280, alt: "Nighttime site photograph of Urmil Jewellers Durgapuri with illuminated rectangular facade frames, a brand emblem and vertical lettering", caption: "Urmil Jewellers Durgapuri / Built exterior photograph" },
   },
   outcome: {
-   title: "An identity, inside and out.",
-   text: "The supplied concept and built photograph show different expressions of the street-facing facade. Together with the interior and spatial study, they reveal the relationship between a recognisable jewellery house and the experience within it.",
-   details: ["A welcoming showroom setting", "A clear relationship between display and seating", "An identity that extends to the street"],
+   title: "A consistent identity, from facade to display.",
+   text: "The elevation concept, exterior photograph and five interior views connect the jewellery house at several scales. A shared language of framing, texture and light gives the building a recognisable presence and the collection a considered setting.",
+   details: ["A layered facade with illuminated branding", "A clear relationship between display and visitor seating", "A consistent palette of pale surfaces, dark frames and warm light"],
   },
  },
  giriZevarMahal: {
@@ -118,6 +192,7 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
   chapters: [
    {
     id: "startingPoint", title: "One showroom, different ways to meet.",
+    image: { src: "/images/projects/gangaJewellers/gangaJewellers.webp", width: 1800, height: 1127, alt: "Ganga Jewellers cutaway concept showing reception, office workstations, a consultation table and rooms connected by black-framed glass partitions", caption: "Ganga Jewellers / Reception, workspaces and consultation concept" },
     paragraphs: ["Choosing jewellery can involve a quick visit to a display or a longer conversation in a quieter setting. The starting point for this design story is making room for both within one connected interior.", "The supplied views present the space at several scales: the overall arrangement, the display counters and a more private room. Each contributes to a visitor experience that moves from arrival towards closer attention."],
    },
    {
@@ -132,6 +207,7 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    },
    {
     id: "materialsAndLight", title: "A rhythm of display and illumination.",
+    image: { src: "/images/projects/gangaJewellers/gangaJewellers2.webp", width: 1800, height: 1134, alt: "Ganga Jewellers consultation room viewed towards the branded wall, with cream chairs, a timber table, black-framed shelving and sculptural ceiling lights", caption: "Ganga Jewellers / Consultation room lighting concept" },
     paragraphs: ["The panoramic showroom view is organised through a repeating line of counters, seating and illuminated wall displays. That rhythm gives the larger room an ordered, readable character.", "Geometric ceiling lighting supports the wider composition, while warmer accents and individual display settings introduce detail closer to the jewellery. The walkthrough brings these relationships into view as a connected sequence."],
    },
   ],
@@ -172,6 +248,43 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    title: "A clear identity. A considered experience.",
    text: "The five supplied concepts connect the street-facing architecture with the experience inside. The design story is carried by a strong frame, an ordered display arrangement and a softer setting for the people who use it.",
    details: ["A recognisable showroom frontage", "A clear arrangement of display and seating", "A consistent relationship between identity, material and light"],
+  },
+ },
+ omShivGiriJewellers: {
+  representation: "Interior & elevation concepts",
+  lead: "A jewellery house with a graceful exterior and a warmly detailed interior. The OM Shiv Giri Jewellers concepts connect a recognisable entrance with an open showroom, comfortable seating and quieter spaces for conversation.",
+  materials: ["Warm timber", "Green display linings", "Cream seating", "Reflective gold details"],
+  chapters: [
+   {
+    id: "startingPoint", title: "A distinct presence, from the street.",
+    image: { src: "/images/projects/omShivGiriJewellers/shivGiriElevation.webp", width: 1200, height: 1800, alt: "OM Shiv Giri Jewellers elevation visualisation with pale horizontal cladding, gold signage, slender balconies and a decorative arched entrance", caption: "OM Shiv Giri Jewellers / Elevation concept" },
+    paragraphs: ["The elevation gives the jewellery house a clear architectural identity. Pale horizontal bands, framed openings and slender balcony railings organise the facade, while illuminated lettering makes the name part of the composition.", "At street level, an ornamental arched doorway marks the entrance between two display windows. The change from the building's wider rhythm to the detail of the doorway sets the scene for the experience inside."],
+   },
+   {
+    id: "inspiration", title: "The display as a carefully framed object.",
+    image: { src: "/images/projects/omShivGiriJewellers/shivGiriInterior1.webp", width: 1500, height: 1125, alt: "OM Shiv Giri Jewellers display wall with green-lined jewellery niches, timber panels, gold geometric mirrors and glass display plinths", caption: "OM Shiv Giri Jewellers / Display and material concept" },
+    paragraphs: ["Green-lined niches give each piece a defined setting. Timber surrounds and fine gold borders bring warmth to the display walls, while mirrored geometric panels introduce reflection and depth.", "The same idea of framing appears at several scales: around a single necklace, around a group of displays and within the decorative panels themselves. Cream seating and pale floor finishes give those richer details room to stand out."],
+   },
+   {
+    id: "spacePlanning", title: "A clear path through the showroom.",
+    image: { src: "/images/projects/omShivGiriJewellers/shivGiriInterior4.webp", width: 1000, height: 1200, alt: "Overhead spatial visualisation of OM Shiv Giri Jewellers showing opposing counter rows, visitor sofas, an open central aisle and a room behind a glass partition", caption: "OM Shiv Giri Jewellers / Spatial arrangement study" },
+    paragraphs: ["The overhead view reveals two rows of counters arranged along the edges of the room. Visitor seating faces the displays, leaving a generous central route through the showroom.", "A waiting area sits near the entrance, while a glass partition defines a quieter room at the far end. Considering arrival, browsing and conversation together gives the decorative interior a practical structure."],
+   },
+   {
+    id: "materialsAndLight", title: "Warmth, reflection and a sense of occasion.",
+    image: { src: "/images/projects/omShivGiriJewellers/shivGiriInterior2.webp", width: 1500, height: 1125, alt: "OM Shiv Giri Jewellers interior concept with illuminated niches, timber and cream wall panels, gold mirrored latticework and glass counters", caption: "OM Shiv Giri Jewellers / Interior lighting and detailing concept" },
+    paragraphs: ["Illuminated niches and concealed strips outline the displays, while ceiling downlights provide a wider layer of light. The chandeliers give the room a more ceremonial focal point.", "Timber, cream upholstery and green display linings balance the reflective surfaces. Gold details connect the wall panels, counter edges and lighting into one visual language."],
+   },
+   {
+    id: "privateConsultation", title: "A quieter place to talk.",
+    image: { src: "/images/projects/omShivGiriJewellers/shivGiriInterior5.webp", width: 1500, height: 900, alt: "OM Shiv Giri Jewellers showroom looking towards a glazed consultation room with a table and chairs, flanked by illuminated display counters", caption: "OM Shiv Giri Jewellers / Consultation area concept" },
+    paragraphs: ["At the end of the showroom, a table and chairs sit behind a glazed partition. Horizontal frosted bands give the room a degree of separation while preserving its connection with the main interior.", "The transition introduces another pace within the jewellery house: an open setting for browsing and a more enclosed place for focused conversation. The surrounding finishes and lighting keep the two spaces visually connected."],
+   },
+  ],
+  outcome: {
+   title: "An identity carried through every space.",
+   text: "The six supplied visualisations connect the facade, showroom and consultation area. Together, they express a design direction built around clearly framed displays, comfortable conversations and a consistent material palette.",
+   details: ["A recognisable arched entrance and street-facing identity", "An open central route between the display counters", "A connected setting for browsing, waiting and consultation"],
   },
  },
 };

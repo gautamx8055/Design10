@@ -86,8 +86,10 @@
   // Apply animation only after the observer is ready; content remains visible without JS.
   let motionObserver: IntersectionObserver | undefined;
   const motionTargets = new Set<HTMLElement>();
+  const motionTriggerTargets = new Map<Element, Set<HTMLElement>>();
   const resetMotion = () => {
    motionObserver?.disconnect();
+   motionTriggerTargets.clear();
    motionTargets.forEach((element) => { element.classList.remove("motionReady"); element.classList.add("isVisible"); });
   };
   const prepareMotion = () => {
@@ -95,8 +97,9 @@
    motionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
      if (!entry.isIntersecting) return;
-     entry.target.classList.add("isVisible");
+     motionTriggerTargets.get(entry.target)?.forEach((element) => element.classList.add("isVisible"));
      motionObserver?.unobserve(entry.target);
+     motionTriggerTargets.delete(entry.target);
     });
    }, { threshold: .12, rootMargin: "0px 0px -32px 0px" });
    const groups = [
@@ -116,7 +119,12 @@
      element.classList.add("motionReady");
      if (element.getBoundingClientRect().bottom <= 0) element.classList.add("isVisible");
      motionTargets.add(element);
-     motionObserver?.observe(element);
+     // Observe outside the image's clip-path so a hidden image can enter view.
+     const trigger = type === "image" ? element.parentElement ?? element : element;
+     const targets = motionTriggerTargets.get(trigger) ?? new Set<HTMLElement>();
+     targets.add(element);
+     motionTriggerTargets.set(trigger, targets);
+     motionObserver?.observe(trigger);
     });
    });
   };

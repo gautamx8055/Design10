@@ -13,6 +13,9 @@ const excludedPublicAssets = [
 	"Urmil Yamuna Vihar/", "Giri Zewar Mahal/", "Mr.ShahnawazDesign10Owner.png",
 	"Ganga Jewellers/",
 	"GuruKripaJewellers/",
+	"OM Shiv Giri Jewellers/",
+	"Urmil Madhu Vihar/",
+	"Urmil Durgapuri/",
 	"Commercial.mp4",
 ];
 
