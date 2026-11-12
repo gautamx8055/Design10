@@ -301,7 +301,8 @@ a:hover .projectOpen { color: var(--textPrimary); background: var(--gold); }
 .serviceCopy > p:not(.sectionLabel) { margin-top: 24px; color: var(--textMuted); font-size: 15px; }
 .serviceCopy ul { margin-block: 25px; padding: 0; list-style: none; }
 .serviceCopy li { padding-block: 10px; border-bottom: 1px solid var(--borderSubtle); font-size: 13px; }
-.serviceProject figcaption { font-size: 11px; color: var(--textMuted); margin-top: 12px; }
+.serviceProject figcaption { display: flex; flex-direction: column; font-size: 12px; line-height: 1.6; color: var(--textMuted); margin-top: 12px; }
+.serviceProject figcaption a { display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; color: var(--goldDeep); text-decoration: underline; text-underline-offset: 4px; }
 .journeyIntro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 10%; align-items: center; padding-block: 65px 100px; }
 .journeyIntro h1 { font-size: clamp(52px, 6.3vw, 94px); }
 .journeyIntro > div > p:last-child { margin-top: 30px; max-width: 430px; color: var(--textMuted); font-size: 15px; }

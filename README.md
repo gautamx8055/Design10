@@ -40,7 +40,12 @@ The original `architectDesignDemoVideo` film is used only as the homepage hero b
 
 `ProjectImage.astro` gives project imagery a shared 4:3 frame across cards, galleries, service sections and project stories. The source image dimensions remain accurate; full facades, spatial studies and panoramic views fit inside the frame without being cut off. Original image files and their camelCase derivative names remain intact.
 
-Each Services section has an image from the supplied client folders: Ganga's consultation room, Giri's showroom, Urmil's commercial interior and Guru Kripa's elevation concept. The Residential section identifies Ganga's image as material and atmosphere inspiration; it is not presented as a completed residential project. All four use the same rounded frame and alternate beside the original service copy on desktop, stacking on phones.
+Each Services section has an image, with metadata in `src/data/services.ts`. Residential and Architectural use locally downloaded Unsplash demo photos, explicitly labelled as inspiration with photographer credits. Jewellery and Commercial retain the supplied Giri and Urmil interiors. All four use the same rounded 4:3 frame and alternate beside the original service copy on desktop, stacking on phones. The images load eagerly and are excluded from scroll-reveal clipping so they remain visible when opening a direct service anchor.
+
+The demo assets in `public/images/services/` are 1600×1200 WebP images downloaded on 12 November 2026 under the [Unsplash License](https://unsplash.com/license):
+
+- `residentialDemo.webp`: [Clay Banks — modern living room with large windows overlooking trees](https://unsplash.com/photos/modern-living-room-with-large-windows-overlooking-trees-A9DmoCgM5iw).
+- `architecturalDemo.webp`: [Alef Morais — modern house with wooden facade and stone accents](https://unsplash.com/photos/modern-house-with-wooden-facade-and-stone-accents-emnfe1YR6io).
 
 Related sections use equal grid columns and the same `--projectImageGap`, so image widths and heights match across repeated sections on a page. About-page images align in equal frames without offsets. Project story opening images, chapter illustrations, concept/built pairs and next-project previews share the same column width. The founder photo on About uses the same frame, while the homepage hero retains its dedicated viewport-fitting portrait. All 16 images from the four supplied project folders are used in their corresponding stories; the supplied founder photograph appears on the homepage and About page.
 
@@ -92,7 +97,7 @@ The contact page is designed and supports Formspree submission, validation, and 
 1. Set `PUBLIC_FORMSPREE_ENDPOINT` in `.env` to the studio’s real Formspree endpoint, then restart/rebuild.
 2. Review the new image-based project narratives with the client.
 3. Set the production domain in `astro.config.mjs` and update `public/robots.txt`.
-4. Replace the residential service's labelled material inspiration with residential project photography when the client supplies it.
+4. Replace the labelled Residential and Architectural demo photos with client project photography when supplied.
 5. Confirm the client’s preferred project spellings and contact details before launch.
 
 ## Pages

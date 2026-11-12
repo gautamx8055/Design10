@@ -45,7 +45,7 @@ export const expertise = [
 		title: "Architectural",
 		text: "Architecture that holds the interior: structure, section, and the long life of the building.",
 	},
-];
+] as const;
 
 /** Draft process copy for client review; illustrative, without fixed delivery promises. */
 export const workProcessSteps = [

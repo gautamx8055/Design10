@@ -5,21 +5,16 @@ import ButtonLink from "../components/ButtonLink.astro";
 import IconArrow from "../components/IconArrow.astro";
 import { expertise, studioCopy } from "../data/content";
 import { studio } from "../data/site";
-const serviceMedia = [
- { src: "/images/projects/gangaJewellers/ganga3.webp", width: 1600, height: 1008, alt: "Ganga Jewellers consultation-room concept with cream seating, warm timber, sculptural lights and black-framed glass", note: "Material & atmosphere inspiration / Ganga Jewellers consultation-room concept" },
- { src: "/images/projects/giriZewarMahal/giriZevarMahalInterior.webp", width: 1500, height: 1050, alt: "Giri Zevar Mahal jewellery showroom with green panelling and brass detailing", note: "Giri Zevar Mahal / Interior design visualisation" },
- { src: "/images/projects/urmilYamunaVihar/urmilInterior.webp", width: 1500, height: 1050, alt: "Urmil Jewellers showroom with curved glass displays and warm timber details", note: "Urmil Jewellers / Commercial interior design" },
- { src: "/images/projects/guruKripaJewellers/guruKripaElevation1.webp", width: 1600, height: 1493, alt: "Guru Kripa Jewellers elevation concept with a dark architectural frame, illuminated signage and a glass showroom frontage", note: "Guru Kripa Jewellers / Elevation design visualisation" },
-];
+import { serviceMedia } from "../data/services";
 ---
 <Base title="Services | Design10 Entire Interior" description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India.">
  <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>Services</h1><p>{studioCopy.expertise}</p></div></header>
  <div class="wrap"><nav class="projectNavigation" aria-label="Our expertise">{expertise.map((item) => <a href={`#${item.id}`}>{item.title}<IconArrow direction="down" /></a>)}</nav>
- <div class="serviceProjects">{expertise.map((item, index) => {
-  const media = serviceMedia[index];
+ <div class="serviceProjects">{expertise.map((item) => {
+  const media = serviceMedia[item.id];
   return <section class="serviceProject" id={item.id}>
    <div class="serviceCopy"><h2>{item.title}</h2><p>{item.text}</p><ButtonLink href={`/contact?project=${encodeURIComponent(item.title)}`} variant="outline">Start a conversation</ButtonLink></div>
-   <figure><ProjectImage src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" /><figcaption>{media.note}</figcaption></figure>
+   <figure class="serviceFigure"><ProjectImage src={media.src} alt={media.alt} width={media.width} height={media.height} loading="eager" /><figcaption><span>{media.note}</span>{media.credit && <a href={media.credit.href} target="_blank" rel="noopener noreferrer">Photo by {media.credit.name} / Unsplash</a>}</figcaption></figure>
   </section>;
  })}</div>
  <div class="pageActions"><ButtonLink href="/contact">Start a conversation</ButtonLink><a class="textLink" href="/portfolio">See the clients <IconArrow /></a></div>
