@@ -8,6 +8,7 @@ node_modules/
 
 # Local media masters; the optimised browser versions are tracked.
 /public/ArchitectDesignDemoVideo.mp4
+/public/Commercial.mp4
 /public/KamalJewl.tif
 
 # logs

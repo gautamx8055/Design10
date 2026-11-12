@@ -13,6 +13,7 @@ const excludedPublicAssets = [
 	"Urmil Yamuna Vihar/", "Giri Zewar Mahal/", "Mr.ShahnawazDesign10Owner.png",
 	"Ganga Jewellers/",
 	"GuruKripaJewellers/",
+	"Commercial.mp4",
 ];
 
 // Replace `site` with the real domain before launch. Canonical URLs and the sitemap use it.

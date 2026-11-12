@@ -14,7 +14,10 @@ import { serviceMedia } from "../data/services";
   const media = serviceMedia[item.id];
   return <section class="serviceProject" id={item.id}>
    <div class="serviceCopy"><h2>{item.title}</h2><p>{item.text}</p><ButtonLink href={`/contact?project=${encodeURIComponent(item.title)}`} variant="outline">Start a conversation</ButtonLink></div>
-   <figure class="serviceFigure"><ProjectImage src={media.src} alt={media.alt} width={media.width} height={media.height} loading="eager" /><figcaption><span>{media.note}</span>{media.credit && <a href={media.credit.href} target="_blank" rel="noopener noreferrer">Photo by {media.credit.name} / Unsplash</a>}</figcaption></figure>
+   <figure class="serviceFigure">
+    {media.video ? <div class="serviceFilm imageFrame" data-image-frame="landscape"><video src={media.video.src} poster={media.src} width={media.width} height={media.height} autoplay muted loop playsinline disablepictureinpicture disableRemotePlayback preload="none" data-background-film aria-label={media.alt} aria-describedby={`${item.id}MediaCaption`} tabindex="-1"></video></div> : <ProjectImage src={media.src} alt={media.alt} width={media.width} height={media.height} loading="eager" />}
+    <figcaption id={`${item.id}MediaCaption`}><span>{media.note}</span>{media.credit && <a href={media.credit.href} target="_blank" rel="noopener noreferrer">Photo by {media.credit.name} / Unsplash</a>}</figcaption>
+   </figure>
   </section>;
  })}</div>
  <div class="pageActions"><ButtonLink href="/contact">Start a conversation</ButtonLink><a class="textLink" href="/portfolio">See the clients <IconArrow /></a></div>

@@ -40,7 +40,7 @@ The original `architectDesignDemoVideo` film is used only as the homepage hero b
 
 `ProjectImage.astro` gives project imagery a shared 4:3 frame across cards, galleries, service sections and project stories. The source image dimensions remain accurate; full facades, spatial studies and panoramic views fit inside the frame without being cut off. Original image files and their camelCase derivative names remain intact.
 
-Each Services section has an image, with metadata in `src/data/services.ts`. Residential and Architectural use locally downloaded Unsplash demo photos, explicitly labelled as inspiration with photographer credits. Jewellery and Commercial retain the supplied Giri and Urmil interiors. All four use the same rounded 4:3 frame and alternate beside the original service copy on desktop, stacking on phones. The images load eagerly and are excluded from scroll-reveal clipping so they remain visible when opening a direct service anchor.
+Each Services section has media, with metadata in `src/data/services.ts`. Residential and Architectural use locally downloaded Unsplash demo photos, explicitly labelled as inspiration with photographer credits. Jewellery retains the supplied Giri interior. Commercial uses the uploaded `Commercial.mp4` walkthrough, playing silently on a loop without playback controls. All four use the same rounded 4:3 frame and alternate beside the original service copy on desktop, stacking on phones. Images and the video's poster remain visible without scroll-reveal clipping, including direct service anchors. The shared video observer pauses playback offscreen, in hidden tabs and for reduced-motion preferences.
 
 The demo assets in `public/images/services/` are 1600×1200 WebP images downloaded on 12 November 2026 under the [Unsplash License](https://unsplash.com/license):
 
@@ -77,6 +77,7 @@ Original uploads are preserved locally in `public/`. Browser versions live in `p
 - `Urmilmap.jpg`: three-dimensional spatial plan, kept with the Urmil project.
 - Earlier individual project uploads are retained as local sources; current project imagery uses only the four supplied client folders.
 - `ArchitectDesignDemoVideo.mp4`: the complete uploaded walkthrough, transcoded to H.264 with fast-start delivery, muted autoplay and looping. Playback controls are intentionally absent. Reduced-motion preferences show a static frame; offscreen and hidden-tab videos pause automatically.
+- `Commercial.mp4`: the complete 346.8-second commercial-building walkthrough, preserved locally as the source master. The browser copy is H.264 at the original 1024×768 resolution in `public/videos/commercial.mp4`, with fast-start delivery and a still in `public/posters/commercial.jpg`. It appears only in the Services page's Commercial section. The large source master is excluded from Git and the generated build.
 - `ganga jeweller lal quater 1.pdf`: retained as a source upload; the layout-plan viewer has been removed from the website.
 - `Urmil Yamuna Vihar/`: interior, three-dimensional spatial study, elevation concept and built exterior; optimised copies live in `public/images/projects/urmilYamunaVihar/`.
 - `Giri Zewar Mahal/`: two interior views, elevation concept and built exterior; optimised copies live in `public/images/projects/giriZewarMahal/`.
