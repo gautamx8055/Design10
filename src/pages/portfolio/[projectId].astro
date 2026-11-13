@@ -13,7 +13,7 @@ export function getStaticPaths() {
 }
 interface Props { project: Project; story: ProjectStory; nextProject: Project; }
 const { project, story, nextProject } = Astro.props;
-const enquiryType = "Jewellery Showroom";
+const enquiryType = story.enquiryType ?? "Jewellery Showroom";
 const imageChapters = story.chapters.filter((chapter) => chapter.image);
 ---
 <Base title={`${project.name} | Project story | Design10`} description={project.text} image={project.image}>
@@ -21,7 +21,7 @@ const imageChapters = story.chapters.filter((chapter) => chapter.image);
   <nav class="storyBreadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/portfolio">Portfolio</a><span aria-hidden="true">/</span><span aria-current="page">{project.name}</span></nav>
   <div class="storyOpening"><div class="storyHeading"><p class="sectionLabel">{story.location ? `${story.location} / ${project.category}` : project.category}</p><h1>{project.name}</h1><p class="storyLead">{story.lead}</p></div><figure class="storyCover"><ProjectImage src={project.image} alt={project.alt} width={project.width} height={project.height} loading="eager" priority /><figcaption>{project.text}</figcaption></figure></div>
   <dl class="storyFacts"><div><dt>Client</dt><dd>{project.name}</dd></div><div><dt>Project focus</dt><dd>{project.category}</dd></div><div><dt>Project archive</dt><dd>{story.representation}</dd></div></dl>
-  <nav class="storyChapterNav" aria-label="Explore this project">{story.chapters.map((chapter) => <a href={`#${chapter.id}`}>{({ startingPoint: "The beginning", inspiration: "Inspiration", spacePlanning: "Space planning", materialsAndLight: "Materials & light", privateConsultation: "Consultation", displayDetail: "Display detail" } as Record<string, string>)[chapter.id]}</a>)}{story.evolution && <a href="#conceptAndBuilt">Concept & built</a>}{story.film && <a href="#projectFilm">The walkthrough</a>}<a href="#projectOutcome">The outcome</a></nav>
+  <nav class="storyChapterNav" aria-label="Explore this project">{story.chapters.map((chapter) => <a href={`#${chapter.id}`}>{chapter.navLabel ?? ({ startingPoint: "The beginning", inspiration: "Inspiration", spacePlanning: "Space planning", materialsAndLight: "Materials & light", privateConsultation: "Consultation", displayDetail: "Display detail" } as Record<string, string>)[chapter.id]}</a>)}{story.evolution && <a href="#conceptAndBuilt">Concept & built</a>}{story.film && <a href="#projectFilm">The walkthrough</a>}<a href="#projectOutcome">The outcome</a></nav>
  </header>
  <div class="storyChapters wrap">
   {story.chapters.map((chapter) => <section id={chapter.id} class:list={["storyChapter", { "storyChapter--withImage": Boolean(chapter.image), "storyChapter--imageLeft": Boolean(chapter.image) && imageChapters.indexOf(chapter) % 2 === 0 }]}>

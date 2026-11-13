@@ -9,8 +9,8 @@ import { studioCopy } from "../data/content";
 import { clients, multiLocationClients } from "../data/clients";
 const directory = [...multiLocationClients.map((client) => ({ name: client.name, location: client.locations.join(", ") })), ...clients];
 ---
-<Base title="Portfolio and clients | Design10 Entire Interior" description="Jewellery showroom clients of Design10 Entire Interior Pvt. Ltd., including Urmil Jeweller, Ganga Jeweller, and Giri Zever Mahal, with showrooms across India.">
- <header class="pageIntro wrap"><p class="sectionLabel">1000+ completed projects</p><div class="pageIntroGrid"><h1>{studioCopy.portfolioTitle}</h1><div><p>Jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar Pradesh. Houses with more than one showroom are grouped below.</p><a class="textLink" href="#directory">See the client list <IconArrow direction="down" /></a></div></div></header>
+<Base title="Portfolio and clients | Design10 Entire Interior" description="Architecture and jewellery showroom projects by Design10 Entire Interior Pvt. Ltd., including Urmil Jewellers, Ganga Jewellers, Giri Zevar Mahal and Umeed Harpal Gaoshala.">
+ <header class="pageIntro wrap"><p class="sectionLabel">1000+ completed projects</p><div class="pageIntroGrid"><h1>{studioCopy.portfolioTitle}</h1><div><p>Architectural concepts and jewellery houses across Delhi, Haryana, Punjab, Uttarakhand, and Uttar Pradesh. Houses with more than one showroom are grouped below.</p><a class="textLink" href="#directory">See the client list <IconArrow direction="down" /></a></div></div></header>
  <div class="wrap"><nav class="projectNavigation" aria-label="Project index">{projects.map((project) => <a href={`#${project.id}`}>{project.name}<IconArrow direction="down" /></a>)}</nav>
  <div class="portfolioCardGrid">{projects.map((project) => <article id={project.id}><ProjectCard project={project} /><p class="projectArchiveNote">{projectStories[project.id].representation}</p></article>)}</div>
  <UrmilStudy />

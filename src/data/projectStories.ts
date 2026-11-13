@@ -10,6 +10,7 @@ export interface StoryImage {
 
 export interface StoryChapter {
  id: string;
+ navLabel?: string;
  title: string;
  paragraphs: string[];
  image?: StoryImage;
@@ -17,6 +18,7 @@ export interface StoryChapter {
 
 export interface ProjectStory {
  location?: string;
+ enquiryType?: "Residential" | "Jewellery Showroom" | "Commercial" | "Architectural";
  representation: string;
  lead: string;
  materials: string[];
@@ -30,6 +32,7 @@ const urmilMadhuInterior: StoryImage = {
  src: "/images/projects/urmilMadhuVihar/urmilInterior.webp", width: 1500, height: 1050,
  alt: "Urmil Madhu Vihar interior design showing curved glass displays, cream seating, timber ceiling details and illuminated jewellery niches",
  caption: "Urmil Jewellers Madhu Vihar / Interior design visualisation",
+
 };
 const urmilMadhuSpatialPlan: StoryImage = {
  src: "/images/projects/urmilMadhuVihar/urmilSpatialPlan.webp", width: 1500, height: 1050,
@@ -285,6 +288,54 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    title: "An identity carried through every space.",
    text: "The six supplied visualisations connect the facade, showroom and consultation area. Together, they express a design direction built around clearly framed displays, comfortable conversations and a consistent material palette.",
    details: ["A recognisable arched entrance and street-facing identity", "An open central route between the display counters", "A connected setting for browsing, waiting and consultation"],
+  },
+ },
+ umeedHarpalGaoshala: {
+  enquiryType: "Architectural",
+  representation: "Architectural & site planning concepts",
+  lead: "A shared green at the heart of a wider architectural composition. The Umeed Harpal Gaoshala studies bring together rooms, open grounds and a recognisable entrance, exploring the relationship between the building, its landscape and the everyday movement through the site.",
+  materials: ["Pale facade finishes", "Framed openings", "Landscaped edges", "Warm exterior lighting"],
+  chapters: [
+   {
+    id: "startingPoint", title: "A place organised around a shared centre.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevation.webp", width: 1000, height: 750, alt: "Elevated architectural concept of Umeed Harpal Gaoshala showing connected building wings, arched entrances, a central tower and an enclosed green court", caption: "Umeed Harpal Gaoshala / Overall elevation concept" },
+    paragraphs: ["The elevation study brings the different wings into one composition. A central tower and a sequence of tall arches give the building a clear front, with a green court set between the entrance and the main rooms.", "The design story begins with that relationship between enclosure and openness. The building defines the edges, while the court provides a common point of reference within the site."],
+   },
+   {
+    id: "inspiration", title: "The entrance as a moment of arrival.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaEnterance.webp", width: 1000, height: 488, alt: "Umeed Harpal Gaoshala gateway concept with classical columns, layered cornices, stepped pointed crowns and decorative metal doors", caption: "Umeed Harpal Gaoshala / Entrance gateway concept" },
+    paragraphs: ["Columns, layered cornices and stepped crowns give the gateway a ceremonial character. Its smaller scale introduces the architectural language before the visitor reaches the larger building.", "Decorative metal doors, planted edges and lighting add detail close to the ground. These elements make arrival part of the wider composition rather than a separate feature."],
+   },
+   {
+    id: "spacePlanning", title: "Reading the site as a connected whole.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap2.webp", width: 1600, height: 720, alt: "Overhead spatial concept for Umeed Harpal Gaoshala showing room groups, connecting corridors, a green court, a water feature and perimeter circulation", caption: "Umeed Harpal Gaoshala / Overhead spatial arrangement" },
+    paragraphs: ["The overhead view reveals the relationship between the room groups, the central green and the routes around them. Corridors connect the building wings, while the outer circulation follows the boundary of the grounds.", "The water feature and planted margins give the larger site a recognisable structure. Looking at these elements together makes the transition from the entrance to the different parts of the complex easier to understand."],
+   },
+   {
+    id: "sitePlanning", navLabel: "Site planning", title: "Bringing the rooms and grounds together.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap.webp", width: 1600, height: 720, alt: "Cutaway site concept for Umeed Harpal Gaoshala showing rooms facing a landscaped green, connecting passages, boundary planting and a long water feature", caption: "Umeed Harpal Gaoshala / Site and circulation study" },
+    paragraphs: ["The cutaway study opens up the building to show how the rooms face the wider grounds. Open passages and changes in level connect the enclosed spaces with the central landscape.", "Trees, paths and boundary walls form a second layer around the architecture. The study considers the building as part of its site, with the outdoor spaces carrying the design between the different wings."],
+   },
+   {
+    id: "landscape", navLabel: "Landscape", title: "A green centre, with active edges.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaOuterMap.webp", width: 1600, height: 720, alt: "Umeed Harpal Gaoshala landscape and room-layout concept with a central lawn, trees, a covered pavilion, a water feature and cattle enclosures along one edge", caption: "Umeed Harpal Gaoshala / Landscape and outer grounds concept" },
+    paragraphs: ["The green court gives the site a quieter centre. A covered pavilion, planted borders and trees define its edges, while the long water feature introduces another outdoor setting beside the building.", "The view also shows the cattle enclosures along the outer edge of the complex. Keeping the different parts of the grounds visible in one study helps explain how the gaoshala and its supporting spaces relate."],
+   },
+   {
+    id: "buildingForm", navLabel: "Building form", title: "A rhythm that continues around the building.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevation2.webp", width: 1600, height: 1200, alt: "Rear and side elevation concept for Umeed Harpal Gaoshala with pale facades, repeated window bays, external stairs and tall columns", caption: "Umeed Harpal Gaoshala / Rear and side elevation study" },
+    paragraphs: ["The side and rear study shows a more regular rhythm of window bays, horizontal bands and pale wall surfaces. External stairs and recessed openings make the building's arrangement visible beyond the main facade.", "The repeated framing connects these elevations with the more expressive entrance. It gives the architecture continuity as the view moves from the ceremonial front to the quieter sides."],
+   },
+   {
+    id: "materialsAndLight", title: "Another reading, after dark.",
+    image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap3.webp", width: 1600, height: 900, alt: "Illuminated spatial concept of Umeed Harpal Gaoshala showing the green court, internal room arrangement, perimeter paths, trees and cattle enclosures", caption: "Umeed Harpal Gaoshala / Illuminated spatial study" },
+    paragraphs: ["The lighting studies give definition to the arches, tower and facade edges. Warm illumination draws out the pale surfaces, while smaller lights mark the landscape and the routes around the building.", "The illuminated spatial view brings the court, rooms and outer grounds into the same scene. Together with the exterior concepts, it shows how the design can be read at both the scale of the site and the detail of the entrance."],
+   },
+  ],
+  outcome: {
+   title: "Architecture, landscape and arrival in one composition.",
+   text: "The eight supplied visualisations present a connected design direction for Umeed Harpal Gaoshala. Elevations, gateway details and spatial studies describe a complex shaped around a shared green, with a consistent relationship between the building and its grounds.",
+   details: ["A recognisable entrance and illuminated architectural identity", "Connected rooms arranged around a shared green", "Landscape and circulation considered with the wider gaoshala grounds"],
   },
  },
 };

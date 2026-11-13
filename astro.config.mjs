@@ -16,6 +16,7 @@ const excludedPublicAssets = [
 	"OM Shiv Giri Jewellers/",
 	"Urmil Madhu Vihar/",
 	"Urmil Durgapuri/",
+	"Umeed Harpal Gaoshala/",
 	"Commercial.mp4",
 ];
 
