@@ -205,8 +205,8 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    },
    {
     id: "spacePlanning", title: "The whole space, considered together.",
-    image: { src: "/images/projects/gangaJewellers/ganga1.webp", width: 1600, height: 1002, alt: "Ganga Jewellers three-dimensional cutaway showing the arrival, staircase, showroom counters and a separate consultation room", caption: "Ganga Jewellers / Three-dimensional spatial study" },
-    paragraphs: ["The three-dimensional study reveals how the arrival, stair and display areas relate to the rooms beyond them. It makes the division between open browsing and quieter conversation easy to understand.", "Glazed partitions give definition to the consultation space while retaining a visual connection with the showroom. The arrangement balances distinct settings with a sense of continuity."],
+    image: { src: "/images/projects/gangaJewellers/ganga7.webp", width: 1600, height: 1008, alt: "Ganga Jewellers corporate office cutaway showing reception, open workstations, a meeting table and enclosed rooms", caption: "Ganga Jewellers / Corporate office spatial study" },
+    paragraphs: ["Seen from above, the cutaway brings the reception, open workstations and meeting areas into one view. It shows how focused daily work and shared conversations sit within the same connected plan.", "Glazed partitions define the enclosed rooms while keeping them visually connected to the wider office. The workstations and meeting table support different ways to collaborate."],
    },
    {
     id: "materialsAndLight", title: "A rhythm of display and illumination.",
@@ -214,7 +214,7 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
     paragraphs: ["The panoramic showroom view is organised through a repeating line of counters, seating and illuminated wall displays. That rhythm gives the larger room an ordered, readable character.", "Geometric ceiling lighting supports the wider composition, while warmer accents and individual display settings introduce detail closer to the jewellery. The walkthrough brings these relationships into view as a connected sequence."],
    },
   ],
-  film: { src: "/videos/gangaJewelers.mp4", poster: "/posters/gangaJewelers.jpg", width: 1280, height: 720, caption: "Ganga Jewellers / Interior design walkthrough" },
+  film: { src: "/videos/gangaJewelers.mp4?v=20261116", poster: "/posters/gangaJewelers.jpg?v=20261116", width: 1280, height: 720, caption: "Ganga Jewellers / Interior design walkthrough" },
   outcome: {
    title: "Different spaces. One considered experience.",
    text: "The spatial study, interior views and walkthrough present a coordinated design direction for Ganga Jewellers. Together, they show how a clear arrival, a focused showroom and a private conversation can belong to the same architectural language.",
