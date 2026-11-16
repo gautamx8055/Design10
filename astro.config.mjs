@@ -14,6 +14,7 @@ const excludedPublicAssets = [
 	"Ganga Jewellers/",
 	"GuruKripaJewellers/",
 	"OM Shiv Giri Jewellers/",
+	"Urmil jewellers Ram Nagar/",
 	"Urmil Madhu Vihar/",
 	"Urmil Durgapuri/",
 	"Umeed Harpal Gaoshala/",

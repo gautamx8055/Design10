@@ -156,6 +156,39 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
    details: ["A layered facade with illuminated branding", "A clear relationship between display and visitor seating", "A consistent palette of pale surfaces, dark frames and warm light"],
   },
  },
+ urmilRamNagar: {
+  location: "Ram Nagar",
+  representation: "Elevation & interior concepts",
+  lead: "A clear street presence meets a warmly lit showroom. The Ram Nagar design views bring together a symmetrical facade, a distinct arched entrance and considered settings for jewellery display.",
+  materials: ["Pale facade finishes", "Deep blue display panels", "Warm metallic accents", "Layered lighting"],
+  chapters: [
+   {
+    id: "startingPoint", title: "A recognisable welcome from the street.",
+    image: { src: "/images/projects/urmilRamNagar/urmilRamNagar1.webp", width: 1092, height: 1600, alt: "Evening elevation concept for Urmil Jewellers Ram Nagar with illuminated signage, a central arched entrance and tall display windows", caption: "Urmil Jewellers Ram Nagar / Evening elevation concept" },
+    paragraphs: ["The facade is arranged around a central entrance, with tall display windows on either side. An illuminated brand panel sits above the entrance and gives the elevation a clear focal point.", "A second, evening view shows how the lighting outlines the entrance and brings the signage forward after dark."],
+   },
+   {
+    id: "inspiration", title: "A calm setting for the collection.",
+    image: { src: "/images/projects/urmilRamNagar/urmilRamNagar2.webp", width: 1920, height: 1080, alt: "Urmil Jewellers Ram Nagar interior concept with pale finishes, blue-backed jewellery displays and glass counters", caption: "Urmil Jewellers Ram Nagar / Interior concept" },
+    paragraphs: ["Pale finishes keep the showroom bright, while deep blue display panels give the jewellery a distinct backdrop. Warm metallic detailing connects the counters with the illuminated wall displays.", "The long view through the room makes the relationship between customer seating, counters and the collection easy to read."],
+   },
+   {
+    id: "spacePlanning", title: "Display arranged around the visit.",
+    image: { src: "/images/projects/urmilRamNagar/urmilRamNagar3.webp", width: 1920, height: 1080, alt: "Wide Urmil Jewellers Ram Nagar showroom concept with glass display counters, visitor seating and illuminated ceiling features", caption: "Urmil Jewellers Ram Nagar / Showroom view" },
+    paragraphs: ["Counters and seating are arranged to support a clear path through the showroom. The open central area keeps the different display settings connected without making the room feel crowded.", "Ceiling features draw the eye along the length of the space and add another layer to the showroom's lighting."],
+   },
+   {
+    id: "materialsAndLight", title: "Light brings the details forward.",
+    image: { src: "/images/projects/urmilRamNagar/urmilRamNagar4.webp", width: 1920, height: 1080, alt: "Urmil Jewellers Ram Nagar interior concept showing illuminated blue display niches, glass counters and pale stone-look finishes", caption: "Urmil Jewellers Ram Nagar / Display and lighting concept" },
+    paragraphs: ["Focused lighting gives the jewellery displays their own presence against the blue panels. Softer ceiling light supports the wider room, while the pale floor and wall finishes keep the composition balanced.", "Together, the views show a consistent palette carried from the facade into the showroom."],
+   },
+  ],
+  outcome: {
+   title: "One identity, from facade to showroom.",
+   text: "The supplied elevation and interior concepts connect the jewellery house's street presence with the experience inside. A clear entrance, illuminated displays and a consistent palette carry the design through each view.",
+   details: ["A symmetrical facade with a distinct central entrance", "Blue-backed displays set against pale finishes", "Layered lighting across the showroom"],
+  },
+ },
  giriZevarMahal: {
   representation: "Design & built exterior",
   lead: "A jewellery house with a ceremonial presence. Giri Zevar Mahal brings together a richly framed exterior, flowing interior forms and intimate display settings, balancing the scale of the building with the detail of the piece.",
