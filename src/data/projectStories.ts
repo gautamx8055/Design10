@@ -188,6 +188,7 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
                 paragraphs: ["Focused lighting gives the jewellery displays their own presence against the blue panels. Softer ceiling light supports the wider room, while the pale floor and wall finishes keep the composition balanced.", "Together, the views show a consistent palette carried from the facade into the showroom."],
             },
         ],
+        film: { src: "/videos/urmilRamNagar.mp4", poster: "/posters/urmilRamNagar.jpg", width: 1024, height: 768, caption: "Urmil Jewellers Ram Nagar / Project walkthrough" },
         outcome: {
             title: "One identity, from facade to showroom.",
             text: "The supplied elevation and interior concepts connect the jewellery house's street presence with the experience inside. A clear entrance, illuminated displays and a consistent palette carry the design through each view.",
@@ -224,6 +225,44 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
             title: "Grandeur, brought down to a personal scale.",
             text: "The project imagery connects a prominent exterior with thoughtfully framed interiors. Its character comes from that change in scale: a jewellery house seen from the street, and a personal experience discovered at the counter.",
             details: ["A recognisable architectural frontage", "A strong central showroom composition", "Richly detailed settings for individual pieces"],
+        },
+    },
+    giriZevarMahalKrishna: {
+        location: "Omax Mall, Chandni Chowk",
+        representation: "Interior design & spatial visualisations",
+        lead: "Located in Omax Mall in Chandni Chowk, Giri Zevar Mahal Krishna brings a sculptural showroom together with warm, carefully framed jewellery displays. The supplied views follow the experience from the overall layout to the central counter and detailed points of service.",
+        materials: ["Ivory and pearl finishes", "Gold-edged display frames", "Marble-look flooring", "Sculptural ceiling lighting"],
+        chapters: [
+            {
+                id: "startingPoint", title: "The showroom, seen as a whole.",
+                image: { src: "/images/projects/giriZevarMahalKrishna/giriZevarMahalKrishna1.webp", width: 1197, height: 835, alt: "Elevated cutaway view of Giri Zevar Mahal Krishna showing a curved central counter, perimeter jewellery displays and arched wall niches", caption: "Giri Zevar Mahal Krishna / Overall showroom study" },
+                paragraphs: ["The elevated view brings the showroom's main elements together: a central counter, display cases around the perimeter and a sequence of arched niches.", "Open space around the centre keeps the different display areas connected, while the pale finishes give the gold details room to stand out."],
+            },
+            {
+                id: "inspiration", title: "A continuous line of display.",
+                image: { src: "/images/projects/giriZevarMahalKrishna/giriZevarMahalKrishna3.webp", width: 1280, height: 720, alt: "Giri Zevar Mahal Krishna interior with a long row of glass jewellery counters, illuminated arched niches and sculptural chandeliers", caption: "Giri Zevar Mahal Krishna / Display and lighting concept" },
+                paragraphs: ["Glass counters and illuminated niches create a steady rhythm along the showroom walls. Sculptural chandeliers add detail above, while the light floor keeps the larger composition calm.", "The repeated display frames bring attention to individual pieces without losing the sense of one connected room."],
+            },
+            {
+                id: "spacePlanning", title: "Clear routes between the displays.",
+                image: { src: "/images/projects/giriZevarMahalKrishna/giriZevarMahalKrishna2.webp", width: 1194, height: 769, alt: "Elevated showroom view showing Giri Zevar Mahal Krishna's display counters, central island and a separate room within the layout", caption: "Giri Zevar Mahal Krishna / Spatial arrangement study" },
+                paragraphs: ["A second elevated view shows how the central island relates to the perimeter counters and the more enclosed room at one end.", "The arrangement leaves clear routes between the displays, connecting browsing, seating and service within one open showroom."],
+            },
+            {
+                id: "displayDetail", title: "A focal point at the centre.",
+                image: { src: "/images/projects/giriZevarMahalKrishna/giriZevarMahalKrishna4.webp", width: 1280, height: 720, alt: "Symmetrical Giri Zevar Mahal Krishna showroom view with a central display island, matching counters and a sculpted ceiling", caption: "Giri Zevar Mahal Krishna / Central showroom view" },
+                paragraphs: ["The central display island sits beneath a sculpted ceiling feature, with matching counters extending to either side.", "This balanced view makes the counter the room's focal point while keeping the surrounding displays easy to read."],
+            },
+            {
+                id: "materialsAndLight", title: "A detailed setting for service.",
+                image: { src: "/images/projects/giriZevarMahalKrishna/giriZevarMahalKrishna5.webp", width: 1280, height: 720, alt: "Giri Zevar Mahal Krishna cash counter with paired service desks, ornate gold detailing and warm ceiling lights", caption: "Giri Zevar Mahal Krishna / Cash counter detail" },
+                paragraphs: ["Paired service desks are framed by ornate gold detailing and warm light. Their symmetrical arrangement gives this part of the showroom a distinct identity.", "The same pale surfaces and fine metallic accents carry through from the display areas, connecting customer service with the wider interior."],
+            },
+        ],
+        outcome: {
+            title: "A complete showroom, from layout to detail.",
+            text: "The six supplied visualisations present Giri Zevar Mahal Krishna at Omax Mall in Chandni Chowk, from its overall arrangement to the central display and service counters.",
+            details: ["A central counter set within an open display layout", "Gold-framed niches and illuminated jewellery cases", "A coordinated setting for display and service"],
         },
     },
     gangaJewellers: {
@@ -335,9 +374,9 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
         materials: ["Pale facade finishes", "Framed openings", "Landscaped edges", "Warm exterior lighting"],
         chapters: [
             {
-                id: "startingPoint", title: "A place organised around a shared centre.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevation.webp", width: 1000, height: 750, alt: "Elevated architectural concept of Umeed Harpal Gaoshala showing connected building wings, arched entrances, a central tower and an enclosed green court", caption: "Umeed Harpal Gaoshala / Overall elevation concept" },
-                paragraphs: ["The elevation study brings the different wings into one composition. A central tower and a sequence of tall arches give the building a clear front, with a green court set between the entrance and the main rooms.", "The design story begins with that relationship between enclosure and openness. The building defines the edges, while the court provides a common point of reference within the site."],
+                id: "startingPoint", title: "The building, after dark.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevationNightView.webp", width: 1600, height: 1200, alt: "Umeed Harpal Gaoshala illuminated at night, with a central tower, arched facade and lit entrance court", caption: "Umeed Harpal Gaoshala / Illuminated exterior after dark" },
+                paragraphs: ["Warm lighting traces the arches, tower and pale facade after dark. The entrance court remains visible as a shared center within the larger architectural composition.", "The evening view gives the building a distinct presence while showing how its connected wings and open court work together."],
             },
             {
                 id: "inspiration", title: "The entrance as a moment of arrival.",
@@ -345,19 +384,19 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
                 paragraphs: ["Columns, layered cornices and stepped crowns give the gateway a ceremonial character. Its smaller scale introduces the architectural language before the visitor reaches the larger building.", "Decorative metal doors, planted edges and lighting add detail close to the ground. These elements make arrival part of the wider composition rather than a separate feature."],
             },
             {
-                id: "spacePlanning", title: "Reading the site as a connected whole.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap2.webp", width: 1600, height: 720, alt: "Overhead spatial concept for Umeed Harpal Gaoshala showing room groups, connecting corridors, a green court, a water feature and perimeter circulation", caption: "Umeed Harpal Gaoshala / Overhead spatial arrangement" },
-                paragraphs: ["The overhead view reveals the relationship between the room groups, the central green and the routes around them. Corridors connect the building wings, while the outer circulation follows the boundary of the grounds.", "The water feature and planted margins give the larger site a recognisable structure. Looking at these elements together makes the transition from the entrance to the different parts of the complex easier to understand."],
+                id: "spacePlanning", title: "The court between the wings.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap2.webp?v=20261116", width: 1600, height: 780, alt: "Umeed Harpal Gaoshala side perspective showing connected pale building wings, a landscaped court and columned terraces", caption: "Umeed Harpal Gaoshala / Courtyard and side elevation concept" },
+                paragraphs: ["The side perspective brings the connected wings and landscaped court into view. Columned terraces frame the open space, while paths and planted edges lead between the building and its grounds.", "The composition balances the larger facade with quieter outdoor areas, giving the complex places to gather and move through."],
             },
             {
-                id: "sitePlanning", navLabel: "Site planning", title: "Bringing the rooms and grounds together.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap.webp", width: 1600, height: 720, alt: "Cutaway site concept for Umeed Harpal Gaoshala showing rooms facing a landscaped green, connecting passages, boundary planting and a long water feature", caption: "Umeed Harpal Gaoshala / Site and circulation study" },
-                paragraphs: ["The cutaway study opens up the building to show how the rooms face the wider grounds. Open passages and changes in level connect the enclosed spaces with the central landscape.", "Trees, paths and boundary walls form a second layer around the architecture. The study considers the building as part of its site, with the outdoor spaces carrying the design between the different wings."],
+                id: "sitePlanning", navLabel: "Site planning", title: "A clear face and a welcoming arrival.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap.webp?v=20261116", width: 1600, height: 1200, alt: "Front elevation concept for Umeed Harpal Gaoshala with pale facades, central signage, a gated entrance and vehicles in the forecourt", caption: "Umeed Harpal Gaoshala / Front elevation and entry sequence" },
+                paragraphs: ["The front view brings the main entrance, central signage and columned facade together. A gated forecourt creates a clear point of arrival and connects the building with the street.", "Planting and lighting soften the formal frontage, while the open entrance keeps the approach legible."],
             },
             {
-                id: "landscape", navLabel: "Landscape", title: "A green centre, with active edges.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaOuterMap.webp", width: 1600, height: 720, alt: "Umeed Harpal Gaoshala landscape and room-layout concept with a central lawn, trees, a covered pavilion, a water feature and cattle enclosures along one edge", caption: "Umeed Harpal Gaoshala / Landscape and outer grounds concept" },
-                paragraphs: ["The green court gives the site a quieter centre. A covered pavilion, planted borders and trees define its edges, while the long water feature introduces another outdoor setting beside the building.", "The view also shows the cattle enclosures along the outer edge of the complex. Keeping the different parts of the grounds visible in one study helps explain how the gaoshala and its supporting spaces relate."],
+                id: "landscape", navLabel: "Landscape", title: "Architecture in daily use.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap4.webp?v=20261116", width: 1600, height: 748, alt: "Umeed Harpal Gaoshala site perspective showing the long building, planted approach, service vehicles and cattle beside the enclosure", caption: "Umeed Harpal Gaoshala / Building and grounds" },
+                paragraphs: ["The site perspective shows the building alongside the planted approach, service access and cattle enclosure. Together, these elements give the architectural concept a practical connection to the everyday work of the gaoshala.", "Movement through the grounds and the relationship between the building and animal areas remain visible in one view."],
             },
             {
                 id: "buildingForm", navLabel: "Building form", title: "A rhythm that continues around the building.",
@@ -365,9 +404,9 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
                 paragraphs: ["The side and rear study shows a more regular rhythm of window bays, horizontal bands and pale wall surfaces. External stairs and recessed openings make the building's arrangement visible beyond the main facade.", "The repeated framing connects these elevations with the more expressive entrance. It gives the architecture continuity as the view moves from the ceremonial front to the quieter sides."],
             },
             {
-                id: "materialsAndLight", title: "Another reading, after dark.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap3.webp", width: 1600, height: 900, alt: "Illuminated spatial concept of Umeed Harpal Gaoshala showing the green court, internal room arrangement, perimeter paths, trees and cattle enclosures", caption: "Umeed Harpal Gaoshala / Illuminated spatial study" },
-                paragraphs: ["The lighting studies give definition to the arches, tower and facade edges. Warm illumination draws out the pale surfaces, while smaller lights mark the landscape and the routes around the building.", "The illuminated spatial view brings the court, rooms and outer grounds into the same scene. Together with the exterior concepts, it shows how the design can be read at both the scale of the site and the detail of the entrance."],
+                id: "materialsAndLight", title: "Light along the arches.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaMap3.webp?v=20261116", width: 1600, height: 828, alt: "Nighttime exterior concept for Umeed Harpal Gaoshala with illuminated arches, a central courtyard and landscaped entrance", caption: "Umeed Harpal Gaoshala / Illuminated exterior study" },
+                paragraphs: ["Warm lines of light define the arches and upper facade, while smaller fixtures illuminate the central court and planted edges.", "Seen after dark, the architecture reads through its rhythm of columns, openings and framed views across the entrance court."],
             },
         ],
         outcome: {
