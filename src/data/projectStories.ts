@@ -431,9 +431,9 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
                 paragraphs: ["The site perspective shows the building alongside the planted approach, service access and cattle enclosure. Together, these elements give the architectural concept a practical connection to the everyday work of the gaoshala.", "Movement through the grounds and the relationship between the building and animal areas remain visible in one view."],
             },
             {
-                id: "buildingForm", navLabel: "Building form", title: "A rhythm that continues around the building.",
-                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevation2.webp", width: 1600, height: 1200, alt: "Rear and side elevation concept for Umeed Harpal Gaoshala with pale facades, repeated window bays, external stairs and tall columns", caption: "Umeed Harpal Gaoshala / Rear and side elevation study" },
-                paragraphs: ["The side and rear study shows a more regular rhythm of window bays, horizontal bands and pale wall surfaces. External stairs and recessed openings make the building's arrangement visible beyond the main facade.", "The repeated framing connects these elevations with the more expressive entrance. It gives the architecture continuity as the view moves from the ceremonial front to the quieter sides."],
+                id: "buildingForm", navLabel: "Building form", title: "The entrance, set within its grounds.",
+                image: { src: "/images/projects/umeedHarpalGaoshala/umeedHarpalGaoshalaElevation2.webp?v=20261116-1856", width: 1600, height: 896, alt: "Nighttime elevation concept for Umeed Harpal Gaoshala with a central tower, illuminated entrance, boundary trees and vehicles in the forecourt", caption: "Umeed Harpal Gaoshala / Nighttime elevation and entrance" },
+                paragraphs: ["The illuminated facade stands behind a planted boundary, with the entrance court and service access visible at street level.", "The central tower and columned frontage remain legible after dark, while the trees and vehicles show the building in relation to its approach."],
             },
             {
                 id: "materialsAndLight", title: "Light along the arches.",
