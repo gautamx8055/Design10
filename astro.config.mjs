@@ -10,7 +10,7 @@ const excludedPublicAssets = [
 	"UrmilBefore.jpg", "UrmilAfter.jpg", "Urmilmap.jpg",
 	"GiriZevarMahal.jpg", "PrabhuDayal.jpg",
 	"ganga jeweller lal quater 1.pdf", "images/gangaJewellerPlan.webp",
-	"Urmil Yamuna Vihar/", "Giri Zewar Mahal/", "Mr.ShahnawazDesign10Owner.png",
+	"Urmil Yamuna Vihar/", "Giri Zever Mahal/", "Mr.ShahnawazDesign10Owner.png",
 	"Ganga Jewellers/",
 	"GuruKripaJewellers/",
 	"OM Shiv Giri Jewellers/",
