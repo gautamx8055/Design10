@@ -5,7 +5,7 @@ import { projectHref, type Project } from "../data/projects";
 interface Props { project: Project; featured?: boolean; }
 const { project, featured = false } = Astro.props;
 ---
-<a class:list={["projectCard", { "projectCard--featured": featured, projectCardInterior: project.cardImage.kind === "interior" }]} href={projectHref(project.id)}>
+<a class:list={["projectCard", { "projectCard--featured": featured, projectCardInterior: project.cardImage.kind === "interior" }]} data-project-id={project.id} href={projectHref(project.id)}>
 	<div class="projectImage"><ProjectImage src={project.cardImage.src} alt={project.cardImage.alt} width={project.cardImage.width} height={project.cardImage.height} /><span class="projectOpen" aria-hidden="true"><IconArrow /></span></div>
 	<div class="projectCaption"><h3>{project.name}</h3><span>{project.category}</span></div>
  <p class="projectSummary">{project.text}</p>
