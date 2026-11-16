@@ -11,7 +11,7 @@ const excludedPublicAssets = [
 	"GiriZevarMahal.jpg", "PrabhuDayal.jpg",
 	"ganga jeweller lal quater 1.pdf", "images/gangaJewellerPlan.webp",
 	"Urmil Yamuna Vihar/", "Giri Zever Mahal/", "Giri Zevar Mahal Krishna/", "Mr.ShahnawazDesign10Owner.png",
-	"Ganga Jewellers/",
+	"Ganga Jewellers/", "Sona Fasion : Ganga Jewellers/",
 	"GuruKripaJewellers/",
 	"OM Shiv Giri Jewellers/",
 	"Urmil jewellers Ram Nagar/",

@@ -298,6 +298,38 @@ export const projectStories: Record<ProjectId, ProjectStory> = {
             details: ["A connected arrangement of arrival and display", "A separate setting for private consultation", "A consistent material and lighting language"],
         },
     },
+    sonaFashionGangaJewellers: {
+        representation: "Storefront photograph & interior visualisations",
+        lead: "The storefront identifies Sona Gold as a house of Ganga Gold & Diamond Pvt. Ltd., while the interior renderings carry the Sona Fashion Jewellery name. Together, they present an illuminated street presence and a warm, ivory-and-gold showroom.",
+        materials: ["Ivory finishes", "Gold-edged display frames", "Blue jewellery backdrops", "Sculptural ceiling lighting"],
+        chapters: [
+            {
+                id: "startingPoint", title: "A long view through the showroom.",
+                image: { src: "/images/projects/sonaFashionGangaJewellers/sonaFashionGangaJewellers1.webp", width: 1250, height: 563, alt: "Wide interior visualisation of Sona Fashion Jewellery with glass display counters, cream seating and a crystal ceiling installation", caption: "Sona Fashion / Main showroom view" },
+                paragraphs: ["A long line of counters draws the eye through the showroom, with seating set alongside the display route. The repeated cases keep the jewellery visible across the full length of the room.", "A sculptural ceiling installation adds a continuous layer of light above the counters, while pale finishes keep the space open and bright."],
+            },
+            {
+                id: "inspiration", title: "Jewellery, held in light.",
+                image: { src: "/images/projects/sonaFashionGangaJewellers/sonaFashionGangaJewellers2.webp", width: 1250, height: 625, alt: "Sona Fashion Jewellery display wall with illuminated necklace cases, gold trim and glass counters", caption: "Sona Fashion / Jewellery display concept" },
+                paragraphs: ["Backlit cases frame the necklace displays, giving each group of pieces a clear setting. Fine gold edges connect the wall niches with the glass counters in front.", "The restrained palette lets the blue display forms and jewellery stand out without interrupting the room's calm atmosphere."],
+            },
+            {
+                id: "spacePlanning", title: "Display and seating, side by side.",
+                image: { src: "/images/projects/sonaFashionGangaJewellers/sonaFashionGangaJewellers3.webp", width: 1250, height: 625, alt: "Sona Fashion Jewellery showroom with lounge seating, illuminated jewellery displays and gold-edged glass counters", caption: "Sona Fashion / Seating and display arrangement" },
+                paragraphs: ["Lounge seating sits beside the display counters, making room for visitors to pause without separating them from the collection.", "The arrangement connects browsing and conversation within one open showroom, with lighting and finishes carried consistently across both areas."],
+            },
+            {
+                id: "materialsAndLight", title: "A clear path through the room.",
+                image: { src: "/images/projects/sonaFashionGangaJewellers/sonaFashionGangaJewellers4.webp", width: 1280, height: 570, alt: "Wide perspective through Sona Fashion Jewellery showroom showing counters on both sides, seating and overhead lighting", caption: "Sona Fashion / Interior perspective" },
+                paragraphs: ["The final perspective shows an open route between the counters, with chairs placed close to the displays for a more personal viewing experience.", "Warm ceiling lights and reflective gold details bring the separate views together as one considered showroom."],
+            },
+        ],
+        outcome: {
+            title: "A street presence carried into the showroom.",
+            text: "The storefront photograph and four interior visualisations connect Sona Fashion Jewellery's illuminated entrance with its displays, seating and visitor routes.",
+            details: ["A clearly marked, illuminated storefront", "Gold-framed cases for jewellery display", "An open showroom with space to sit and browse"],
+        },
+    },
     guruKripaJewellers: {
         representation: "Interior & elevation concepts",
         lead: "A jewellery house expressed through a strong outer frame and a softer interior. The Guru Kripa Jewellers concepts bring together a recognisable frontage, carefully arranged displays and a comfortable setting for conversation.",
