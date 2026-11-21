@@ -28,9 +28,11 @@ export const nav = [
 ] as const;
 
 /** Formspree endpoint, with an optional environment override. */
+const configuredFormEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT?.trim();
 export const formEndpoint =
-	import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
-	"https://formspree.io/f/xdegwneg";
+	configuredFormEndpoint && !/replace-me|yourFormId/i.test(configuredFormEndpoint)
+		? configuredFormEndpoint
+		: "https://formspree.io/f/xdegwneg";
 
 export const films = {
 	hall: {
