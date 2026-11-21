@@ -6,13 +6,13 @@ The studio designs residential spaces, jewellery showrooms, commercial interiors
 
 ## Main pages
 
-- [Home](https://design10entireinterior.com/)
-- [About the studio](https://design10entireinterior.com/about/)
-- [Services](https://design10entireinterior.com/services/)
-- [Portfolio](https://design10entireinterior.com/portfolio/)
-- [Our journey](https://design10entireinterior.com/journey/)
-- [Contact](https://design10entireinterior.com/contact/)
+- [Home](https://www.design10entireinterior.com/)
+- [About the studio](https://www.design10entireinterior.com/about/)
+- [Services](https://www.design10entireinterior.com/services/)
+- [Portfolio](https://www.design10entireinterior.com/portfolio/)
+- [Our journey](https://www.design10entireinterior.com/journey/)
+- [Contact](https://www.design10entireinterior.com/contact/)
 
 ## Sitemap
 
-- [Sitemap index](https://design10entireinterior.com/sitemap-index.xml)
+- [Sitemap index](https://www.design10entireinterior.com/sitemap-index.xml)

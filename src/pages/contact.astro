@@ -5,7 +5,7 @@ import { studioCopy } from "../data/content";
 import { formEndpoint } from "../data/site";
 const isFormConnected = !/replace-me|yourFormId/.test(formEndpoint);
 ---
-<Base title="Contact Design10 Entire Interior" description="Tell Design10 about your residential, jewellery showroom, commercial interior or architecture project. Start with a conversation.">
+<Base title="Contact Design10 | Interior Design & Architecture" description="Contact Design10 Entire Interior to discuss residential, jewellery showroom, commercial interior or architecture projects across India.">
  <header class="pageIntro wrap"><p class="sectionLabel">Design10 Entire Interior Pvt. Ltd.</p><div class="pageIntroGrid"><h1>Contact</h1><p>{studioCopy.contact}</p></div></header>
  <section class="contactSection wrap sectionSpace"><aside class="contactAside"><h2>Architecture.<br />Interior. Design.</h2><p>Shahnawaz Ahmed<br /><span>Founder & Principal Designer</span></p><p>Architecture & interiors<br />Practising across India since 1996</p>{!isFormConnected && <p class="contactAvailability">Online enquiries will open soon.</p>}</aside>
  <form class="contactForm" action={formEndpoint} method="POST" data-contact-form data-connected={String(isFormConnected)}>

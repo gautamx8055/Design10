@@ -4,11 +4,53 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Loader from "../components/Loader.astro";
 import SiteEffects from "../components/SiteEffects.astro";
+import { studio } from "../data/site";
 import "../styles/global.css";
-interface Props { title: string; description: string; image?: string; projectId?: string; }
-const { title, description, image = "/images/projects/giriZewarMahal/giriZevarMahalInterior.webp", projectId } = Astro.props;
+interface Props { title: string; description: string; image?: string; projectId?: string; noindex?: boolean; }
+const { title, description, image = "/images/projects/giriZewarMahal/giriZevarMahalInterior.webp", projectId, noindex = false } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
+const organizationId = new URL("/#organization", Astro.site).href;
+const websiteId = new URL("/#website", Astro.site).href;
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Organization",
+			"@id": organizationId,
+			name: studio.name,
+			url: Astro.site,
+			description: studio.summary,
+			foundingDate: "1996-10-06",
+			founder: {
+				"@type": "Person",
+				"@id": new URL("/about/#shahnawaz-ahmed", Astro.site).href,
+				name: "Shahnawaz Ahmed",
+				jobTitle: studio.founderTitle,
+			},
+			areaServed: { "@type": "Country", name: "India" },
+			knowsAbout: ["Architecture", "Interior design", "Residential design", "Jewellery showroom design", "Commercial interiors"],
+		},
+		{
+			"@type": "WebSite",
+			"@id": websiteId,
+			url: Astro.site,
+			name: studio.name,
+			publisher: { "@id": organizationId },
+			inLanguage: "en-IN",
+		},
+		{
+			"@type": "WebPage",
+			"@id": `${canonicalUrl.href}#webpage`,
+			url: canonicalUrl.href,
+			name: title,
+			description,
+			isPartOf: { "@id": websiteId },
+			about: { "@id": organizationId },
+			inLanguage: "en-IN",
+		},
+	],
+};
 const isPortfolioPage = Astro.url.pathname === "/portfolio" || Astro.url.pathname.startsWith("/portfolio/");
 ---
 <!doctype html>
@@ -17,9 +59,12 @@ const isPortfolioPage = Astro.url.pathname === "/portfolio" || Astro.url.pathnam
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="generator" content={Astro.generator} /><meta name="theme-color" content="#111111" />
   <title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:site_name" content={studio.shortName} /><meta property="og:locale" content="en_IN" />
   <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={imageUrl} />
   <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={imageUrl} />
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;450;500;550;600;650;700&family=DM+Sans:wght@400;450;500;550;600&display=swap" rel="stylesheet" />

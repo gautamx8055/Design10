@@ -22,7 +22,7 @@ const excludedPublicAssets = [
 ];
 
 export default defineConfig({
-	site: "https://design10entireinterior.com",
+	site: "https://www.design10entireinterior.com",
 	integrations: [
 		{
 			name: "optimisedProjectMedia",

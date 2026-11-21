@@ -12,10 +12,9 @@ import { clients, multiLocationClients } from "../data/clients";
 import { expertise, highlights, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 const featuredClients = clients.slice(0, 6);
-const organization = { "@context": "https://schema.org", "@type": "Organization", name: studio.name, description: studio.summary, founder: { "@type": "Person", name: "Shahnawaz Ahmed", honorificPrefix: "Mr.", jobTitle: studio.founderTitle }, knowsAbout: expertise.map((item) => item.title) };
 ---
-<Base title="Design10 Entire Interior Pvt. Ltd." description="Design10 Entire Interior Pvt. Ltd. Architecture, interior, and design. Shahnawaz Ahmed founded the practice on 6 October 1996. Three decades, 1000+ projects, across India.">
- <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(organization)} /><link rel="preload" as="image" href="/posters/architectDesignDemoVideo.jpg" /></Fragment>
+<Base title="Interior Design & Architecture Across India | Design10" description="Design10 creates residential, jewellery showroom, commercial and architectural spaces across India. Founded by Shahnawaz Ahmed in 1996, with 1,000+ completed projects.">
+ <Fragment slot="head"><link rel="preload" as="image" href="/posters/architectDesignDemoVideo.jpg" /></Fragment>
  <section class="hero" aria-labelledby="heroTitle"><BackgroundFilm class="heroBackdrop" eager /><div class="wrap">
   <div class="heroTopline"><span>{studio.disciplines}</span><span>Established {studio.since}</span></div>
   <div class="heroGrid">

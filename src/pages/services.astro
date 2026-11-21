@@ -6,8 +6,24 @@ import IconArrow from "../components/IconArrow.astro";
 import { expertise, studioCopy } from "../data/content";
 import { studio } from "../data/site";
 import { serviceMedia } from "../data/services";
+const serviceFaqs = [
+ { question: "What kinds of projects does Design10 work on?", answer: "Design10 works on residences, jewellery showrooms, commercial interiors and architectural projects." },
+ { question: "Does Design10 design jewellery showrooms?", answer: "Yes. Design10 plans jewellery showrooms around display, movement through the space and the needs of each jewellery house." },
+ { question: "Where does Design10 take on projects?", answer: "Design10 works across India. Its portfolio includes projects in Delhi, Haryana, Punjab, Uttarakhand and Uttar Pradesh." },
+ { question: "How does a project begin?", answer: "A project begins with a conversation about your ideas, lifestyle or business needs, budget and expectations. The studio then studies the site before planning and developing the design." },
+] as const;
+const faqSchema = {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ mainEntity: serviceFaqs.map(({ question, answer }) => ({
+  "@type": "Question",
+  name: question,
+  acceptedAnswer: { "@type": "Answer", text: answer },
+ })),
+};
 ---
-<Base title="Services | Design10 Entire Interior" description="Residential, jewellery showroom, commercial, and architectural design by Design10 Entire Interior Pvt. Ltd., practising across India.">
+<Base title="Interior Design & Architecture Services | Design10" description="Explore residential, jewellery showroom, commercial interior and architectural design by Design10 Entire Interior, working across India since 1996.">
+ <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
  <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>Services</h1><p>{studioCopy.expertise}</p></div></header>
  <div class="wrap"><nav class="projectNavigation" aria-label="Our expertise">{expertise.map((item) => <a href={`#${item.id}`}>{item.title}<IconArrow direction="down" /></a>)}</nav>
  <div class="serviceProjects">{expertise.map((item) => {
@@ -20,6 +36,20 @@ import { serviceMedia } from "../data/services";
    </figure>
   </section>;
  })}</div>
+ <section class="serviceFaq sectionSpace" aria-labelledby="serviceFaqTitle">
+  <div class="sectionHeading"><div><p class="sectionLabel">Planning a project</p><h2 id="serviceFaqTitle">Questions about our services</h2></div></div>
+  <div class="serviceFaqList">{serviceFaqs.map(({ question, answer }) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div>
+ </section>
  <div class="pageActions"><ButtonLink href="/contact">Start a conversation</ButtonLink><a class="textLink" href="/portfolio">See the clients <IconArrow /></a></div>
  </div>
 </Base>
+<style>
+ .serviceFaq { border-top: 1px solid var(--borderSubtle); }
+ .serviceFaqList { border-top: 1px solid var(--borderSubtle); }
+ .serviceFaqList details { border-bottom: 1px solid var(--borderSubtle); }
+ .serviceFaqList summary { min-height: 60px; display: flex; align-items: center; cursor: pointer; font-size: 17px; font-weight: 500; list-style: none; }
+ .serviceFaqList summary::-webkit-details-marker { display: none; }
+ .serviceFaqList details[open] summary { color: var(--goldDeep); }
+ .serviceFaqList details p { max-width: 70ch; padding: 0 0 22px; color: var(--textMuted); line-height: 1.65; }
+ .serviceFaq :focus-visible { outline-color: var(--goldDeep); }
+</style>

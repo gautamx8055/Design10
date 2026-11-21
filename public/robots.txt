@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://design10entireinterior.com/sitemap-index.xml
+Sitemap: https://www.design10entireinterior.com/sitemap-index.xml

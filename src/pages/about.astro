@@ -7,9 +7,9 @@ import IconArrow from "../components/IconArrow.astro";
 import { studioCopy } from "../data/content";
 import { studio } from "../data/site";
 ---
-<Base title="About Design10 Entire Interior" description="About Design10 Entire Interior Pvt. Ltd. and its founder, Shahnawaz Ahmed, who began the practice on 6 October 1996.">
+<Base title="About Design10 | Interior Design Studio in India" description="Meet Shahnawaz Ahmed, founder of Design10 Entire Interior. Since 1996, the studio has designed residential, jewellery showroom and commercial spaces across India.">
  <header class="pageIntro wrap"><p class="sectionLabel">{studio.disciplines}</p><div class="pageIntroGrid"><h1>About</h1><p>{studio.name}. Founded by {studio.principal}, {studio.founderTitle}.</p></div></header>
- <section class="aboutFounder wrap sectionSpace"><FounderPortrait large /><div class="aboutFounderCopy"><p class="sectionLabel">{studio.founderTitle}</p><h2>Shahnawaz<br />Ahmed</h2><p>{studioCopy.introduction}</p><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/journey" variant="outline">Our Journey</ButtonLink></div></section>
+ <section class="aboutFounder wrap sectionSpace"><FounderPortrait large /><div class="aboutFounderCopy"><p class="sectionLabel">{studio.founderTitle}</p><h2 id="shahnawaz-ahmed">Shahnawaz<br />Ahmed</h2><p>{studioCopy.introduction}</p><p>{studioCopy.journey}</p><p>{studioCopy.portfolio}</p><ButtonLink href="/journey" variant="outline">Our Journey</ButtonLink></div></section>
  <section class="aboutDesignStudy sectionSpace" aria-labelledby="aboutStudyTitle"><div class="wrap aboutStudyGrid">
   <div class="aboutStudyHeading"><p class="sectionLabel">{studio.name}</p><h2 id="aboutStudyTitle">Architecture.<br />Interior. Design.</h2><a class="textLink" href="/portfolio">Explore our work <IconArrow /></a></div>
   <div class="aboutStudyGallery">
