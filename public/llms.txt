@@ -1,0 +1,18 @@
+# Design10 Entire Interior
+
+> Design10 Entire Interior is an architecture and interior design studio led by Shahnawaz Ahmed, practising across India since 1996.
+
+The studio designs residential spaces, jewellery showrooms, commercial interiors, and architecture.
+
+## Main pages
+
+- [Home](https://design10entireinterior.com/)
+- [About the studio](https://design10entireinterior.com/about/)
+- [Services](https://design10entireinterior.com/services/)
+- [Portfolio](https://design10entireinterior.com/portfolio/)
+- [Our journey](https://design10entireinterior.com/journey/)
+- [Contact](https://design10entireinterior.com/contact/)
+
+## Sitemap
+
+- [Sitemap index](https://design10entireinterior.com/sitemap-index.xml)

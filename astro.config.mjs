@@ -21,9 +21,8 @@ const excludedPublicAssets = [
 	"Commercial.mp4",
 ];
 
-// Replace `site` with the real domain before launch. Canonical URLs and the sitemap use it.
 export default defineConfig({
-	site: "https://shahnawaz.example",
+	site: "https://design10entireinterior.com",
 	integrations: [
 		{
 			name: "optimisedProjectMedia",
