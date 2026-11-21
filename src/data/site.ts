@@ -27,10 +27,10 @@ export const nav = [
 	{ href: "/contact", label: "Contact" },
 ] as const;
 
-/** Replace with the real Formspree form URL, or set PUBLIC_FORMSPREE_ENDPOINT in `.env`. */
+/** Formspree endpoint, with an optional environment override. */
 export const formEndpoint =
 	import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
-	"https://formspree.io/f/replace-me";
+	"https://formspree.io/f/xdegwneg";
 
 export const films = {
 	hall: {
